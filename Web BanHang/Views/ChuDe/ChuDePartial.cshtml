@@ -1,0 +1,7 @@
+﻿@using Web_BanHang.Models;
+@model List<ChuDe>
+
+@foreach(var item in Model)
+{
+    <a href="@Url.Action("SachTheoChuDe",new{@MaChuDe= item.MaChuDe})" class="btn btn-primary">@item.TenChuDe</a>      
+}

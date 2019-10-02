@@ -1,0 +1,7 @@
+﻿@using Web_BanHang.Models;
+@model List<NhaXuatBan>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("SachTheoNXB", new { @MaNXB =item.MaNXB})" class="btn btn-success">@item.TenNXB</a>
+}

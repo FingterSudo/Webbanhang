@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<Web_BanHang.Models.Sach>
+@using PagedList.Mvc;
+
+
+
+@*@model IPagedList<Sach>*@
+@{
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+@*<nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>*@
+
+
+
+
+<section class="recomended-sec">
+    <div class="container">
+        <div class="title">
+            <h2>Sách bán chạy</h2>
+            <hr>
+        </div>
+        <div class="row">
+            @Html.Action("SachMoiPartial", "Sach")
+        </div>
+    </div>
+</section>
+<section class="recent-book-sec">
+    <div class="container">
+        <div class="title">
+            <h2> Sách Mới Ra </h2>
+            <hr>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="item">
+                        <a href="@Url.Action("XemChiTiet","Sach",new{@masach=  item.MaSach})"><img src="@Url.Content("~/HinhAnh/"+item.AnhBia)" alt="Image"/>
+                        <h3><a href="@Url.Action("XemChiTiet","Sach",new{@masach=  item.MaSach})"> @item.TenSach</a></h3>
+                        <h6><span class="price"> @item.GiaBan</span> / <a href="#">Buy Now</a></h6>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="btn-sec">
+            <a href="#" class="btn gray-btn">view all books</a>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+</section>
+@*Tao link lien ket cac trang*@
+<center>
+    @Html.PagedListPager(Model, page =>
+        Url.Action("Index", new { page = page, @class = "page-link" }),
+        new PagedListRenderOptions
+        {
+            ContainerDivClasses = new string[] { "navigation" },
+            LiElementClasses = new string[] { "page-item" },
+        })
+</center>
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+
+<br />
+
+

@@ -1,0 +1,102 @@
+﻿@using Web_BanHang.Models;
+@model List<GioHang>
+@{ ViewBag.Title = "Sửa Giỏ H";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+@*<h2> Giỏ Hàng </h2>
+    <table class="table">
+        <tr>
+            <th> Ảnh bìa</th>
+            <th>Tên sách</th>
+            <th> Đơn giản</th>
+            <th>Số lượng</th>
+
+            <th>Thành tiền</th>
+        </tr>
+        <tr>
+            @foreach (var item in Model)
+            {
+
+                <td>@item.sTenSach</td>
+                <td> </td>
+                <td>@String.Format("{0:0,0}", item.dDonGia)</td>
+                <td>@item.iSoLuong</td>
+
+                <td> @String.Format("{0:0,0}", item.dThanhTien) VNĐ</td>
+            }
+        </tr>
+    </table>*@
+<h2 class="text-center">Giỏ Hàng </h2>
+<div class="container">
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:50%">Tên sản phẩm</th>
+                <th style="width:10%">Giá</th>
+                <th style="width:8%">Số lượng</th>
+                <th style="width:22%" class="text-center">Thành tiền</th>
+                <th style="width:10%"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            @*<div class="col-sm-2 hidden-xs">
+                                    <img src="" alt="Sản phẩm 1" class="img-responsive" width="100">
+                                </div>*@
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">@item.sTenSach</h4>
+
+                            </div>
+
+                        </div>
+                    </td>
+                    <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
+                    <td data-th="Quantity">
+                        @Html.TextBox("sanPham", item.iSoLuong)
+                    </td>
+                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+                    <td class="actions" data-th="">
+                        <button class="btn btn-info btn-sm">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </td>
+            <thead>
+                <tr>
+                    <th>
+                        Tổng tiền
+                    </th>
+                    <th>
+
+                    </th>
+
+                    <th>
+                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+
+                    </th>
+                </tr>
+            </thead>
+            </tr>
+        }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <a href="h#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    </td>
+                    <td colspan="2" class="hidden-xs"> </td>
+
+                    <td>
+                        <a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

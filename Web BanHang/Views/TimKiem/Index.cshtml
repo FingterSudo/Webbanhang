@@ -1,0 +1,151 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@using Web_BanHang.DTO;
+@using Web_BanHang.ViewModels;
+@model SearchAuthorViewModels
+
+
+@{
+    ViewBag.Title = "Tìm kiếm";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+    int count = 0;
+
+}
+
+@using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book"}))
+{
+    <input type="hidden" name="sortProperty" id="hidden-sort-property" />
+    <input type="hidden" name="sortOrder" id="hidden-sort-order" value="@Model.SortProperty" />
+    <div class="container">
+        <div class="row">
+            <div style="float:right">
+                @Html.TextBox("searchString") <input type="submit" value="Tìm Kiếm"  id="form--search-book" >
+            </div>
+            <div>
+               Chủ đề:  @Html.DropDownList("chudeID", Model.GroupChuDe, "All")
+               Nhà Xuất Bản @Html.DropDownList("maNXB", Model.GroupNXB, "All")
+               Tác Giả: @Html.DropDownList("maTacGia", Model.GroupTacGia, "All")            
+            </div>
+        </div>
+    </div>
+    <div>
+       <select>
+        
+           <option> <i class="fas fa-sort-alpha-up-alt">123</i></option>
+           <option><i class="fas fa-sort-alpha-down">123</i></option>
+       </select>
+        <input type="hidden" name="sortProperty"  />
+         
+
+
+    </div>
+}
+
+
+
+<table class="table table-bordered table-danger" id="form--search-book" >
+    <tr>
+
+        <th scope="col">
+            Số thứ tự
+        </th>
+        <th scope="col" class="th-sm">
+            <button onclick="submit('TenSach')" >
+                <i class="fas fa-sort"></i>
+                Tên sách
+            </button>
+        </th>
+        <th scope="col" class="th-sm">
+            <button onclick="submit('GiaBan')">
+                <i  class="fa fa-sort"></i>
+                @*vi du*@
+                @*@if(SortDirection == 'GiaBan')
+                {
+                    if(sortProperty == "asc")
+                    {
+                        <i class="fa fa-sort-alpha-up-alt"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-sort-alpha-down"></i>
+                    }
+                }*@
+                Giá bán
+            </button>
+        </th>
+        <th scope="col" class="th-sm">
+            Mô  Tả
+        </th>
+        <th scope="col" class="th-sm">
+            Ảnh Bìa
+        </th>
+        <th scope="col" class="th-sm">
+            <button onclick="submit('TenChuDe')">
+                <i class="fas fa-sort"></i>
+                Chủ đề
+            </button>
+        </th>
+        <th>
+            <button onclick="submit('TenTacGia')">
+                <i class="fas fa-sort">
+                </i>
+                Tác Giả
+            </button>
+        </th>
+        <th>
+            <button onclick="submit('TenNXB')">
+                <i class="fas fa-sort"></i>
+                Nhà Xuất Bản
+            </button>
+        </th>
+    </tr>
+    @foreach (var item in Model.GroupSach)
+    {
+        <tr>
+            <td>
+                @(Model.PageSerial + count)
+            </td>
+            <td>
+                @item.TenSach
+            </td>
+            <td>
+                @item.GiaBan
+            </td>
+            <td>
+                @item.MoTa
+            </td>
+            <td>
+                <img src="@Url.Content("~/HinhAnh/"+item.AnhBia)" width="150px" height="200px" />
+            </td>
+            <td>
+                @item.TenChuDe
+            </td>
+            <td>
+                @item.TenTacGia
+            </td>
+            <td>
+                @item.TenNXB
+            </td>
+        </tr>
+        count++;
+    }
+</table>
+
+<script>
+    function submit(sortProperty) {
+        $('#hidden-sort-property').val(sortProperty);
+        var sortOrder = $('#hidden-sort-order').val();
+        if (sortOrder == '') {
+            sortOrder = 'asc';
+        } else if (sortOrder == 'asc') {
+            sortOrder = 'desc';
+        } else {
+            sortOrder = 'asc';
+        }
+        $('#hidden-sort-order').val(sortOrder);
+        $('#form-search-book').submit();
+    }
+</script>
+@Html.DropDownList("size", Model.GroupPageSizes, new { @onchange = "this.form.submit();" })
+    trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    @Html.PagedListPager(Model.GroupSach, page => Url.Action("Index", new { page = page }))
