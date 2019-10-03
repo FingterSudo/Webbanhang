@@ -30,15 +30,15 @@ namespace Web_BanHang.Models
         public Nullable<int> SoLuongTon { get; set; }
         public Nullable<int> MaNXB { get; set; }
         public Nullable<int> MaChuDe { get; set; }
-        public Nullable<int> SachMoi { get; set; }
         public Nullable<int> MaTacGia { get; set; }
+        public Nullable<int> SachMoi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
         public virtual ChuDe ChuDe { get; set; }
         public virtual NhaXuatBan NhaXuatBan { get; set; }
+        public virtual TacGia TacGia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThamGia> ThamGias { get; set; }
-        public virtual TacGia TacGia { get; set; }
     }
 }

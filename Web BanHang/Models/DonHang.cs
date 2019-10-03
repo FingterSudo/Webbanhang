@@ -22,7 +22,7 @@ namespace Web_BanHang.Models
     
         public int MaDonHang { get; set; }
         public Nullable<int> DaThanhToan { get; set; }
-        public Nullable<int> TinhTrangGiaoHang { get; set; }
+        public string TinhTrangGiaoHang { get; set; }
         public Nullable<System.DateTime> NgayDat { get; set; }
         public Nullable<System.DateTime> NgayGiao { get; set; }
         public Nullable<int> MaKH { get; set; }

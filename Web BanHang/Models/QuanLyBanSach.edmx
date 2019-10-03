@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QuanLyBanSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QuanLyBanSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietDonHang">
           <Key>
             <PropertyRef Name="MaDonHang" />
@@ -28,7 +28,7 @@
           </Key>
           <Property Name="MaDonHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DaThanhToan" Type="int" />
-          <Property Name="TinhTrangGiaoHang" Type="int" />
+          <Property Name="TinhTrangGiaoHang" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayDat" Type="datetime" />
           <Property Name="NgayGiao" Type="datetime" />
           <Property Name="MaKH" Type="int" />
@@ -43,7 +43,7 @@
           <Property Name="MatKhau" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
-          <Property Name="DienThoai" Type="varchar" MaxLength="50" />
+          <Property Name="DienThoai" Type="varbinary" MaxLength="50" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySinh" Type="datetime" />
         </EntityType>
@@ -64,7 +64,7 @@
           <Property Name="TenSach" Type="nvarchar" MaxLength="100" />
           <Property Name="GiaBan" Type="decimal" Precision="18" Scale="0" />
           <Property Name="MoTa" Type="nvarchar(max)" />
-          <Property Name="AnhBia" Type="nvarchar" MaxLength="100" />
+          <Property Name="AnhBia" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayCapNhap" Type="datetime" />
           <Property Name="SoLuongTon" Type="int" />
           <Property Name="MaNXB" Type="int" />
@@ -230,7 +230,8 @@
             <End Role="ThamGia" EntitySet="ThamGia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuanLyBanSachModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -260,7 +261,7 @@
           </Key>
           <Property Name="MaDonHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DaThanhToan" Type="Int32" />
-          <Property Name="TinhTrangGiaoHang" Type="Int32" />
+          <Property Name="TinhTrangGiaoHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgayDat" Type="DateTime" Precision="3" />
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
           <Property Name="MaKH" Type="Int32" />
@@ -277,7 +278,7 @@
           <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DienThoai" Type="Binary" MaxLength="50" FixedLength="false" />
           <Property Name="GioiTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DonHangs" Relationship="Self.FK_DonHang_KhachHang" FromRole="KhachHang" ToRole="DonHang" />
@@ -296,22 +297,22 @@
           <Key>
             <PropertyRef Name="MaSach" />
           </Key>
-          <Property Name="MaSach" Type="Int32" Nullable="false" />
+          <Property Name="MaSach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenSach" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="GiaBan" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AnhBia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AnhBia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgayCapNhap" Type="DateTime" Precision="3" />
           <Property Name="SoLuongTon" Type="Int32" />
           <Property Name="MaNXB" Type="Int32" />
           <Property Name="MaChuDe" Type="Int32" />
+          <Property Name="MaTacGia" Type="Int32" />
+          <Property Name="SachMoi" Type="Int32" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK_ChiTietDonHang_Sach" FromRole="Sach" ToRole="ChiTietDonHang" />
           <NavigationProperty Name="ChuDe" Relationship="Self.FK_Sach_ChuDe" FromRole="Sach" ToRole="ChuDe" />
           <NavigationProperty Name="NhaXuatBan" Relationship="Self.FK_Sach_NhaXuatBan" FromRole="Sach" ToRole="NhaXuatBan" />
+          <NavigationProperty Name="TacGia" Relationship="Self.FK_Sach_TacGia" FromRole="Sach" ToRole="TacGia" />
           <NavigationProperty Name="ThamGias" Relationship="Self.FK_ThamGia_Sach" FromRole="Sach" ToRole="ThamGia" />
-          <Property Name="SachMoi" Type="Int32" />
-          <Property Name="MaTacGia" Type="Int32" />
-          <NavigationProperty Name="TacGia" Relationship="QuanLyBanSachModel.FK_Sach_TacGia" FromRole="Sach" ToRole="TacGia" />
         </EntityType>
         <EntityType Name="TacGia">
           <Key>
@@ -322,8 +323,8 @@
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TieuSu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Saches" Relationship="Self.FK_Sach_TacGia" FromRole="TacGia" ToRole="Sach" />
           <NavigationProperty Name="ThamGias" Relationship="Self.FK_ThamGia_TacGia" FromRole="TacGia" ToRole="ThamGia" />
-          <NavigationProperty Name="Saches" Relationship="QuanLyBanSachModel.FK_Sach_TacGia" FromRole="TacGia" ToRole="Sach" />
         </EntityType>
         <EntityType Name="ThamGia">
           <Key>
@@ -397,6 +398,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sach_TacGia">
+          <End Role="TacGia" Type="Self.TacGia" Multiplicity="0..1" />
+          <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="MaTacGia" />
+            </Principal>
+            <Dependent Role="Sach">
+              <PropertyRef Name="MaTacGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ThamGia_Sach">
           <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
           <End Role="ThamGia" Type="Self.ThamGia" Multiplicity="*" />
@@ -450,6 +463,10 @@
             <End Role="NhaXuatBan" EntitySet="NhaXuatBans" />
             <End Role="Sach" EntitySet="Saches" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sach_TacGia" Association="Self.FK_Sach_TacGia">
+            <End Role="TacGia" EntitySet="TacGias" />
+            <End Role="Sach" EntitySet="Saches" />
+          </AssociationSet>
           <AssociationSet Name="FK_ThamGia_Sach" Association="Self.FK_ThamGia_Sach">
             <End Role="Sach" EntitySet="Saches" />
             <End Role="ThamGia" EntitySet="ThamGias" />
@@ -458,23 +475,7 @@
             <End Role="TacGia" EntitySet="TacGias" />
             <End Role="ThamGia" EntitySet="ThamGias" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sach_TacGia" Association="QuanLyBanSachModel.FK_Sach_TacGia">
-            <End Role="TacGia" EntitySet="TacGias" />
-            <End Role="Sach" EntitySet="Saches" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Sach_TacGia">
-          <End Type="QuanLyBanSachModel.TacGia" Role="TacGia" Multiplicity="0..1" />
-          <End Type="QuanLyBanSachModel.Sach" Role="Sach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TacGia">
-              <PropertyRef Name="MaTacGia" />
-            </Principal>
-            <Dependent Role="Sach">
-              <PropertyRef Name="MaTacGia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -539,8 +540,6 @@
           <EntitySetMapping Name="Saches">
             <EntityTypeMapping TypeName="QuanLyBanSachModel.Sach">
               <MappingFragment StoreEntitySet="Sach">
-                <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
-                <ScalarProperty Name="SachMoi" ColumnName="SachMoi" />
                 <ScalarProperty Name="MaSach" ColumnName="MaSach" />
                 <ScalarProperty Name="TenSach" ColumnName="TenSach" />
                 <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
@@ -550,6 +549,8 @@
                 <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
                 <ScalarProperty Name="MaNXB" ColumnName="MaNXB" />
                 <ScalarProperty Name="MaChuDe" ColumnName="MaChuDe" />
+                <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
+                <ScalarProperty Name="SachMoi" ColumnName="SachMoi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

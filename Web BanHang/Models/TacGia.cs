@@ -17,8 +17,8 @@ namespace Web_BanHang.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TacGia()
         {
-            this.ThamGias = new HashSet<ThamGia>();
             this.Saches = new HashSet<Sach>();
+            this.ThamGias = new HashSet<ThamGia>();
         }
     
         public int MaTacGia { get; set; }
@@ -28,8 +28,8 @@ namespace Web_BanHang.Models
         public string DienThoai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThamGia> ThamGias { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sach> Saches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThamGia> ThamGias { get; set; }
     }
 }
