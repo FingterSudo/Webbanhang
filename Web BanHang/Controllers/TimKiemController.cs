@@ -214,7 +214,8 @@ namespace Web_BanHang.Controllers
 
             var viewModel = new SearchAuthorViewModels()
             {
-                SortProperty = string.IsNullOrEmpty(sortOrder) ? "asc" : sortOrder,
+                SortOrder = string.IsNullOrEmpty(sortOrder) ? "asc" : sortOrder,
+                SortProperty = sortProperty,
                 GroupSach = sach1.ToPagedList(pageNumber, pageSize),
                 GroupNXB = groupNXB.Select(x => new SelectListItem()
                 {

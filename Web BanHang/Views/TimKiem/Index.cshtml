@@ -12,67 +12,71 @@
 
 }
 
-@using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book"}))
+@using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book" }))
 {
-    <input type="hidden" name="sortProperty" id="hidden-sort-property" />
-    <input type="hidden" name="sortOrder" id="hidden-sort-order" value="@Model.SortProperty" />
+    <input type="hidden" name="sortProperty" id="hidden-sort-property" value="@Model.SortProperty"/>
+    <input type="hidden" name="sortOrder" id="hidden-sort-order"  value="@Model.SortOrder"/>
     <div class="container">
         <div class="row">
-            <div style="float:right">
-                @Html.TextBox("searchString") <input type="submit" value="Tìm Kiếm"  id="form--search-book" >
+
+            <div>
+                Chủ đề:  @Html.DropDownList("chudeID", Model.GroupChuDe, "All")
+                Nhà Xuất Bản @Html.DropDownList("maNXB", Model.GroupNXB, "All")
+                Tác Giả: @Html.DropDownList("maTacGia", Model.GroupTacGia, "All")
             </div>
             <div>
-               Chủ đề:  @Html.DropDownList("chudeID", Model.GroupChuDe, "All")
-               Nhà Xuất Bản @Html.DropDownList("maNXB", Model.GroupNXB, "All")
-               Tác Giả: @Html.DropDownList("maTacGia", Model.GroupTacGia, "All")            
+                <div style="float:right">
+                    @Html.TextBox("searchString") <input type="submit" value="Tìm Kiếm">
+                </div>
             </div>
         </div>
     </div>
     <div>
-       <select>  
-           <option id="sortOrder"> Cao->Thấp </option>
-           <option id="sortOrder"> Thấp->Cao </option>
-       </select>
-        <input type="hidden" name="sortProperty"  />     
+        <select id="hidden-sort-order" onchange="sortOrder1(this)">
+            <option>Hiển thị theo</option>
+            <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "MaSach" ? "selected": "")>A->Z</option>
+            <option value="desc" @(Model.SortOrder == "desc"  && Model.SortProperty == "MaSach"? "selected": "")>Z->A</option>
+        </select>
+        <p style="color: red" id="show_message"></p>
     </div>
 }
 
 
 
-<table class="table table-bordered table-danger" id="form--search-book" >
+<table class="table table-bordered table-danger" id="form--search-book">
     <tr>
 
         <th scope="col">
             Số thứ tự
         </th>
-        <th scope="col" class="th-sm">
-            <button onclick="submit('TenSach')" >
+        <th scope="col" class="th-sm" width="200px">
+            <button onclick="submit('TenSach')">
                 <i class="fas fa-sort"></i>
                 Tên sách
             </button>
         </th>
         <th scope="col" class="th-sm">
             <button onclick="submit('GiaBan')">
-                <i  class="fa fa-sort"></i>
+                <i class="fa fa-sort"></i>
                 @*vi du*@
                 @*@if(SortDirection == 'GiaBan')
-                {
-                    if(sortProperty == "asc")
                     {
-                        <i class="fa fa-sort-alpha-up-alt"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-sort-alpha-down"></i>
-                    }
-                }*@
+                        if(sortProperty == "asc")
+                        {
+                            <i class="fa fa-sort-alpha-up-alt"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-sort-alpha-down"></i>
+                        }
+                    }*@
                 Giá bán
             </button>
         </th>
-        <th scope="col" class="th-sm">
+        <th scope="col" class="th-sm" width="350px">
             Mô  Tả
         </th>
-        <th scope="col" class="th-sm">
+        <th scope="col" class="th-sm" width="200px">
             Ảnh Bìa
         </th>
         <th scope="col" class="th-sm">
@@ -128,20 +132,35 @@
 </table>
 
 <script>
-    function submit(sortProperty) {
-        $('#hidden-sort-property').val(sortProperty);
-        var sortOrder = $('#hidden-sort-order').val();
-        if (sortOrder == '') {
-            sortOrder = 'asc';
-        } else if (sortOrder == 'asc') {
-            sortOrder = 'desc';
-        } else {
-            sortOrder = 'asc';
+
+
+
+    function sortOrder1(obj) {
+
+        var message = document.getElementById('show_message');
+        var value = obj.value;
+        if (value === '') {
+            sortOrder == '  ';
+            message = "Bạn chưa chọn sách tăng";
+            return false;
         }
-        $('#hidden-sort-order').val(sortOrder);
+        else {
+            if (value == 'asc') {
+                message.innerHTML = "Bạn đã chọn tăng";
+            }
+            else (value == 'desc'){
+                message.innerHTML = "Bạn đã chọn giảm";
+            }
+        }
+        $('#hidden-sort-order').val(value);
+        $('#hidden-sort-property').val('MaSach');
         $('#form-search-book').submit();
     }
 </script>
-@Html.DropDownList("size", Model.GroupPageSizes, new { @onchange = "this.form.submit();" })
+@using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book" }))
+{
+    @Html.DropDownList("size", Model.GroupPageSizes, new { @onchange = "this.form.submit()" })
+}
+
     trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
     @Html.PagedListPager(Model.GroupSach, page => Url.Action("Index", new { page = page }))

@@ -23,5 +23,6 @@ namespace Web_BanHang.ViewModels
 
         public int PageSerial { get; set; }
         public string SortProperty { get; set; }
+        public string SortOrder { get; set; }
     }
 }
