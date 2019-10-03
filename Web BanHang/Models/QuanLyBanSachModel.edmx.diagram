@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="QuanLyBanSachModel.ChuDe" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyBanSachModel.DonHang" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyBanSachModel.KhachHang" Width="1.5" PointX="2.375" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.NhaXuatBan" Width="1.5" PointX="0.875" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.Sach" Width="1.5" PointX="3.625" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.NhaXuatBan" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.Sach" Width="1.5" PointX="9.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyBanSachModel.TacGia" Width="1.5" PointX="2" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyBanSachModel.ThamGia" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" ManuallyRouted="false" />

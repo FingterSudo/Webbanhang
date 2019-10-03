@@ -231,7 +231,6 @@ namespace Web_BanHang.Controllers
                     Value = x.MaTacGia.ToString(),
                     Text = x.TenTacGia
                 }).ToList(),
-
                 PageCount = checkTotal,
                 PageNumber = pageNumber,
                 PageSerial = (pageNumber - 1) * pageSize + 1,
