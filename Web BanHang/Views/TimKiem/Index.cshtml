@@ -34,8 +34,8 @@
     <div>
         <select id="hidden-sort-order" onchange="sortOrder1(this)">
             <option>Hiển thị theo</option>
-            <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "MaSach" ? "selected": "")>A->Z</option>
-            <option value="desc" @(Model.SortOrder == "desc"  && Model.SortProperty == "MaSach"? "selected": "")>Z->A</option>
+            <option value="asc" @(Model.SortOrder == "desc" && Model.SortProperty == "MaSach" ? "selected": "")>A->Z</option>
+            <option value="desc" @(Model.SortOrder == "asc"  && Model.SortProperty == "MaSach"? "selected": "")>Z->A</option>
         </select>
         <p style="color: red" id="show_message"></p>
     </div>
@@ -132,9 +132,6 @@
 </table>
 
 <script>
-
-
-
     function sortOrder1(obj) {
 
         var message = document.getElementById('show_message');
@@ -145,10 +142,10 @@
             return false;
         }
         else {
-            if (value == 'asc') {
+            if (value === 'desc') {
                 message.innerHTML = "Bạn đã chọn tăng";
             }
-            else (value == 'desc'){
+            else  {
                 message.innerHTML = "Bạn đã chọn giảm";
             }
         }
