@@ -50,6 +50,17 @@
         <th scope="col" class="th-sm" width="200px">
             <button onclick="submit('TenSach')">
                 <i class="fas fa-sort"></i>
+                @if (Model.SortProperty == "TenSach")
+                {
+                    if (Model.SortOrder == "asc")
+                    {
+                        <i class="fa fa-sort-alpha-up"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-sort-alpha-down"></i>
+                    }
+                }
                 Tên sách
             </button>
         </th>
@@ -57,17 +68,17 @@
             <button onclick="submit('GiaBan')">
                 <i class="fa fa-sort"></i>
                 @*vi du*@
-                @*@if(SortDirection == 'GiaBan')
+                @if (Model.SortProperty == "GiaBan")
+                {
+                    if (Model.SortOrder == "asc")
                     {
-                        if(sortProperty == "asc")
-                        {
-                            <i class="fa fa-sort-alpha-up-alt"></i>
-                        }
-                        else
-                        {
-                            <i class="fa fa-sort-alpha-down"></i>
-                        }
-                    }*@
+                        <i class="fas fa-sort-numeric-up"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-sort-numeric-down"></i>
+                    }
+                }
                 Giá bán
             </button>
         </th>
