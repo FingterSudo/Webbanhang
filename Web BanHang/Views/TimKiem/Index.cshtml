@@ -14,8 +14,8 @@
 
 @using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book" }))
 {
-    <input type="hidden" name="sortProperty" id="hidden-sort-property" value="@Model.SortProperty"/>
-    <input type="hidden" name="sortOrder" id="hidden-sort-order"  value="@Model.SortOrder"/>
+    <input type="hidden" name="sortProperty" id="hidden-sort-property" value="@Model.SortProperty" />
+    <input type="hidden" name="sortOrder" id="hidden-sort-order" value="@Model.SortOrder" />
     <div class="container">
         <div class="row">
 
@@ -32,12 +32,11 @@
         </div>
     </div>
     <div>
-        <select id="hidden-sort-order" onchange="sortOrder1(this)">
+        <select id="hidden-Sort-Order-Option" onchange="sortOrderTenSach(this)">
             <option>Hiển thị theo</option>
-            <option value="asc" @(Model.SortOrder == "desc" && Model.SortProperty == "MaSach" ? "selected": "")>A->Z</option>
-            <option value="desc" @(Model.SortOrder == "asc"  && Model.SortProperty == "MaSach"? "selected": "")>Z->A</option>
+            <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "MaSach" ? "selected" : "")>A->Z</option>
+            <option value="desc" @(Model.SortOrder == "desc" && Model.SortProperty == "MaSach" ? "selected" : "")>Z->A</option>
         </select>
-        <p style="color: red" id="show_message"></p>
     </div>
 }
 
@@ -47,7 +46,7 @@
     <tr>
 
         <th scope="col">
-            Số thứ tự
+            Stt
         </th>
         <th scope="col" class="th-sm" width="200px">
             <button onclick="submit('TenSach')">
@@ -55,7 +54,7 @@
                 Tên sách
             </button>
         </th>
-        <th scope="col" class="th-sm">
+        <th scope="col" class="th-sm" width="50px">
             <button onclick="submit('GiaBan')">
                 <i class="fa fa-sort"></i>
                 @*vi du*@
@@ -73,13 +72,13 @@
                 Giá bán
             </button>
         </th>
-        <th scope="col" class="th-sm" width="350px">
+        <th scope="col" class="th-sm">
             Mô  Tả
         </th>
         <th scope="col" class="th-sm" width="200px">
             Ảnh Bìa
         </th>
-        <th scope="col" class="th-sm">
+        <th scope="col" class="th-sm" width="100px">
             <button onclick="submit('TenChuDe')">
                 <i class="fas fa-sort"></i>
                 Chủ đề
@@ -130,29 +129,48 @@
         count++;
     }
 </table>
-
+@*doan jquery nay chua co input với select giá trị @@ *@
+@*Order  xac dinh nhung function khong sap xep duoc ten  sach theo chu de *@
+@*????*@
 <script>
-    function sortOrder1(obj) {
+    function sortOrderTenSach(obj) {
 
-        var message = document.getElementById('show_message');
+         
+       
+        $('hidden-sort-order').val('hidden-sort-property')
+     
+        var sortOrder = $('hidden-sort-order').val() ;
         var value = obj.value;
-        if (value === '') {
+        if (value ==' ') {
             sortOrder == '  ';
-            message = "Bạn chưa chọn sách tăng";
             return false;
         }
         else {
-            if (value === 'desc') {
-                message.innerHTML = "Bạn đã chọn tăng";
+            if (value == 'asc') {
+                sortOrder == 'asc';
+         
             }
-            else  {
-                message.innerHTML = "Bạn đã chọn giảm";
+            else {
+                sortOrder == 'desc';               
             }
         }
         $('#hidden-sort-order').val(value);
         $('#hidden-sort-property').val('MaSach');
         $('#form-search-book').submit();
     }
+    //function submit(sortProperty) {
+    //     $('#hidden-sort-property').val(sortProperty);
+    //     var sortOrder = $('#hidden-sort-order').val();
+    //     if (sortOrder == '') {
+    //         sortOrder = 'asc';
+    //     } else if (sortOrder == 'asc') {
+    //         sortOrder = 'desc';
+    //     } else {
+    //         sortOrder = 'asc';
+    //     }
+    //     $('#hidden-sort-order').val(sortOrder);
+    //     $('#form-search-book').submit();
+    // }
 </script>
 @using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book" }))
 {
