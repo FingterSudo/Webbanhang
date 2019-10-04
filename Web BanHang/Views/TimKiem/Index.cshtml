@@ -16,28 +16,27 @@
 {
     <input type="hidden" name="sortProperty" id="hidden-sort-property" value="@Model.SortProperty" />
     <input type="hidden" name="sortOrder" id="hidden-sort-order" value="@Model.SortOrder" />
-    <div class="container">
-        <div class="row">
-
-            <div>
-                Chủ đề:  @Html.DropDownList("chudeID", Model.GroupChuDe, "All")
-                Nhà Xuất Bản @Html.DropDownList("maNXB", Model.GroupNXB, "All")
-                Tác Giả: @Html.DropDownList("maTacGia", Model.GroupTacGia, "All")
-            </div>
-            <div>
-                <div style="float:right">
-                    @Html.TextBox("searchString") <input type="submit" value="Tìm Kiếm">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <select id="hidden-Sort-Order-Option" onchange="sortOrderTenSach(this)">
-            <option>Hiển thị theo</option>
+    <div class="bach-1">
+        <select id="hidden-Sort-Order-Book" onchange="sortOrderTenSach(this)">
+            <option>Sắp xếp theo tên</option>
             <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "MaSach" ? "selected" : "")>A->Z</option>
             <option value="desc" @(Model.SortOrder == "desc" && Model.SortProperty == "MaSach" ? "selected" : "")>Z->A</option>
         </select>
+        <select id="hidden-Sort-Order-Price" onchange="sortOrderGia(this)">
+            <option>Sắp xếp theo Giá </option>
+            <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "GiaBan" ? "selected" : "")>Thấp->Cao</option>
+            <option value="desc" @(Model.SortOrder == "desc" && Model.SortProperty == "GiaBan" ? "selected" : "")>Cao->Thấp</option>
+        </select>
+        Chủ đề:  @Html.DropDownList("chudeID", Model.GroupChuDe, "All")
+        Nhà Xuất Bản @Html.DropDownList("maNXB", Model.GroupNXB, "All")
+        Tác Giả: @Html.DropDownList("maTacGia", Model.GroupTacGia, "All")
+        @Html.TextBox("searchString") <input type="submit" value="Tìm Kiếm" />
+
     </div>
+    <div>
+       
+    </div>
+
 }
 
 
@@ -134,43 +133,58 @@
 @*????*@
 <script>
     function sortOrderTenSach(obj) {
+        //console.log(obj);
+        //$('#hidden-sort-order').val('#hidden-sort-property');
 
-         
-       
-        $('hidden-sort-order').val('hidden-sort-property')
-     
-        var sortOrder = $('hidden-sort-order').val() ;
+        var sortOrder = $('#hidden-sort-order').val();
         var value = obj.value;
-        if (value ==' ') {
-            sortOrder == '  ';
-            return false;
+        if (value == ' ') {
+            sortOrder == 'asc';
         }
         else {
             if (value == 'asc') {
                 sortOrder == 'asc';
-         
+
             }
             else {
-                sortOrder == 'desc';               
+                sortOrder == 'desc';
+            }
+        }
+        //console.log(value)
+        $('#hidden-sort-order').val(value);
+        $('#form-search-book').submit();
+    }
+    function sortOrderGia(obj) {
+        var sortOrder = $('#hidden-sort-order').val();
+        var value = obj.value;
+        if (value == ' ') {
+            sortOrder == 'asc';
+        }
+        else {
+            if (value == 'asc') {
+                sortOrder == 'asc';
+            }
+            else {
+                sortOrder == 'desc';
             }
         }
         $('#hidden-sort-order').val(value);
-        $('#hidden-sort-property').val('MaSach');
         $('#form-search-book').submit();
     }
-    //function submit(sortProperty) {
-    //     $('#hidden-sort-property').val(sortProperty);
-    //     var sortOrder = $('#hidden-sort-order').val();
-    //     if (sortOrder == '') {
-    //         sortOrder = 'asc';
-    //     } else if (sortOrder == 'asc') {
-    //         sortOrder = 'desc';
-    //     } else {
-    //         sortOrder = 'asc';
-    //     }
-    //     $('#hidden-sort-order').val(sortOrder);
-    //     $('#form-search-book').submit();
-    // }
+    function submit(sortproperty) {
+        $('#hidden-sort-property').val(sortproperty);
+        var sortorder = $('#hidden-sort-order').val();
+        if (sortorder == '') {
+            sortorder = 'asc';
+        } else if (sortorder == 'asc') {
+            sortorder = 'desc';
+        } else {
+            sortorder = 'asc';
+        }
+        $('#hidden-sort-order').val(sortorder);
+        $('#hidden-sort-property').val(sortproperty);
+        $('#form-search-book').submit();
+    }
 </script>
 @using (Html.BeginForm("Index", "TimKiem", FormMethod.Post, new { id = "form-search-book" }))
 {
