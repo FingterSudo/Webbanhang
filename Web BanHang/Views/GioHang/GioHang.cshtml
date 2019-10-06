@@ -45,14 +45,9 @@
             <tr>
                 <td data-th="Product">
                     <div class="row">
-                        @*<div class="col-sm-2 hidden-xs">
-            <img src="" alt="Sản phẩm 1" class="img-responsive" width="100">
-        </div>*@
                         <div class="col-sm-10">
                             <h4 class="nomargin">@item.sTenSach</h4>
-
                         </div>
-                        
                     </div>
                 </td>
                 <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
@@ -61,10 +56,12 @@
                 </td>
                 <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}",item.dDonGia)</td>
                 <td class="actions" data-th="">
-                    <button class="btn btn-info btn-sm">
-                        <a href="@Url.Action("SuaGioHang","GioHang")"></a>
-                        <i class="fa fa-edit"></i>
-                    </button>
+                    <a href="@Url.Action("SuaGioHang","GioHang")">
+                        <button class="btn btn-info btn-sm">
+
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </a>
                     <button class="btn btn-danger btn-sm">
                         <i class="fa fa-trash-o"></i>
                     </button>
@@ -93,7 +90,6 @@
                     <a href="h#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
                 </td>
                 <td colspan="2" class="hidden-xs"> </td>
-               
                 <td>
                     <a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
                 </td>

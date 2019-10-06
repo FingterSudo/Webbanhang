@@ -66,7 +66,6 @@ namespace Web_BanHang.Controllers
                              TenTacGia = tg.TenTacGia
 
                          });
-            
             if (!String.IsNullOrEmpty(timkiem))
             {
                 sach1 = sach1.Where(n => n.TenSach.Contains(timkiem));
@@ -104,9 +103,6 @@ namespace Web_BanHang.Controllers
             //    //int maTacGia = int.Parse(form["maTacGia"]);
             //    sach1 = sach1.Where(n => n.MaTacGia == nhaxb);
             //}
-
-
-
             /***
              * sach1 = sach1.Where(x=>x.TENCHUDE);
              * 
@@ -114,9 +110,6 @@ namespace Web_BanHang.Controllers
              * 
              *  sach1 = sach1.Where(x=>x.NXB);
              */
-
-
-           
             if (sortProperty == "TenChuDe")
             {
                 sach1 = sach1.OrderBy(x => x.TenChuDe);
