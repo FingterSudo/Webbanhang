@@ -5,28 +5,28 @@
 }
 
 @*<h2> Giỏ Hàng </h2>
-<table class="table">
-    <tr>
-        <th> Ảnh bìa</th>
-        <th>Tên sách</th>
-        <th> Đơn giản</th>
-        <th>Số lượng</th>
+    <table class="table">
+        <tr>
+            <th> Ảnh bìa</th>
+            <th>Tên sách</th>
+            <th> Đơn giản</th>
+            <th>Số lượng</th>
 
-        <th>Thành tiền</th>
-    </tr>
-    <tr>
-        @foreach (var item in Model)
-        {
+            <th>Thành tiền</th>
+        </tr>
+        <tr>
+            @foreach (var item in Model)
+            {
 
-            <td>@item.sTenSach</td>
-            <td> </td>
-            <td>@String.Format("{0:0,0}", item.dDonGia)</td>
-            <td>@item.iSoLuong</td>
-             
-            <td> @String.Format("{0:0,0}", item.dThanhTien) VNĐ</td>
-        }
-    </tr>
-</table>*@
+                <td>@item.sTenSach</td>
+                <td> </td>
+                <td>@String.Format("{0:0,0}", item.dDonGia)</td>
+                <td>@item.iSoLuong</td>
+
+                <td> @String.Format("{0:0,0}", item.dThanhTien) VNĐ</td>
+            }
+        </tr>
+    </table>*@
 <h2 class="text-center">Giỏ Hàng </h2>
 <div class="container">
     <table id="cart" class="table table-hover table-condensed">
@@ -42,58 +42,59 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td data-th="Product">
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <h4 class="nomargin">@item.sTenSach</h4>
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">@item.sTenSach</h4>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
-                <td data-th="Quantity">
-                    <input class="form-control text-center" value="@item.iSoLuong" type="number">
-                </td>
-                <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}",item.dDonGia)</td>
-                <td class="actions" data-th="">
-                    <a href="@Url.Action("SuaGioHang","GioHang")">
-                        <button class="btn btn-info btn-sm">
+                    </td>
+                    <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
 
-                            <i class="fa fa-edit"></i>
+                    <td data-th="Quantity">
+                        <input class="form-control text-center" value="@item.iSoLuong" type="number">
+                       @*@Html.TextBox("txtSoLuong") @item.iSoLuong*@
+                    </td>
+                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+                    <td class="actions" data-th="">
+                        <a href="@Url.Action("SuaGioHang","GioHang")">
+                            <button class="btn btn-info btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </a>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
-                    </a>
-                    <button class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </td>     
-                <thead>
-                    <tr>
-                        <th>
-                            Tổng tiền
-                        </th>
-                        <th>
+                    </td>
+            <thead>
+                <tr>
+                    <th>
+                        Tổng tiền
+                    </th>
+                    <th>
 
-                        </th>
+                    </th>
 
-                        <th>
-                        <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
-                        
-                        </th>
-                    </tr>
-                </thead>
+                    <th>
+                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+
+                    </th>
+                </tr>
+            </thead>
             </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <a href="h#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
-                </td>
-                <td colspan="2" class="hidden-xs"> </td>
-                <td>
-                    <a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+        }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <a href="h#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    </td>
+                    <td colspan="2" class="hidden-xs"> </td>
+                    <td>
+                        <a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

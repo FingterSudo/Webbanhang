@@ -1,6 +1,6 @@
 ﻿@using Web_BanHang.Models;
 @model List<GioHang>
-@{ ViewBag.Title = "Sửa Giỏ Hàng ";
+@{ ViewBag.Title = "GioHang";
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
 }
 
@@ -42,28 +42,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td data-th="Product">
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <h4 class="nomargin">@item.sTenSach</h4>
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">@item.sTenSach</h4>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
-                <td data-th="Quantity">
-                    @Html.TextBox("sanPham", item.iSoLuong)
-                </td>
-                <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
-                <td class="actions" data-th="">
-                    <button class="btn btn-info btn-sm">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash-o"></i>
-                    </button>
-                </td>
-            </tr>
+                    </td>
+                    <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
+
+                    <td data-th="Quantity">
+                        <input class="form-control text-center" value="@item.iSoLuong" type="number">
+                        @*@Html.TextBox("txtSoLuong") @item.iSoLuong*@
+                    </td>
+                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+                    <td class="actions" data-th="">
+                        <a href="@Url.Action("SuaGioHang","GioHang")">
+                            <button class="btn btn-info btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </a>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </td>
+            <thead>
                 <tr>
                     <th>
                         Tổng tiền
@@ -71,10 +75,16 @@
                     <th>
 
                     </th>
+
+                    <th>
                     <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+
+                    </th>
                 </tr>
+            </thead>
+            </tr>
         }
-         </tbody>   
+            </tbody>
             <tfoot>
                 <tr>
                     <td>
