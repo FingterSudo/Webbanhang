@@ -36,14 +36,9 @@ namespace Web_BanHang.Controllers
         {
 
             String timkiem = form["searchString"];
-           
-            
-
             // tao danh sach hien thi o dropview
             var groupChuDe = (from c in db.ChuDes select c).ToList();
-
             var groupNXB = (from xuatban in db.NhaXuatBans select xuatban).ToList();
-
             var groupTacGia = (from tg in db.TacGias select tg).ToList();
 
             // tao cau truy van giua 2 bang chu de va sach
@@ -148,6 +143,7 @@ namespace Web_BanHang.Controllers
                 sach1 = sach1.OrderBy(x => x.MaSach);
             }
 
+        
             #region code thừa để dùng sau
             ////2.1 Thiet lap so trang dang chon List<SelectListItem>
             //foreach (var item in items)
