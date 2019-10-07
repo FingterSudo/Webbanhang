@@ -52,7 +52,7 @@
                 <ul>
                     <li>
                         <span class="name">Nhà Xuất Bản</span><span class="clm">:</span>
-                        <span class="price final"style="color:hotpink;font-size:medium">@ViewBag.TenNXB</span>
+                        <span class="price final" style="color:hotpink;font-size:medium">@ViewBag.TenNXB</span>
                     </li>
                     <li>
                         <span class="name">Chủ Đề</span><span class="clm">:</span>
@@ -60,23 +60,23 @@
                     </li>
                     <li>
                         <span class="name">Mã sách</span><span class="clm">:</span>
-                        <span class="price final"style="color:hotpink;font-size:medium">@Model.MaSach</span>
+                        <span class="price final" style="color:hotpink;font-size:medium">@Model.MaSach</span>
                     </li>
                     <li>
                         <span class="name">Giá</span><span class="clm">:</span>
-                        <span class="price final"style="color:hotpink;font-size:medium" >@Model.GiaBan</span>
+                        <span class="price final" style="color:hotpink;font-size:medium">@Model.GiaBan</span>
                     </li>
                     @*<li><span class="save-cost">Save $7.62 (69%)</span></li>*@
                 </ul>
                 <div class="btn-sec">
                     @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = Model.MaSach, @strUrl = Request.Url.ToString() }))
                     {
-                        <button class="btn" type="submit" id="btnGioHang">Add To cart</button>
-                    }
 
-                    <button class="btn black">Buy Now</button>
+                        <button class="btn" type="submit" id="btnGioHang">Add to cart</button>
+                    } 
+                            <button class="btn black">Buy Now</button>
+ 
                 </div>
-            </div>
         </div>
     </div>
 </section>
