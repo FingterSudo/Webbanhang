@@ -35,8 +35,8 @@
                 <th style="width:50%">Tên sản phẩm</th>
                 <th style="width:10%">Giá</th>
                 <th style="width:8%">Số lượng</th>
-                <th style="width:22%" class="text-center">Thành tiền</th>
-                <th style="width:10%"> </th>
+                <th style="width:22%" class="text-center">Đơn Giá</th>
+                <th style="width:10%">Thành tiền </th>
             </tr>
         </thead>
         <tbody>
@@ -50,15 +50,16 @@
                             </div>
                         </div>
                     </td>
-                    <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia)</td>
+                    <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia) VND</td>
 
                     <td data-th="Quantity">
                         <input class="form-control text-center" value="@item.iSoLuong" type="number">
                        @*@Html.TextBox("txtSoLuong") @item.iSoLuong*@
                     </td>
                     <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+                    <td> @String.Format("{0:0,0}", item.dThanhTien)</td>
                     <td class="actions" data-th="">
-                        <a href="@Url.Action("SuaGioHang","GioHang")">
+                        <a href="@Url.Action("SuaGioHang","GioHang",new { amount = item.iSoLuong }) ">
                             <button class="btn btn-info btn-sm">
                                 <i class="fa fa-edit"></i>
                             </button>
@@ -67,7 +68,7 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </td>
-            <thead>
+            @*<thead>
                 <tr>
                     <th>
                         Tổng tiền
@@ -77,13 +78,16 @@
                     </th>
 
                     <th>
-                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
-
+                    
                     </th>
                 </tr>
-            </thead>
+            </thead>*@
             </tr>
         }
+            <td> Tổng số lượng </td>
+            <td>@Model.Sum(m=>m.iSoLuong)</td>
+            <td>Tổng thành tiền</td>
+            <td> @Model.Sum(m=>m.dThanhTien).ToString("#,##0").Replace(',','.') VND</td>
             </tbody>
             <tfoot>
                 <tr>
