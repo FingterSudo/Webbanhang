@@ -23,15 +23,14 @@ namespace Web_BanHang.Models
     
         public int MaSach { get; set; }
         public string TenSach { get; set; }
-        public Nullable<decimal> GiaBan { get; set; }
         public string MoTa { get; set; }
         public string AnhBia { get; set; }
+        public Nullable<decimal> GiaBan { get; set; }
         public Nullable<System.DateTime> NgayCapNhap { get; set; }
         public Nullable<int> SoLuongTon { get; set; }
+        public Nullable<int> MaTacGia { get; set; }
         public Nullable<int> MaNXB { get; set; }
         public Nullable<int> MaChuDe { get; set; }
-        public Nullable<int> MaTacGia { get; set; }
-        public Nullable<int> SachMoi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }

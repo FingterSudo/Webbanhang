@@ -20,6 +20,7 @@ namespace Web_BanHang.Models
         public string DonGia { get; set; }
     
         public virtual DonHang DonHang { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
         public virtual Sach Sach { get; set; }
     }
 }

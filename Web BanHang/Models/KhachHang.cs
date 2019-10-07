@@ -17,7 +17,7 @@ namespace Web_BanHang.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KhachHang()
         {
-            this.DonHangs = new HashSet<DonHang>();
+            this.ChiTietDonHangs = new HashSet<ChiTietDonHang>();
         }
     
         public int MaKH { get; set; }
@@ -31,6 +31,6 @@ namespace Web_BanHang.Models
         public Nullable<System.DateTime> NgaySinh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DonHang> DonHangs { get; set; }
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
     }
 }

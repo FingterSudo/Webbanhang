@@ -18,12 +18,13 @@
     <input type="hidden" name="sortOrder" id="hidden-sort-order" value="@Model.SortOrder" />
     <div class="bach-1">
         <select id="hidden-Sort-Order-Book" onchange="sortOrderTenSach(this)">
-            <option>Sắp xếp theo tên</option>
+            
+            
             <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "MaSach" ? "selected" : "")>A->Z</option>
             <option value="desc" @(Model.SortOrder == "desc" && Model.SortProperty == "MaSach" ? "selected" : "")>Z->A</option>
         </select>
         <select id="hidden-Sort-Order-Price" onchange="sortOrderGia(this)">
-            <option>Sắp xếp theo Giá </option>
+             
             <option value="asc" @(Model.SortOrder == "asc" && Model.SortProperty == "GiaBan" ? "selected" : "")>Thấp->Cao</option>
             <option value="desc" @(Model.SortOrder == "desc" && Model.SortProperty == "GiaBan" ? "selected" : "")>Cao->Thấp</option>
         </select>
@@ -183,7 +184,7 @@
         $('#form-search-book').submit();
     }
     function submit(sortproperty) {
-        $('#hidden-sort-property').val(sortproperty);
+        //$('#hidden-sort-property').val(sortproperty);
         var sortorder = $('#hidden-sort-order').val();
         if (sortorder == '') {
             sortorder = 'asc';
