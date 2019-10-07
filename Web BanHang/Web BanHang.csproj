@@ -157,11 +157,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ChuDeController.cs" />
+    <Compile Include="Controllers\fdfasfsfController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhaXuatBanController.cs" />
     <Compile Include="Controllers\SachController.cs" />
+    <Compile Include="Controllers\sdfdsfController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
     <Compile Include="DTO\SachDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -354,6 +356,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\fdfasfsf\" />
+    <Folder Include="Views\sdfdsf\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
