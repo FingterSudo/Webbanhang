@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
-                    <ul class="carousel-indicators list-inline">
+                    @*<ul class="carousel-indicators list-inline">
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#myCarousel">
                                 <img src="@Url.Content("~/HinhAnh/"+Model.AnhBia)" class="img-fluid">
@@ -43,7 +43,7 @@
                                 <img src="@Url.Content("~/HinhAnh/"+Model.AnhBia)" class="img-fluid">
                             </a>
                         </li>
-                    </ul>
+                    </ul>*@
                 </div>
                 <!--/main slider carousel-->
             </div>
@@ -75,7 +75,10 @@
                         <button class="btn" type="submit" id="btnGioHang">Add to cart</button>
                     } 
 
-                            <button class="btn black">Buy Now</button>    
+                    @using (Html.BeginForm("GioHang","GioHang", new { @iMaSach= Model.MaSach }))
+                    {
+                        <button class="btn" type="submit" id="btnDatHang">By Now</button>
+                    }
                 </div>
         </div>
     </div>

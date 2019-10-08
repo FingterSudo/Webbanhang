@@ -12,11 +12,12 @@ namespace Web_BanHang.Controllers
         private readonly QuanLyBanSachEntities db = new QuanLyBanSachEntities();
         // GET: GioHang
         // gio hang
+        #region Giỏ hàng 
         public ActionResult GioHang()
         {
             if (Session["GioHang"] == null)
             {
-                return RedirectToAction("Index", "Home");
+                return View("GioHangRong", "GioHang");
             }
             List<GioHang> lstGioHang = LayGioHang();
             return View(lstGioHang);
@@ -60,26 +61,7 @@ namespace Web_BanHang.Controllers
                 return Redirect(strURL);
             }
         }
-        //public ActionResult CapNhapGiohang(int iMaSP,string sanPham )
-        //{
-        //    // kiem tra ma san pham
-        //    Sach sach = db.Saches.SingleOrDefault(n => n.MaSach == iMaSP);
-        //    // neu get sai ma sp thi tro ve loi 404
-        //    if(sach== null)
-        //    {
-        //        Response.StatusCode = 404;
-        //        return null;
-        //    }
-        //    // lấy giỏ hàng tại session ["Gio Hang"]
-        //    List<GioHang> lstGioHang = LayGioHang();
-        //    GioHang sanpham = lstGioHang.SingleOrDefault(n => n.iMaSach == iMaSP);
-        //    if (sanpham != null)
-        //    {
-        //        sanpham.iSoLuong = int.Parse(sanPham.ToString());
-
-        //    }
-        //    return View("GioHang");
-        //}
+      
         public ActionResult CapNhapGiohang(int iMaSP, FormCollection formsoluong )
         {
             // kiem tra ma san pham
@@ -121,7 +103,7 @@ namespace Web_BanHang.Controllers
             }
             if (lstGioHang.Count == 0)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GioHangRong", "GioHang");
             }
             return RedirectToAction("GioHang");
         }
@@ -171,6 +153,58 @@ namespace Web_BanHang.Controllers
             List<GioHang> lstgiohang = LayGioHang();
             return View(lstgiohang) ;
         }
+        #endregion
+        #region Đặt Hàng
+        [HttpPost]
+        public ActionResult DatHang()
+        {
+            // kiem tra dang nhap
+            if(Session["TaiKhoan"]==null|| Session["TaiKhoan"].ToString() == "")
+            {
+                return RedirectToAction("DangNhap", "NguoiDung");
+            }
+            // kiem tra gio hang 
+            if (Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            // them don hang
+            DonHang ddh = new DonHang();
+            KhachHang kh =(KhachHang) Session["TaiKhoan"];
+            List<GioHang> giohang = LayGioHang();
+            ddh.MaKH = kh.MaKH;
+            ddh.NgayDat = DateTime.Now;
+            db.DonHangs.Add(ddh);
+            // them chi tiet don hang
+            foreach(var item in giohang)
+            {
+                ChiTietDonHang ctdh = new ChiTietDonHang();
+                ctdh.MaDonHang = ddh.MaDonHang;
+                ctdh.MaSach = item.iMaSach;
+                ctdh.DonGia = (decimal)item.dDonGia;
+            }
+            return  RedirectToAction("Index","Home");
+        }
+        #endregion
+        //public ActionResult CapNhapGiohang(int iMaSP,string sanPham )
+        //{
+        //    // kiem tra ma san pham
+        //    Sach sach = db.Saches.SingleOrDefault(n => n.MaSach == iMaSP);
+        //    // neu get sai ma sp thi tro ve loi 404
+        //    if(sach== null)
+        //    {
+        //        Response.StatusCode = 404;
+        //        return null;
+        //    }
+        //    // lấy giỏ hàng tại session ["Gio Hang"]
+        //    List<GioHang> lstGioHang = LayGioHang();
+        //    GioHang sanpham = lstGioHang.SingleOrDefault(n => n.iMaSach == iMaSP);
+        //    if (sanpham != null)
+        //    {
+        //        sanpham.iSoLuong = int.Parse(sanPham.ToString());
 
+        //    }
+        //    return View("GioHang");
+        //}
     }
 }

@@ -32,7 +32,8 @@
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>
-                <th style="width:50%">Tên sản phẩm</th>
+                <th style="width:20%">Tên sản phẩm</th>
+                <th style="height:5%; width:15%" >Ảnh sản phẩm </th>
                 <th style="width:10%">Giá</th>
                 <th style="width:8%">Số lượng</th>
                 <th style="width:22%" class="text-center">Đơn Giá</th>
@@ -42,48 +43,46 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td data-th="Product">
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <h4 class="nomargin">@item.sTenSach</h4>
-                            </div>
+            <tr>
+                <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h5>@item.sTenSach</h5>
                         </div>
-                    </td>
-                    <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia) VND</td>
+                    </div>
+                </td>
+                <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <a href="@Url.Action("XemChiTiet", "Sach", new { @MaSach =item.iMaSach})">
+                            <img src="@Url.Content("~/HinhAnh/"+item.sAnhBia)" alt="Image" /></a>
+                           
+                        </div>
+                    </div>
+                </td>
+                <td data-th="Price">@String.Format("{0:0,0}", item.dDonGia) VND</td>
 
-                    <td data-th="Quantity">
-                        <input class="form-control text-center" value="@item.iSoLuong" type="number">
-                       @*@Html.TextBox("txtSoLuong") @item.iSoLuong*@
-                    </td>
-                    <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
-                    <td> @String.Format("{0:0,0}", item.dThanhTien)</td>
-                    <td class="actions" data-th="">
-                        <a href="@Url.Action("SuaGioHang","GioHang",new { amount = item.iSoLuong }) ">
-                            <button class="btn btn-info btn-sm">
-                                <i class="fa fa-edit"></i>
-                            </button>
-                        </a>
-                        <button class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
+                <td data-th="Quantity">
+                    <input class="form-control text-center" value="@item.iSoLuong" type="number">
+                    @*@Html.TextBox("txtSoLuong") @item.iSoLuong*@
+                </td>
+                <td data-th="Subtotal" class="text-center">@String.Format("{0:0,0}", item.dDonGia)</td>
+                <td> @String.Format("{0:0,0}", item.dThanhTien)</td>
+                <td class="actions" data-th="">
+                    <a href="@Url.Action("SuaGioHang","GioHang",new { amount = item.iSoLuong }) ">
+                        <button class="btn btn-info btn-sm">
+                            <i class="fa fa-edit"></i>
                         </button>
-                    </td>
-            @*<thead>
-                <tr>
-                    <th>
-                        Tổng tiền
-                    </th>
-                    <th>
+                    </a>
+                    <a href="@Url.Action("XoaGioHang", new { @iMaSP =item.iMaSach})" onclick="return confirm('bạn có chắc xóa sản phẩm này?');" class="btn btn-danger btn-sm">
 
-                    </th>
-
-                    <th>
-                    
-                    </th>
-                </tr>
-            </thead>*@
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
             </tr>
         }
+            <td></td>
+            <td></td>
             <td> Tổng số lượng </td>
             <td>@Model.Sum(m=>m.iSoLuong)</td>
             <td>Tổng thành tiền</td>
@@ -94,7 +93,14 @@
                     <td>
                         <a href="h#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
                     </td>
-                    <td colspan="2" class="hidden-xs"> </td>
+                    <td></td>
+                    <td></td>
+                    <td>@using (Html.BeginForm("DatHang", "Giohang"))
+                    {
+                        <input type="submit" value="Đặt Hàng" />
+
+                    }
+                    </td >
                     <td>
                         <a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
                     </td>

@@ -23,6 +23,7 @@ namespace Web_BanHang.Models
         {
             iMaSach = Masach;
             Sach sach = db.Saches.Single(n => n.MaSach == iMaSach);
+            sAnhBia = sach.AnhBia;
             sTenSach = sach.TenSach;
             dDonGia = double.Parse(sach.GiaBan.ToString());
             iSoLuong = 1;
