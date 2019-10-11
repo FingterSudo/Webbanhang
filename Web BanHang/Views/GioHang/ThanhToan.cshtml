@@ -1,0 +1,49 @@
+﻿@using Web_BanHang.Models;
+@model List<GioHang> 
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<h2>ThanhToan</h2>
+<div class="container">
+    <table>
+        <tr>
+            <td>Hình thức nhận hàng</td>
+            <td>
+
+                <form action="/" method="post">
+                    <input type="radio" name="name" value="1" />Thanh toán bằng tiền mặt<br />
+                    <input type="radio" name="name" value="2" />Thanh toán bằng thẻ nội địa <br />
+                    <input type="radio" name="name" value="3" />Thanh toán bằng thẻ Visa,JSC,Master <br />
+                </form>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>Địa chỉ nhận hàng</td>
+                        <td>Đơn hàng</td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.iMaSach, @item.dDonGia</td>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                    }
+
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <a href="@Url.Action("Success","GioHang")">
+                <button class="btn btn-danger">
+                    Đặt mua
+                </button>
+            </a>
+          
+        </tr>
+    </table>
+</div>

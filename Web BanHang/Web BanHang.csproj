@@ -47,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -174,14 +174,17 @@
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DanhSachViewModels.cs" />
+    <Compile Include="Models\DatHang.cs" />
     <Compile Include="Models\DonHang.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DonHangChiTiet.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\KhachHang.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListSachViewModel.cs" />
+    <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\NhaXuatBan.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
@@ -203,10 +206,10 @@
     <Compile Include="Models\Sach.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\TacGia.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TacGia.cs">
+    <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThamGia.cs">
@@ -258,6 +261,8 @@
     <Content Include="HinhAnh\doi-lua-xung-doi.jpg" />
     <Content Include="HinhAnh\doi-ngan-dung-ngu-dai.jpg" />
     <Content Include="HinhAnh\Doremon.jpg" />
+    <Content Include="HinhAnh\gio-hang.jpg" />
+    <Content Include="HinhAnh\giohang.jpg" />
     <Content Include="HinhAnh\hai-con-meo-ngoi-ben-cua-so.jpg" />
     <Content Include="HinhAnh\hanh-trinh-ve-phuong-dong.jpg" />
     <Content Include="HinhAnh\hat-giong-tam-hon.jpg" />
@@ -354,12 +359,13 @@
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
     <Content Include="Views\GioHang\SuaGioHang.cshtml" />
     <Content Include="Views\GioHang\GioHangRong.cshtml" />
+    <Content Include="Views\GioHang\DKKH.cshtml" />
+    <Content Include="Views\GioHang\DatHang.cshtml" />
+    <Content Include="Views\GioHang\Success.cshtml" />
+    <Content Include="Views\GioHang\ThanhToan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Default\" />
-    <Folder Include="Views\fdfasfsf\" />
-    <Folder Include="Views\sdfdsf\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

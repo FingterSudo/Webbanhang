@@ -12,12 +12,17 @@ namespace Web_BanHang.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class TaiKhoan
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int MaTK { get; set; }
+        public string TaiKhoan1 { get; set; }
+        public string MatKhau { get; set; }
+        public string HoTen { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string DiaChi { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> Sdt { get; set; }
+        public string Image { get; set; }
+        public string GioiTinh { get; set; }
     }
 }

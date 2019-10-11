@@ -12,8 +12,7 @@ namespace Web_BanHang.Models
         public string sTenSach { get; set; }
         public string sAnhBia { get; set; }
         public double dDonGia { get; set; }
-        public int iSoLuong { get; set; }
-
+        public int iSoLuong { get; set; }       
         public double dThanhTien
         {
             get { return (dDonGia * iSoLuong); }
@@ -28,5 +27,15 @@ namespace Web_BanHang.Models
             dDonGia = double.Parse(sach.GiaBan.ToString());
             iSoLuong = 1;
         }
+        //public DatHang(int Email, int Address, int Name,int mobile)
+        //{
+             
+        //    KhachHang kh = db.KhachHangs.Single(n => n.MaKH == mMaKH);
+        //    nHoTen = kh.Hoten;
+        //    dDiaChi = kh.DiaChi;
+        //    pDienThoai = kh.DienThoai;
+        //    eEmail = kh.Email;
+           
+        //}
     }
 }

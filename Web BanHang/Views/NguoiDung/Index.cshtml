@@ -1,5 +1,4 @@
-﻿@using Web_BanHang.Models
-@{
+﻿@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -16,9 +15,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 </head>
-@{
-    var session = (KhachHang)Session["TaiKhoan"];
-}
 <body>
     <header>
 
@@ -42,43 +38,19 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                  
-                                     
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        @if (Session["TaiKhoan"] != null)
-                        {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="navbar-item">
+                                @* tạo nút đăng nhập*@
+                                <a href="@Url.Action("DangNhap","NguoiDung")" class="nav-link">Đăng Nhập</a>
+                                @*@Html.ActionLink("Đăng Nhập", "DangNhap", "NguoiDung", htmlAttributes: new { @class = "nav-link" })*@
 
-                            <ul class="navbar-nav ml-auto">
-                                <li class="navbar-item">
-                                    @* tạo nút đăng nhập*@
-                                    <a class="nav-link">Xin chào:@session.Hoten</a>
-                                    @*@Html.ActionLink("Đăng Nhập", "DangNhap", "NguoiDung", htmlAttributes: new { @class = "nav-link" })*@
-
-                                </li>
-                                <li class="navbar-item">
-                                    <a href="@Url.Action("DangXuat","NguoiDung")" class="nav-link">Đăng Xuất</a>
-                                    @*@Html.ActionLink("Đăng ký", "DangKy", "NguoiDung", htmlAttributes: new { @class = "nav-link" })*@
-                                </li>
-                            </ul>
-
-
-                        }
-                        else
-                        {
-                            <ul class="navbar-nav ml-auto">
-                                <li class="navbar-item">
-                                    @* tạo nút đăng nhập*@
-                                    <a href="@Url.Action("DangNhap","NguoiDung")" class="nav-link">Đăng Nhập</a>
-                                    @*@Html.ActionLink("Đăng Nhập", "DangNhap", "NguoiDung", htmlAttributes: new { @class = "nav-link" })*@
-
-                                </li>
-                                <li class="navbar-item">
-                                    <a href="@Url.Action("DangKy","NguoiDung")" class="nav-link">Đăng Ký</a>
-                                    @*@Html.ActionLink("Đăng ký", "DangKy", "NguoiDung", htmlAttributes: new { @class = "nav-link" })*@
-                                </li>
-                            </ul>
-                        }
-
+                            </li>
+                            <li class="navbar-item">
+                                <a href="@Url.Action("DangKy","NguoiDung")" class="nav-link">Đăng Ký</a>
+                                @*@Html.ActionLink("Đăng ký", "DangKy", "NguoiDung", htmlAttributes: new { @class = "nav-link" })*@
+                            </li>
+                        </ul>
                         <div class="cart my-2 my-lg-0">
                             @Html.Action("GioHangPartial", "GioHang")
                         </div>

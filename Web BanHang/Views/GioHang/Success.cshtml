@@ -1,0 +1,15 @@
+﻿ 
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<h2>Success</h2>
+@if (Session["TaiKhoan"] != null)
+{
+     <h2>Tài khoản đã đặt hàng thành công</h2>
+}
+else
+{
+    <H2>Quý khách đã đặt hàng thành công</H2>
+}

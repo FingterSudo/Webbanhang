@@ -47,10 +47,16 @@ namespace Web_BanHang.Controllers
             {
                 ViewBag.ThongBao = "Chúc mừng bạn đăng nhập thành công";
                 Session["TaiKhoan"] = kh;
-                return View();
+                return RedirectToAction("Index","Home");
             }
             ViewBag.ThongBao = "Tài khoản bạn đăng nhập không đúng ";
             return View();
+        }
+        public ActionResult DangXuat()
+        {
+            Session["TaiKhoan"] = null;
+            TempData["messenger"] = "Đã đăng xuất";
+            return RedirectToAction("Index","Home");
         }
     }
 }

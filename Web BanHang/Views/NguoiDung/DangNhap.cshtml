@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "DangNhap";
+    ViewBag.Title = "Đăng Nhập";
     Layout = "~/Views/Layout/DangKyLayout.cshtml";
 }
 @ViewBag.ThongBao
@@ -22,7 +22,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-4">
                 <input type="submit" id="btnSumit" value="Đăng Nhập" class="btn btn black" />
-                <h6>không Đăng Nhập? <a href="login.html">Đăng Ký</a></h6>
+                <h6>Không Đăng Nhập? <a href="@Url.Action("DangKy","NguoiDung")">Đăng Ký</a></h6>
             </div>
         </div>
 

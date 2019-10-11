@@ -1,11 +1,12 @@
-﻿@using Web_BanHang.Models;
+﻿
+@using Web_BanHang.Models;
 @model List<GioHang>
-@{ ViewBag.Title = "GioHang";
+@{
+    ViewBag.Title = "GioHangRong";
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,20 +14,26 @@
 </head>
 <body>
     <h2 class="text-center">Giỏ Hàng </h2>
-    <div class="container">
-        <i class="fas fa-shopping-cart"></i>
-        <h3>Không có sản phẩm nào trong giỏ hàng</h3>
+    <div class="text-center">
+        <div class="container">
+            
+            <img src="~/HinhAnh/gio-hang.jpg" style="max-width:15%"/>
+            <h4>Không có sản phẩm nào trong giỏ hàng</h4>
 
-        <a href="@Url.Action("Index","Home")">
-            <button class="btn btn-danger">
-                Về trang chủ
-            </button>
-        </a>
-        <h5>
-            Khi cần trợ giúp vui lòng gọi 1800.1061
-            (7h30 - 22h)
-        </h5>
+            <a href="@Url.Action("Index","Home")">
+                <button class="btn btn-danger">
+                    Về trang chủ
+                </button>
+            </a>
+            <h5>
+                Khi cần trợ giúp vui lòng gọi 1800.1061
+                (7h30 - 22h)
+            </h5>
+        </div>
     </div>
+
+
 
 </body>
 </html>
+
