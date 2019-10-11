@@ -281,7 +281,10 @@ namespace Web_BanHang.Controllers
         [HttpGet]
         public ActionResult ThanhToan()
         {
+
             List<GioHang> gh = new List<GioHang>();
+            ChiTietDonHang ct = new ChiTietDonHang();
+            string content = MailHelper.MailOrder();
 
             return View(gh);
         }
