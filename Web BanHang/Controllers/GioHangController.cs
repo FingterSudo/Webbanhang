@@ -161,7 +161,6 @@ namespace Web_BanHang.Controllers
 
             return View(gh);
              
-
         }
         [HttpPost]
         public ActionResult DatHang (string name, string mobile, string address,string email    )
@@ -264,7 +263,6 @@ namespace Web_BanHang.Controllers
                     return RedirectToAction("ThanhToan", "GioHang");
                 }
                 return RedirectToAction("Index", "Home");
-
             }
             // truong hop dang nhap an danh
             // kiem tra gio hang
@@ -281,11 +279,7 @@ namespace Web_BanHang.Controllers
         [HttpGet]
         public ActionResult ThanhToan()
         {
-
             List<GioHang> gh = new List<GioHang>();
-            ChiTietDonHang ct = new ChiTietDonHang();
-            string content = MailHelper.MailOrder();
-
             return View(gh);
         }
         //[HttpPost]

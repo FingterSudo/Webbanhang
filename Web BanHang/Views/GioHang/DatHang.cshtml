@@ -5,9 +5,9 @@
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
 }
 
-<h2>Đặt Hàng</h2>
+<h2></h2>
 
-<h2 class="text-center">Giỏ Hàng </h2>
+<h2 class="text-center">Đặt Hàng</h2>
 <div class="container">
     <table id="cart" class="table table-hover table-condensed">
         <thead>
@@ -78,7 +78,7 @@
             </tr>
         </tfoot>
     </table>
-    <div class="container">
+    <div style="margin:10px">
         @*@if (Session["TaiKhoan"] != null)
         {
 
@@ -99,12 +99,9 @@
                         <label>Email</label>
                         <input name="email" class="form-control" />
                     </div>
-
-                </div>
-                 
-                <a href="@Url.Action("Index","Home")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
-                <button type="submit" class="btn btn-warning">Đặt Hàng<i class="fa fa-angle-right"></i></button>
-
+                </div>      
+                    <a href="@Url.Action("Index","Home")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    <button type="submit" class="btn btn-warning" style="float:right">Đặt Hàng<i class="fa fa-angle-right" style=""></i></button>             
             }
         </div>
     </div>

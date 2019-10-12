@@ -1468,7 +1468,7 @@ header .cart {
         .product-sec #myCarousel .carousel-indicators > li {
             width: 33.33%;
             margin-left: 0;
-            display: block;
+           // display: block;
             float: left;
             margin: 0;
             padding: 0 5px;
@@ -1628,4 +1628,7 @@ footer {
 /*# sourceMappingURL=styles.css.map */
 .bach-1{
     float:right;
+}
+.cartnull{
+    margin: 0 10px;
 }
