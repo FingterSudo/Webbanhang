@@ -5,24 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8decdabda2204f52a8068b3c6272dc89" Name="Diagram1">
-        <EntityTypeShape EntityType="QuanLyBanSachModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.ChuDe" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.DonHang" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.KhachHang" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.NhaXuatBan" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.Sach" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.TacGia" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.TaiKhoan" Width="1.5" PointX="5.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBanSachModel.ThamGia" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_KhachHang" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_Sach" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_Sach_ChuDe" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_DonHang_KhachHang" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_Sach_NhaXuatBan" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_Sach_TacGia" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_ThamGia_Sach" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyBanSachModel.FK_ThamGia_TacGia" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.ChuDe" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.DonHang" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.KhachHang" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.NhaXuatBan" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.Sach" Width="1.5" PointX="3" PointY="3" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.TacGia" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.TaiKhoan" Width="1.5" PointX="5.75" PointY="8.25" />
+        <EntityTypeShape EntityType="QuanLyBanSachModel.ThamGia" Width="1.5" PointX="8.25" PointY="3.875" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_KhachHang" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_ChiTietDonHang_Sach" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_Sach_ChuDe" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_DonHang_KhachHang" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_Sach_NhaXuatBan" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_Sach_TacGia" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_ThamGia_Sach" />
+        <AssociationConnector Association="QuanLyBanSachModel.FK_ThamGia_TacGia" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

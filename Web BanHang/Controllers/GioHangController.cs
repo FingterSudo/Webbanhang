@@ -163,7 +163,7 @@ namespace Web_BanHang.Controllers
              
         }
         [HttpPost]
-        public ActionResult DatHang (string name, string mobile, string address,string email    )
+        public ActionResult DatHang (string name, string mobile, string address,string email,string gt    )
         {
             // Đăng nhập đặt hàng
             // kiem tra dang nhap
@@ -194,7 +194,8 @@ namespace Web_BanHang.Controllers
                         dhct.DonGia = (decimal)item.dDonGia;
                         dhct.TenKH = kh2.Hoten;
                         dhct.DiaChi = kh2.DiaChi;
-                        //dhct.GioiTinh = ddh.KhachHang.;
+                        dhct.DiaChiNhanHang = address; 
+                        dhct.GioiTinh = kh2.GioiTinh;
                         dhct.Sdt = kh2.DienThoai;
                         dhct.Email = kh2.Email;
                         db.ChiTietDonHangs.Add(dhct);
@@ -228,6 +229,7 @@ namespace Web_BanHang.Controllers
                 kh.DiaChi = address;
                 kh.DienThoai = mobile;
                 kh.Email = email;
+                kh.GioiTinh = gt;
                 db.KhachHangs.Add(kh);
                 db.SaveChanges();
                 DonHang ddh = new DonHang();
@@ -246,8 +248,8 @@ namespace Web_BanHang.Controllers
                         dhct.MaDonHang = ddh.MaDonHang;
                         dhct.DonGia = (decimal)item.dDonGia;
                         dhct.TenKH = ddh.KhachHang.Hoten;
-                        dhct.DiaChi = ddh.KhachHang.DiaChi;
-                        //dhct.GioiTinh = ddh.KhachHang.;
+                        dhct.DiaChiNhanHang = ddh.KhachHang.DiaChi;
+                        dhct.GioiTinh = ddh.KhachHang.GioiTinh;
                         dhct.Sdt = ddh.KhachHang.DienThoai;
                         dhct.Email = ddh.KhachHang.Email;
                         db.ChiTietDonHangs.Add(dhct);
@@ -289,5 +291,6 @@ namespace Web_BanHang.Controllers
 
 
         //}
+       
     }
 }
