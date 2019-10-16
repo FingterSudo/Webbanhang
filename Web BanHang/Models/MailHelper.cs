@@ -64,60 +64,26 @@ namespace Web_BanHang.Models
             string content = body.ToString();
             return content;
         }
-        public static string MailOrder(List<ChiTietDonHang> ct,KhachHang kh,List<GioHang> giohang  )
+        public static string MailOrder(DonHang ct,KhachHang kh,List<GioHang> giohang  )
         {
             StringBuilder body = new StringBuilder();
-            //int MDH;
-            //string thuDienTu;
-            //string nameCustomer;
-            //string numberPhone;
-            //string addressCustomer;
-            //string addressOrder;
-
-            //foreach (var item in ct)
-            //{
-            //    MDH = item.MaDonHang;
-            //    thuDienTu = item.Email;
-            //    numberPhone = item.Sdt;
-            //    nameCustomer = item.TenKH;
-            //    addressCustomer = item.DiaChi;
-            //    addressOrder = item.DiaChiNhanHang;
-            //}
-            body.Append("<table>");
-            foreach (var item in ct)
-            {
-                body.Append("<p>Thông tin chi tiết đơn hàng số: <b style='color:red;'>" + item.MaDonHang + "</p>" 
-                +"<tr><th style='text-align:left;'>Email:</th><td>" + item.Email + "</td></tr>" 
-                +"<tr><th style='text-align:left;'>Họ và tên:</th><td>" + item.TenKH + "</td></tr>" 
-                +"<tr><th style='text-align:left;'>Số điện thoại:</th><td>" + item.Sdt + "</td></tr>" 
-                +"<tr><th style='text-align:left;'>Địa chỉ:</th><td>" + item.DiaChi + "</td></tr>");
-            }
-            body.Append("</table>");
-            body.Append("<table>");
-            foreach(var item in ct)
-            {
-                body.Append("<tr><td colspan='2'><h3>Thông tin người nhận</h3></td></tr>" 
-                 +"<tr><th style='text-align:left;'>Email:</th><td>" + item.Email + "</td></tr>" 
-                +"<tr><th style='text-align:left;'>Họ và tên:</th><td>" + item.TenKH + "</td></tr>" 
-                +"<tr><th style='text-align:left;'>Số điện thoại:</th><td>" + item.Sdt + "</td></tr>" 
-                +"<tr><th style='text-align:left;'>Địa chỉ:</th><td>" + item.DiaChiNhanHang + "</td></tr>");
-            }
-            body.Append("</table>");
-            //body.Append("<p>Thông tin chi tiết đơn hàng số: <b style='color:red;'>" + 'MDH' + "</p>");          
-            //body.Append("<tr><td colspan='2'><h3>Thông tin người mua:</h3></td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Email:</th><td>" + thuDienTu + "</td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Họ và tên:</th><td>" + item.TenKH + "</td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Số điện thoại:</th><td>" + item.Sdt + "</td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Địa chỉ:</th><td>" + item.DiaChi + "</td></tr>");
-            //body.Append("</table>");
-            //body.Append("<table>");
-            //body.Append("<tr><td colspan='2'><h3>Thông tin người nhận</h3></td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Email:</th><td>" + item.Email + "</td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Họ và tên:</th><td>" + item.TenKH + "</td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Số điện thoại:</th><td>" + item.Sdt + "</td></tr>");
-            //body.Append("<tr><th style='text-align:left;'>Địa chỉ:</th><td>" + item.DiaChiNhanHang + "</td></tr>");
-            //body.Append("</table>"); 
             
+           
+            body.Append("<p>Thông tin chi tiết đơn hàng số: <b style='color:red;'>" + ct.MaDonHang + "</p>");
+            body.Append("<table>");
+            body.Append("<tr><td colspan='2'><h3>Thông tin người mua:</h3></td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Email:</th><td>" + ct.EmailKH + "</td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Họ và tên:</th><td>" + ct.TenKH + "</td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Số điện thoại:</th><td>" + ct.DienThoaiKH + "</td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Địa chỉ:</th><td>" + ct.DiaChi + "</td></tr>");
+            body.Append("</table>");
+            body.Append("<table>");
+            body.Append("<tr><td colspan='2'><h3>Thông tin người nhận</h3></td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Email:</th><td>" + ct.EmailKH + "</td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Họ và tên:</th><td>" + ct.TenKH + "</td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Số điện thoại:</th><td>" + ct.DienThoaiKH + "</td></tr>");
+            body.Append("<tr><th style='text-align:left;'>Địa chỉ:</th><td>" + ct.DiaChiNhanHang + "</td></tr>");
+            body.Append("</table>"); 
             body.Append("<table>");
             body.Append("<tr><td colspan='2'><h3>Chi tiết đơn hàng</h3></td></tr>");
             body.Append("<tr><th>Tên sản phẩm</th><th>Số lượng</th><th>Đơn giá</th></tr>");

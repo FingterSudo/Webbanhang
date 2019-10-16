@@ -37,6 +37,7 @@
           <Property Name="NgayDat" Type="datetime" />
           <Property Name="NgayGiao" Type="datetime" />
           <Property Name="DaThanhToan" Type="int" />
+          <Property Name="DienThoaiKH" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -353,6 +354,7 @@
           <Property Name="NgayDat" Type="DateTime" Precision="3" />
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
           <Property Name="DaThanhToan" Type="Int32" />
+          <Property Name="DienThoaiKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" FromRole="DonHang" ToRole="ChiTietDonHang" />
           <NavigationProperty Name="KhachHang" Relationship="QuanLyBanSachModel.FK_DonHang_KhachHang" FromRole="DonHang" ToRole="KhachHang" />
         </EntityType>
@@ -577,6 +579,7 @@
           <EntitySetMapping Name="DonHangs">
             <EntityTypeMapping TypeName="QuanLyBanSachModel.DonHang">
               <MappingFragment StoreEntitySet="DonHang">
+                <ScalarProperty Name="DienThoaiKH" ColumnName="DienThoaiKH" />
                 <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
                 <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
                 <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />

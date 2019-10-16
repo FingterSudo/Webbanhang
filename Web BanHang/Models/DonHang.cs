@@ -30,6 +30,7 @@ namespace Web_BanHang.Models
         public Nullable<System.DateTime> NgayDat { get; set; }
         public Nullable<System.DateTime> NgayGiao { get; set; }
         public Nullable<int> DaThanhToan { get; set; }
+        public string DienThoaiKH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }

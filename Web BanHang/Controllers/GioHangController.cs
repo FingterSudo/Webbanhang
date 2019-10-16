@@ -159,7 +159,6 @@ namespace Web_BanHang.Controllers
         public ActionResult DatHang()
         {
             var gh = Session["GioHang"];
-
             return View(gh);
              
         }
@@ -183,10 +182,12 @@ namespace Web_BanHang.Controllers
                 ddh1.DiaChi = kh2.DiaChi;
                 ddh1.DiaChiNhanHang = address;
                 ddh1.EmailKH = email;
-                ddh1.M
-                ddh1.NgayDat = DateTime.Now;
+                ddh1.DienThoaiKH = mobile;
+                ddh1.NgayDat = DateTime.Now; 
                 db.DonHangs.Add(ddh1);
                 db.SaveChanges();
+                string content = MailHelper.MailOrder(ddh1, kh2, giohang1);
+                string mail = kh2.Email;
                 try
                 {
                     ////var id = new DatHang().Insert(ddh);
@@ -206,6 +207,7 @@ namespace Web_BanHang.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 db.SaveChanges();
+                MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
                 if (Session["GioHang"] != null)
                 {
                     Session["GioHang"] = null;
@@ -231,12 +233,18 @@ namespace Web_BanHang.Controllers
                 db.KhachHangs.Add(kh);
                 db.SaveChanges();
                 DonHang ddh = new DonHang();
+                ddh.NgayDat = DateTime.Now;
                 ddh.MaKH = kh.MaKH;
+                ddh.TenKH = kh.Hoten;
+                ddh.DiaChi = kh.DiaChi;
+                ddh.DiaChiNhanHang = address;
+                ddh.EmailKH = email;
+                ddh.DienThoaiKH = mobile;
                 ddh.NgayDat = DateTime.Now;
                 db.DonHangs.Add(ddh);
                 db.SaveChanges();
-                var listCTDH = new List<ChiTietDonHang>();
-                 
+                string content = MailHelper.MailOrder(ddh, kh, giohang);
+                string mail = email;
                 try
                 {
                     foreach (var item in giohang)
@@ -244,15 +252,8 @@ namespace Web_BanHang.Controllers
                         ChiTietDonHang dhct = new ChiTietDonHang();
                         dhct.MaSach = item.iMaSach;
                         dhct.MaDonHang = ddh.MaDonHang;
-                        dhct.DonGia = (decimal)item.dDonGia;
-                        dhct.TenKH = ddh.KhachHang.Hoten;
-                        dhct.DiaChiNhanHang = ddh.KhachHang.DiaChi;
-                        dhct.GioiTinh = ddh.KhachHang.GioiTinh;
-                        dhct.Sdt = ddh.KhachHang.DienThoai;
-                        dhct.Email = ddh.KhachHang.Email;
-                        dhct.TongTien +=(Convert.ToDecimal(item.dDonGia));
-                        db.ChiTietDonHangs.Add(dhct);
-                        listCTDH.Add(dhct);
+                        dhct.DonGia = (decimal)item.dDonGia; 
+                        db.ChiTietDonHangs.Add(dhct);  
                     }
                 }
                 catch (Exception ex)
@@ -260,8 +261,7 @@ namespace Web_BanHang.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 db.SaveChanges();
-                string content = MailHelper.MailOrder(listCTDH, kh, giohang );
-                string mail = email;
+               
                 MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
                 if (Session["GioHang"] != null)
                 {
