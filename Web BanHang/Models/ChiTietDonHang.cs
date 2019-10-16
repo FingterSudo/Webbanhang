@@ -19,12 +19,6 @@ namespace Web_BanHang.Models
         public Nullable<int> MaKH { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> DonGia { get; set; }
-        public string TenKH { get; set; }
-        public string DiaChi { get; set; }
-        public string DiaChiNhanHang { get; set; }
-        public string Sdt { get; set; }
-        public string Email { get; set; }
-        public string GioiTinh { get; set; }
     
         public virtual DonHang DonHang { get; set; }
         public virtual KhachHang KhachHang { get; set; }

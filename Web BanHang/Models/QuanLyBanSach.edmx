@@ -15,12 +15,6 @@
           <Property Name="MaKH" Type="int" />
           <Property Name="SoLuong" Type="int" />
           <Property Name="DonGia" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
-          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
-          <Property Name="DiaChiNhanHang" Type="nvarchar" MaxLength="200" />
-          <Property Name="Sdt" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="GioiTinh" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="ChuDe">
           <Key>
@@ -34,11 +28,15 @@
             <PropertyRef Name="MaDonHang" />
           </Key>
           <Property Name="MaDonHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DaThanhToan" Type="int" />
+          <Property Name="MaKH" Type="int" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChiNhanHang" Type="nvarchar" MaxLength="200" />
+          <Property Name="EmailKH" Type="varchar" MaxLength="50" />
           <Property Name="TinhTrangGiaoHang" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayDat" Type="datetime" />
           <Property Name="NgayGiao" Type="datetime" />
-          <Property Name="MaKH" Type="int" />
+          <Property Name="DaThanhToan" Type="int" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -329,12 +327,6 @@
           <Property Name="MaKH" Type="Int32" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="DonGia" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChiNhanHang" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sdt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DonHang" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" FromRole="ChiTietDonHang" ToRole="DonHang" />
           <NavigationProperty Name="KhachHang" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_KhachHang" FromRole="ChiTietDonHang" ToRole="KhachHang" />
           <NavigationProperty Name="Sach" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_Sach" FromRole="ChiTietDonHang" ToRole="Sach" />
@@ -352,11 +344,15 @@
             <PropertyRef Name="MaDonHang" />
           </Key>
           <Property Name="MaDonHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DaThanhToan" Type="Int32" />
+          <Property Name="MaKH" Type="Int32" />
+          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiNhanHang" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TinhTrangGiaoHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgayDat" Type="DateTime" Precision="3" />
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
-          <Property Name="MaKH" Type="Int32" />
+          <Property Name="DaThanhToan" Type="Int32" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" FromRole="DonHang" ToRole="ChiTietDonHang" />
           <NavigationProperty Name="KhachHang" Relationship="QuanLyBanSachModel.FK_DonHang_KhachHang" FromRole="DonHang" ToRole="KhachHang" />
         </EntityType>
@@ -553,7 +549,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -562,12 +558,6 @@
           <EntitySetMapping Name="ChiTietDonHangs">
             <EntityTypeMapping TypeName="QuanLyBanSachModel.ChiTietDonHang">
               <MappingFragment StoreEntitySet="ChiTietDonHang">
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Sdt" ColumnName="Sdt" />
-                <ScalarProperty Name="DiaChiNhanHang" ColumnName="DiaChiNhanHang" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
                 <ScalarProperty Name="DonGia" ColumnName="DonGia" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
@@ -587,11 +577,15 @@
           <EntitySetMapping Name="DonHangs">
             <EntityTypeMapping TypeName="QuanLyBanSachModel.DonHang">
               <MappingFragment StoreEntitySet="DonHang">
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
                 <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
                 <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
                 <ScalarProperty Name="TinhTrangGiaoHang" ColumnName="TinhTrangGiaoHang" />
-                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
+                <ScalarProperty Name="EmailKH" ColumnName="EmailKH" />
+                <ScalarProperty Name="DiaChiNhanHang" ColumnName="DiaChiNhanHang" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="MaDonHang" ColumnName="MaDonHang" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -8,15 +8,17 @@ namespace Web_BanHang.Models
     public class GioHang
     {
         QuanLyBanSachEntities db = new QuanLyBanSachEntities();
+        
         public int iMaSach { get; set; }
         public string sTenSach { get; set; }
         public string sAnhBia { get; set; }
         public double dDonGia { get; set; }
-        public int iSoLuong { get; set; }       
+        public int iSoLuong { get; set; }     
+        public string eEmail { get; set; }
         public double dThanhTien
         {
             get { return (dDonGia * iSoLuong); }
-        }
+        }     
         // ham tao gio hang 
         public GioHang(int Masach)
         {
@@ -27,15 +29,5 @@ namespace Web_BanHang.Models
             dDonGia = double.Parse(sach.GiaBan.ToString());
             iSoLuong = 1;
         }
-        //public DatHang(int Email, int Address, int Name,int mobile)
-        //{
-             
-        //    KhachHang kh = db.KhachHangs.Single(n => n.MaKH == mMaKH);
-        //    nHoTen = kh.Hoten;
-        //    dDiaChi = kh.DiaChi;
-        //    pDienThoai = kh.DienThoai;
-        //    eEmail = kh.Email;
-           
-        //}
     }
 }

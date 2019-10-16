@@ -52,6 +52,7 @@ namespace Web_BanHang.Controllers
             if (sanpham == null)
             {
                 sanpham = new GioHang(iMaSach );
+                
                 lstGioHang.Add(sanpham);
                 return Redirect(strURL);
             }
@@ -163,7 +164,7 @@ namespace Web_BanHang.Controllers
              
         }
         [HttpPost]
-        public ActionResult DatHang (string name, string mobile, string address,string email,string gt    )
+        public ActionResult DatHang (string name, string mobile, string address,string email,string gender)
         {
             // Đăng nhập đặt hàng
             // kiem tra dang nhap
@@ -178,6 +179,11 @@ namespace Web_BanHang.Controllers
                 KhachHang kh2 = (KhachHang)Session["TaiKhoan"];
                 DonHang ddh1 = new DonHang();
                 ddh1.MaKH = kh2.MaKH;
+                ddh1.TenKH = kh2.Hoten;
+                ddh1.DiaChi = kh2.DiaChi;
+                ddh1.DiaChiNhanHang = address;
+                ddh1.EmailKH = email;
+                ddh1.M
                 ddh1.NgayDat = DateTime.Now;
                 db.DonHangs.Add(ddh1);
                 db.SaveChanges();
@@ -192,12 +198,6 @@ namespace Web_BanHang.Controllers
                         dhct.MaDonHang = ddh1.MaDonHang;
                         dhct.MaKH = ddh1.MaKH;
                         dhct.DonGia = (decimal)item.dDonGia;
-                        dhct.TenKH = kh2.Hoten;
-                        dhct.DiaChi = kh2.DiaChi;
-                        dhct.DiaChiNhanHang = address; 
-                        dhct.GioiTinh = kh2.GioiTinh;
-                        dhct.Sdt = kh2.DienThoai;
-                        dhct.Email = kh2.Email;
                         db.ChiTietDonHangs.Add(dhct);
                     }
                 }
@@ -220,16 +220,14 @@ namespace Web_BanHang.Controllers
                 {
                     return RedirectToAction("GioHangRong", "GioHang");
                 }
-
                 // them don hang
-
                 List<GioHang> giohang = LayGioHang();
                 KhachHang kh = new KhachHang();
                 kh.Hoten = name;
                 kh.DiaChi = address;
                 kh.DienThoai = mobile;
                 kh.Email = email;
-                kh.GioiTinh = gt;
+                kh.GioiTinh = gender;
                 db.KhachHangs.Add(kh);
                 db.SaveChanges();
                 DonHang ddh = new DonHang();
@@ -237,10 +235,10 @@ namespace Web_BanHang.Controllers
                 ddh.NgayDat = DateTime.Now;
                 db.DonHangs.Add(ddh);
                 db.SaveChanges();
+                var listCTDH = new List<ChiTietDonHang>();
+                 
                 try
                 {
-                    ////var id = new DatHang().Insert(ddh);
-                    ////var ctdh = new Models.DonHangChiTiet();
                     foreach (var item in giohang)
                     {
                         ChiTietDonHang dhct = new ChiTietDonHang();
@@ -252,7 +250,9 @@ namespace Web_BanHang.Controllers
                         dhct.GioiTinh = ddh.KhachHang.GioiTinh;
                         dhct.Sdt = ddh.KhachHang.DienThoai;
                         dhct.Email = ddh.KhachHang.Email;
+                        dhct.TongTien +=(Convert.ToDecimal(item.dDonGia));
                         db.ChiTietDonHangs.Add(dhct);
+                        listCTDH.Add(dhct);
                     }
                 }
                 catch (Exception ex)
@@ -260,6 +260,9 @@ namespace Web_BanHang.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 db.SaveChanges();
+                string content = MailHelper.MailOrder(listCTDH, kh, giohang );
+                string mail = email;
+                MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
                 if (Session["GioHang"] != null)
                 {
                     return RedirectToAction("ThanhToan", "GioHang");
@@ -268,10 +271,8 @@ namespace Web_BanHang.Controllers
             }
             // truong hop dang nhap an danh
             // kiem tra gio hang
-
         }
         #endregion
-
         public ActionResult Success()
         {
             Session["GioHang"] = null;
@@ -282,15 +283,13 @@ namespace Web_BanHang.Controllers
         public ActionResult ThanhToan()
         {
             List<GioHang> gh = new List<GioHang>();
+          
             return View(gh);
         }
         //[HttpPost]
         //public ActionResult ThanhToan()
         //{
         //    ChiTietDonHang dh = new ChiTietDonHang();
-
-
-        //}
-       
+        //}       
     }
 }
