@@ -22,14 +22,14 @@ namespace Web_BanHang.Controllers
         }
         [HttpPost]
         public ActionResult DangKy(KhachHang kh)
-        { 
+        {
             if (ModelState.IsValid)
             {
                 // chèn dữ liệu vào khách hàng
                 db.KhachHangs.Add(kh);
                 // luu dữ liệu khách hàng
                 db.SaveChanges();
-            }     
+            }
             return View();
         }
         [HttpGet]
@@ -43,11 +43,11 @@ namespace Web_BanHang.Controllers
             string sTaiKhoan = f["txtTaiKhoan"].ToString();
             string sMatKhau = f.Get("txtMatKhau").ToString();
             KhachHang kh = db.KhachHangs.SingleOrDefault(n => n.TaiKhoan == sTaiKhoan && n.MatKhau == sMatKhau);
-            if (kh!=null)
+            if (kh != null)
             {
                 ViewBag.ThongBao = "Chúc mừng bạn đăng nhập thành công";
                 Session["TaiKhoan"] = kh;
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.ThongBao = "Tài khoản bạn đăng nhập không đúng ";
             return View();
@@ -56,7 +56,7 @@ namespace Web_BanHang.Controllers
         {
             Session["TaiKhoan"] = null;
             TempData["messenger"] = "Đã đăng xuất";
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
