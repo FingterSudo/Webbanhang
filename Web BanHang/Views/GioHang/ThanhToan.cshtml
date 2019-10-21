@@ -5,18 +5,17 @@
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
 }
  
-<h2>Thanh Toán </h2>
-<div class="container">
+
+<div class="container  " style="margin-bottom:30px">
+    <h2>Thanh Toán </h2>
     <table>
         <tr>
             <form action="/" method="post">
                 <input type="radio" name="name" value="1" />Thanh toán bằng tiền mặt<br />
                 <input type="radio" name="name" value="2" />Thanh toán bằng thẻ nội địa <br />
-                <input type="radio" name="name" value="3" />Thanh toán bằng thẻ Visa,JSC,Master <br/>
+                <input type="radio" name="name" value="3" />Thanh toán bằng thẻ Visa,JSC,Master <br />
             </form>
-            <td>
-                
-            </td>
+            <td></td>
         </tr>
         <tr>
             <a href="@Url.Action("Success","GioHang")">
@@ -24,7 +23,7 @@
                     Đặt mua
                 </button>
             </a>
-          
+
         </tr>
     </table>
 </div>

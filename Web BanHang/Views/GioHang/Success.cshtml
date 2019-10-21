@@ -4,12 +4,22 @@
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
 }
 
-<h2>Success</h2>
-@if (Session["TaiKhoan"] != null)
-{
-     <h6>Tài khoản đã đặt hàng thành công</h6>
-}
-else
-{
-    <h6>Quý khách đã đặt hàng thành công</h6>
-}
+<div class="container text-center" style="margin-bottom:20px" >
+    <h5>Đặt hàng thành công</h5>
+    <img src="~/HinhAnh/icon-tick-12.jpg" style="width:12%"/>
+    @if (Session["TaiKhoan"] != null)
+    {
+        <h6>Cảm ơn Quý Khách đã cho chúng tôi cơ hội phục vụ quý khác!
+            Chi tiết đơn hàng sẽ được email tới quýt khách!
+    </h6>
+    }
+    else
+    {
+        <h6>
+            Cảm ơn Quý Khách đã cho chúng tôi cơ hội phục vụ quý khác!
+            Chi tiết đơn hàng sẽ được email tới quýt khách!
+        </h6>
+    }
+    <a href="@Url.Action("Index","Home")"><button class="btn btn-danger">Tiếp tục mua hàng</button></a>
+    
+</div>

@@ -68,16 +68,18 @@
                     </li>
                     @*<li><span class="save-cost">Save $7.62 (69%)</span></li>*@
                 </ul>
-                <div class="btn-sec">
+                <div class="btn-sec" >
                     @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = Model.MaSach, @strUrl = Request.Url.ToString() }))
                     {
-
-                        <button class="btn" type="submit" id="btnGioHang">Add to cart</button>
+                    <div style="padding-bottom:20px"> 
+                        <button class="btn" type="submit" id="btnGioHang">Thêm giỏ hàng</button>
+                    </div>
+                       
                     } 
 
                     @using (Html.BeginForm("GioHang","GioHang", new { @iMaSach= Model.MaSach }))
                     {
-                        <button class="btn" type="submit" id="btnDatHang">By Now</button>
+                        <button class="btn" type="submit" id="btnDatHang">Mua ngay</button>
                     }
                 </div>
         </div>

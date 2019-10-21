@@ -27,6 +27,14 @@ namespace Web_BanHang
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/PagedList.css"));
+
+            bundles.Add(new StyleBundle("~/Views/TemplateAdmin/css").Include(
+                "~/Views/TemplateAdmin/css/sb-admin-2.css",
+                "~/Views/TemplateAdmin/css/sb-admin-2.min.css"
+                ));
+            bundles.Add(new StyleBundle("~/Views/TemplateAdmin/css/vendor/fontawesome-free/css").Include(
+                "~/Views/TemplateAdmin/css/vendor/fontawesome-free/css/all.min.css"
+                ));
         }
     }
 }

@@ -230,7 +230,7 @@ namespace Web_BanHang.Controllers
                 kh.DienThoai = mobile;
                 kh.Email = email;
                 kh.GioiTinh = gender;
-                db.KhachHangs.Add(kh);
+                db.KhachHangs.Add(kh);  
                 db.SaveChanges();
                 DonHang ddh = new DonHang();
                 ddh.NgayDat = DateTime.Now;
