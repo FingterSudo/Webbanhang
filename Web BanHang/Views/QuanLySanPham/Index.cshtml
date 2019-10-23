@@ -1,4 +1,7 @@
-﻿
+﻿@model PagedList.IPagedList<Web_BanHang.Models.Sach>
+@using PagedList.Mvc;
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
@@ -6,3 +9,87 @@
 
 <h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Thêm mới", "Themmoi")
+</p>
+<table class="table table-bordered table-danger">
+    <tr>
+        <th scope="col" class="th-sm" width="50px">
+            Tên Sách
+        </th>
+        <th scope="col" class="th-sm" width="400px">
+            Mô tả
+        </th>
+        <th scope="col" class="th-sm">
+           Ảnh bìa
+        </th>
+        <th scope="col" class="th-sm">
+            Giá bán
+        </th>
+        <th scope="col" class="th-sm">
+            Ngày cập nhập
+        </th>
+        <th scope="col" class="th-sm">
+            Còn tồn
+        </th>
+        <th scope="col" class="th-sm">
+            Chủ đề
+        </th>
+        <th scope="col" class="th-sm">
+            NXB
+        </th>
+        <th scope="col" class="th-sm">
+            Tác giả
+        </th>
+        <th scope="col" class="th-sm" width="100px"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                <img src="@Url.Content("~/HinhAnh/"+item.AnhBia)"width="150px" height="200px"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuDe.TenChuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaXuatBan.TenNXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TacGia.TenTacGia)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.MaSach }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSach }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.MaSach })
+            </td>
+        </tr>
+    }
+
+</table>
+<center>
+    @Html.PagedListPager(Model, page =>
+        Url.Action("Index", new { page = page, @class = "page-link" }),
+        new PagedListRenderOptions
+        {
+            ContainerDivClasses = new string[] { "navigation" },
+            LiElementClasses = new string[] { "page-item" },
+        })
+</center>
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
