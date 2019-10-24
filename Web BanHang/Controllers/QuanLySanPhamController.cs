@@ -15,7 +15,7 @@ namespace Web_BanHang.Controllers
         // GET: QuanLySanPham
         public ActionResult Index(int? page)
         {
-            int pageSize =9;
+            int pageSize = 9;
             int pageNumber = page ?? 1;
             IPagedList sach = db.Saches.OrderBy(n => n.NgayCapNhap).ToPagedList(pageNumber, pageSize);
             return View(sach);
@@ -30,10 +30,10 @@ namespace Web_BanHang.Controllers
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
             return View();
         }
-        
+
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ThemMoi(Sach sach,HttpPostedFileBase fileupload)
+        public ActionResult ThemMoi(Sach sach, HttpPostedFileBase fileupload)
         {
             ViewBag.MaChuDe = new SelectList(db.ChuDes, "MaChuDe", "TenChuDe");
             ViewBag.MaTacGia = new SelectList(db.TacGias, "MaTacGia", "TenTacGia");
@@ -61,9 +61,9 @@ namespace Web_BanHang.Controllers
                 db.Saches.Add(sach);
                 db.SaveChanges();
             }
-                return View();
+            return View();
         }
-        
+
         [HttpGet]
         public ActionResult ChinhSua(int MaSach)
         {
@@ -79,13 +79,19 @@ namespace Web_BanHang.Controllers
             return View(sach);
         }
         [HttpPost]
-        public ActionResult ChinhSua(Sach sach,FormCollection f)
+        [ValidateInput(false)]
+        public ActionResult ChinhSua(Sach sach, FormCollection f)
         {
+            //    Sach sach1 = db.Saches.SingleOrDefault(n => n.MaSach==sach.MaSach);
+            //    sach1.MoTa = sach.MoTa;
+            //    sach1.NgayCapNhap = DateTime.Now;
+
             if (ModelState.IsValid)
             {
+                sach.NgayCapNhap = FormatDate(f["NgayCapNhap"]);
                 db.Entry(sach).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-           }
+            }
             ViewBag.MaChuDe = new SelectList(db.ChuDes, "MaChuDe", "TenChuDe", sach.MaChuDe);
             ViewBag.MaTacGia = new SelectList(db.TacGias, "MaTacGia", "TenTacGia", sach.MaTacGia);
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB", sach.MaNXB);
@@ -111,11 +117,34 @@ namespace Web_BanHang.Controllers
             if (sach == null)
             {
                 Response.StatusCode = 404;
-                return null; 
+                return null;
             }
             db.Saches.Remove(sach);
             db.SaveChanges();
-            return RedirectToAction ("Index" );
+            return RedirectToAction("Index");
+        }
+
+        public DateTime? FormatDate(string obj)
+        {
+
+            try
+            {
+                if (!string.IsNullOrEmpty(obj))
+                {
+                    var silit = obj.Split('-');
+
+                    var day = int.Parse(silit[2]);
+                    var month = int.Parse(silit[1]);
+                    var year = int.Parse(silit[0]);
+                    return DateTime.ParseExact(string.Format("{0}/{1}/{2}", month, day, year), "MM/dd/yyyy", null);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return null;
         }
     }
 }
