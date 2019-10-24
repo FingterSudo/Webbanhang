@@ -75,7 +75,7 @@
                 @Html.DisplayFor(modelItem => item.TacGia.TenTacGia)
             </td>
             <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.MaSach }) |
+                @Html.ActionLink("Sửa", "ChinhSua", new { @MaSach = item.MaSach }) |
                 @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSach }) |
                 @Html.ActionLink("Xóa", "Delete", new { id = item.MaSach })
             </td>

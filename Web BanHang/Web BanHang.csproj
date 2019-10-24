@@ -2683,6 +2683,8 @@
     <Content Include="Views\Layout\AdminLayout.cshtml" />
     <Content Include="Views\QuanLySanPham\Index.cshtml" />
     <Content Include="Views\QuanLySanPham\ThemMoi.cshtml" />
+    <Content Include="Views\QuanLySanPham\Xoa.cshtml" />
+    <Content Include="Views\QuanLySanPham\ChinhSua.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

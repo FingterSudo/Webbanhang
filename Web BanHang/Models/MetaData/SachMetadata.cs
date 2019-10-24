@@ -19,17 +19,17 @@ namespace Web_BanHang.Models
 
             [Required(ErrorMessage = "Vui lòng nhập tên sách này!")]
             [DisplayName("Tên sách(*)")]
-            [MaxLength]
+            
             public string TenSach { get; set; }
 
             [Required(ErrorMessage = "Vui lòng nhập mô tả !")]
             [DisplayName("Mô tả(*)")]
-            [MaxLength]
+           
             public string MoTa { get; set; }
 
-            [Required(ErrorMessage = "Vui lòng nhập ảnh bìa!")]
+             
             [DisplayName("Ảnh bìa(*)")]
-            [StringLength(50)]
+            
             public string AnhBia { get; set; }
 
             [Required(ErrorMessage = "Vui lòng nhập giá bán!")]
