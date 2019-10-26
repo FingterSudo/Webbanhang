@@ -7,11 +7,13 @@
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Quản lý sản phẩm</h2>
 
-<p>
-    @Html.ActionLink("Thêm mới", "Themmoi")
-</p>
+<div class="col-sm-2">
+    <a href="@Url.Action("ThemMoi","QuanLySanPham")" class="btn btn-success btn-block" style="float:right"><i class="fas fa-plus-square">Thêm mới</i></a>
+</div>
+   
+ 
 <table class="table table-bordered table-danger">
     <tr>
         <th scope="col" class="th-sm" width="50px">

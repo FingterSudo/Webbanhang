@@ -161,6 +161,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhaXuatBanController.cs" />
+    <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\SachController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
@@ -186,6 +187,7 @@
     </Compile>
     <Compile Include="Models\ListSachViewModel.cs" />
     <Compile Include="Models\MailHelper.cs" />
+    <Compile Include="Models\MetaData\DonHangMetaData.cs" />
     <Compile Include="Models\MetaData\SachMetadata.cs" />
     <Compile Include="Models\NhaXuatBan.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
@@ -2686,6 +2688,7 @@
     <Content Include="Views\QuanLySanPham\ChinhSua.cshtml" />
     <Content Include="Views\QuanLySanPham\Xoa.cshtml" />
     <Content Include="Views\QuanLySanPham\ChiTiet.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,15 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
-using PagedList;
 using Web_BanHang.Models;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
 using Web_BanHang.DTO;
 using Web_BanHang.ViewModels;
-
-
+using PagedList;
 
 namespace Web_BanHang.Controllers
 {

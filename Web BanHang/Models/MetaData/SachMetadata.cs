@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 // using 2 thư viện thiết kế class MetaData
-using  System.Web.DynamicData;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 namespace Web_BanHang.Models 
@@ -24,12 +23,10 @@ namespace Web_BanHang.Models
 
             [Required(ErrorMessage = "Vui lòng nhập mô tả !")]
             [DisplayName("Mô tả(*)")]
-           
             public string MoTa { get; set; }
 
              
             [DisplayName("Ảnh bìa(*)")]
-            
             public string AnhBia { get; set; }
 
             [Required(ErrorMessage = "Vui lòng nhập giá bán!")]
