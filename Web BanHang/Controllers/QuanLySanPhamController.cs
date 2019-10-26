@@ -80,18 +80,29 @@ namespace Web_BanHang.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ChinhSua(Sach sach, FormCollection f)
+        public ActionResult ChinhSua(Sach sach,  FormCollection f, HttpPostedFileBase fileupload)
         {
-            //    Sach sach1 = db.Saches.SingleOrDefault(n => n.MaSach==sach.MaSach);
-            //    sach1.MoTa = sach.MoTa;
-            //    sach1.NgayCapNhap = DateTime.Now;
-
-            if (ModelState.IsValid)
+           
+            
+            if (fileupload!=null)
             {
-                sach.NgayCapNhap = FormatDate(f["NgayCapNhap"]);
-                db.Entry(sach).State = System.Data.Entity.EntityState.Modified;
+                // lưu tên file
+                var fileName = Path.GetFileName(fileupload.FileName);
+                // lưu đường dẫn của file 
+                var path = Path.Combine(Server.MapPath("~/HinhAnh"), fileName);
+                // kiem tra hinh anh da ton tai
+                if (System.IO.File.Exists(path))
+                {
+                    ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                }
+                else
+                {
+                    fileupload.SaveAs(path);
+                }
+                sach.AnhBia = fileupload.FileName;
+                db.Saches.Add(sach);
                 db.SaveChanges();
-            }
+            }   
             ViewBag.MaChuDe = new SelectList(db.ChuDes, "MaChuDe", "TenChuDe", sach.MaChuDe);
             ViewBag.MaTacGia = new SelectList(db.TacGias, "MaTacGia", "TenTacGia", sach.MaTacGia);
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB", sach.MaNXB);
@@ -99,21 +110,21 @@ namespace Web_BanHang.Controllers
         }
         // xóa sản phẩm
         [HttpGet]
-        public ActionResult Xoa(int MaSach)
+        public ActionResult Xoa(int iMaSach)
         {
-            Sach sach = db.Saches.SingleOrDefault(n => n.MaSach == MaSach);
+            Sach sach = db.Saches.Single(n => n.MaSach == iMaSach);
             if (sach == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
-            return null;
+            return View(sach);
         }
         [HttpPost]
-        [ActionName("Xoa")]
-        public ActionResult XacNhanXoa(int MaSach)
+        //[ActionName("Xoa")]
+        public ActionResult XoaSach(int MaSach)
         {
-            Sach sach = db.Saches.SingleOrDefault(n => n.MaSach == MaSach);
+            Sach sach = db.Saches.Single(n => n.MaSach == MaSach);
             if (sach == null)
             {
                 Response.StatusCode = 404;
@@ -123,7 +134,16 @@ namespace Web_BanHang.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public ActionResult ChiTiet(int iMaSach )
+        {
+            Sach sach = db.Saches.SingleOrDefault(n => n.MaSach == iMaSach);
+            if(sach==null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(sach);
+        }
         public DateTime? FormatDate(string obj)
         {
 
@@ -132,7 +152,6 @@ namespace Web_BanHang.Controllers
                 if (!string.IsNullOrEmpty(obj))
                 {
                     var silit = obj.Split('-');
-
                     var day = int.Parse(silit[2]);
                     var month = int.Parse(silit[1]);
                     var year = int.Parse(silit[0]);

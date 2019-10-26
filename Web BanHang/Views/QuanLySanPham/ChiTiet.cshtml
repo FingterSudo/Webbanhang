@@ -1,14 +1,14 @@
 ﻿@model Web_BanHang.Models.Sach
 
 @{
-    ViewBag.Title = "Xoa";
+    ViewBag.Title = "ChiTiet";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
 
-<h2>Xóa sản phẩm</h2>
+<h2>ChiTiet</h2>
 
-<h3>Bạn Có muốn xóa sản phẩm</h3>
-<div> 
+<div>
+    <h4>Sach</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -32,7 +32,7 @@
         </dt>
 
         <dd>
-            <img src="@Url.Content("~/HinhAnh/"+Model.AnhBia)" />
+             <img src="@Url.Content("~/HinhAnh/"+Model.AnhBia)"/>
         </dd>
 
         <dt>
@@ -84,13 +84,8 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm("XoaSach", "QuanLySanPham", FormMethod.Post)) {
-        @Html.AntiForgeryToken()
-        <input type="hidden" name="MaSach" value="@Model.MaSach"/>
-        <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { @MaSach = Model.MaSach }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

@@ -76,8 +76,8 @@
             </td>
             <td>
                 @Html.ActionLink("Sửa", "ChinhSua", new { @MaSach = item.MaSach }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSach }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.MaSach })
+                @Html.ActionLink("Chi tiết", "ChiTiet", new { @iMaSach = item.MaSach }) |
+                @Html.ActionLink("Xóa", "Xoa", new { @iMaSach = item.MaSach })
             </td>
         </tr>
     }
