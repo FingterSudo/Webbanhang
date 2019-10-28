@@ -1,5 +1,7 @@
 ﻿@model  PagedList.IPagedList<Web_BanHang.Models.DonHang>
+ 
 @using PagedList.Mvc
+ 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
@@ -13,74 +15,57 @@
 <table class="table">
     <tr>
         <th scope="col" class="th-sm">
-           Tên Khách Hàng
-        </th>
-        <th scope="col" class="th-sm">
-           Địa Chỉ
-        </th>
-        <th scope="col" class="th-sm">
-            Địa Chỉ Nhận Hàng
-        </th>
-        <th scope="col" class="th-sm">
-            Email
-        </th>
-        <th scope="col" class="th-sm">
-           Tình trạng giao hàng
+            Mã Dơn Hàng
         </th>
         <th scope="col" class="th-sm">
             Ngày đặt
         </th>
         <th scope="col" class="th-sm">
-            Ngày giao
+            Tên Khách Hàng
         </th>
         <th scope="col" class="th-sm">
-            Tình trạng thanh toán
+            Tổng thanh toán
         </th>
         <th scope="col" class="th-sm">
-            Điện thoại
+            Tình trạng
         </th>
-        
         <th scope="col" class="th-sm"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenKH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChiNhanHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailKH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayDat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayGiao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DaThanhToan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DienThoaiKH)
-        </td>
-         
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaDonHang }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaDonHang }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaDonHang })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDonHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.TongTien)
+            </td>
+            <td>
+                @Html.DropDownListFor(modelItem=>item.TinhTrangGiaoHang, new List<SelectListItem>()
+                           { /*new SelectListItem {Text="Chưa Thanh Toán", Value="null", Selected = item.TinhTrangGiaoHang.Value},*/
+                             new SelectListItem{Text="Đang giao hàng", Value="false",Selected=item.TinhTrangGiaoHang.Value?item.TinhTrangGiaoHang.Value: false },
+                             new SelectListItem{Text="Đã giao hàng", Value="true",Selected=item.TinhTrangGiaoHang.Value?item.TinhTrangGiaoHang.Value: true } })
+                @Html.DropDownListFor(modelItem=>item.TinhTrangThanhToan, new List<SelectListItem>()
+                           { new SelectListItem{Text="Chưa thanh toán", Value="false", Selected=item.TinhTrangThanhToan.Value?item.TinhTrangThanhToan.Value:true},
+                           new SelectListItem{Text="Đã thanh toán", Value="true", Selected=item.TinhTrangThanhToan.Value?item.TinhTrangThanhToan.Value:false}})
+            </td>
+             
+            <td>
+                <a href="@Url.Action("ChiTiet","QuanLyDonHang", new {@iMaDonHang= item.MaDonHang })" class="btn"><i class="fas fa-eye"> Xem</i></a>
+                <a href="@Url.Action("Xoa","QuanLyDonHang",new { @MaDonHang = item.MaDonHang })" class="btn"><i class="fas fa-trash-alt"> Xóa</i></a>
+
+            </td>
+        </tr>
+    }
 </table>
+
 <center>
     @Html.PagedListPager(Model, Page =>
        Url.Action("Index", new { Page=Page, @class="page-link" }),
@@ -91,4 +76,4 @@
        }
        )
 </center>
-@(Model.PageCount<Model.PageNumber?0: Model.PageNumber)/@Model.PageCount
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount

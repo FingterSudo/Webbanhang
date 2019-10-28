@@ -1,0 +1,199 @@
+﻿@model Web_BanHang.Models.DonHang
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h4>Chi tiết đơn hàng</h4>
+
+@*<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã Đơn Hàng
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaDonHang)
+        </dd>
+        <dt>
+            Tên Khách Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenKH)
+        </dd>
+
+        <dt>
+            Địa Chỉ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            Địa Chỉ Nhận Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiNhanHang)
+        </dd>
+
+        <dt>
+            Email Khách Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailKH)
+        </dd>
+        <dt>
+            Ngày Đặt
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+
+        <dt>
+            Ngày Giao
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiao)
+        </dd>
+        <dt>
+            Giao Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangGiaoHang)
+        </dd>
+        <dt>
+            Thanh toán
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaThanhToan)
+        </dd>
+
+        <dt>
+            Điện Thoại Khách Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoaiKH)
+        </dd>
+
+        <dt>
+            Họ Tên Khách Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.Hoten)
+        </dd>
+
+    </dl>
+</div>*@
+<div class="container">
+    <div class="row">
+        <div class="col-xl-4">
+            <dl>
+                <dt>
+                    Mã Đơn Hàng
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MaDonHang)
+                </dd>
+                <dt>
+                    Tên Khách Hàng
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TenKH)
+                </dd>
+                <dt>
+                    Địa Chỉ
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DiaChi)
+                </dd>
+                <dt>
+                    Địa Chỉ Nhận Hàng
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DiaChiNhanHang)
+                </dd>
+            </dl>
+        </div>      
+        <div class="col-xl-4">
+            <dl>
+                <dt>
+                    Email Khách Hàng
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EmailKH)
+                </dd>
+                <dt>
+                    Ngày Đặt
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NgayDat)
+                </dd>
+
+                <dt>
+                    Ngày Giao
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NgayGiao)
+                </dd>
+                <dt>
+                    Giao Hàng
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TinhTrangGiaoHang)
+                </dd>
+              
+            </dl>
+        </div>
+        <div class="col-xl-4">
+            <dl>
+                <dt>
+                    Điện Thoại Khách Hàng
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DienThoaiKH)
+                </dd>
+
+                <dt>
+                    Họ Tên Khách Hàng
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.KhachHang.Hoten)
+                </dd>
+                <dt>
+                    Thanh toán
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TinhTrangThanhToan)
+                </dd>
+
+                <dt>
+                    Tổng thanh toán
+                </dt>
+                <dd>@Html.DisplayFor(model => model.TongTien)</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDonHang }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

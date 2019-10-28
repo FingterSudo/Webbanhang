@@ -30,6 +30,8 @@ namespace Web_BanHang.Models
         public virtual DbSet<DonHang> DonHangs { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NhaXuatBan> NhaXuatBans { get; set; }
+        public virtual DbSet<NhomNguoiDung> NhomNguoiDungs { get; set; }
+        public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
         public virtual DbSet<Sach> Saches { get; set; }
         public virtual DbSet<TacGia> TacGias { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }

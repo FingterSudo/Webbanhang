@@ -12,24 +12,16 @@ namespace Web_BanHang.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaiKhoan
+    public partial class NhomNguoiDung
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TaiKhoan()
+        public NhomNguoiDung()
         {
             this.PhanQuyens = new HashSet<PhanQuyen>();
         }
     
-        public int MaTK { get; set; }
-        public string TaiKhoan1 { get; set; }
-        public string MatKhau { get; set; }
-        public string HoTen { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string DiaChi { get; set; }
-        public string Email { get; set; }
-        public Nullable<int> Sdt { get; set; }
-        public string Image { get; set; }
-        public string GioiTinh { get; set; }
+        public int NhomID { get; set; }
+        public string NhomNguoiDung1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanQuyen> PhanQuyens { get; set; }

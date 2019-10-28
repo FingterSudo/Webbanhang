@@ -160,7 +160,6 @@ namespace Web_BanHang.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
             return null;

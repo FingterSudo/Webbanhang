@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -246,6 +246,8 @@ namespace Web_BanHang.Controllers
                 }        
                 // khởi tạo đối tượng giohang1 để lấy Session["GioHang"]
                 List<GioHang> giohang1 = LayGioHang();
+                //tao tong tien
+                var tongtien = giohang1.Sum(n => n.dThanhTien);
                 // tạo một đối tượng kh2 từ session["TaiKhoan"]
                 KhachHang kh2 = (KhachHang)Session["TaiKhoan"];
                 // tạo một đội tượng ddh1 từ DonHang
@@ -258,6 +260,7 @@ namespace Web_BanHang.Controllers
                 ddh1.EmailKH = email;
                 ddh1.DienThoaiKH = mobile;
                 ddh1.NgayDat = DateTime.Now;
+                ddh1.TongTien = Convert.ToDecimal(tongtien);
                 // thêm  đối tượng ddh1 vào DonHangs
                 db.DonHangs.Add(ddh1);
                 //lưu  đối tượng ddh1 vào DonHangs
@@ -316,6 +319,9 @@ namespace Web_BanHang.Controllers
                 }
                 // them don hang
                 List<GioHang> giohang = LayGioHang();
+                // tinh toang tien
+                var tongtien = giohang.Sum(n => n.dThanhTien);
+                //them don vi khach hang 
                 KhachHang kh = new KhachHang();
                 kh.Hoten = name;
                 kh.DiaChi = address;
@@ -333,6 +339,7 @@ namespace Web_BanHang.Controllers
                 ddh.EmailKH = email;
                 ddh.DienThoaiKH = mobile;
                 ddh.NgayDat = DateTime.Now;
+                ddh.TongTien = Convert.ToDecimal(tongtien);
                 db.DonHangs.Add(ddh);
                 db.SaveChanges();
                 string content = MailHelper.MailOrder(ddh, kh, giohang);

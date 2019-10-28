@@ -192,6 +192,12 @@
     <Compile Include="Models\NhaXuatBan.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhomNguoiDung.cs">
+      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhanQuyen.cs">
+      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\QuanLyBanSach.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2687,8 +2693,9 @@
     <Content Include="Views\QuanLySanPham\ThemMoi.cshtml" />
     <Content Include="Views\QuanLySanPham\ChinhSua.cshtml" />
     <Content Include="Views\QuanLySanPham\Xoa.cshtml" />
-    <Content Include="Views\QuanLySanPham\ChiTiet.cshtml" />
     <Content Include="Views\QuanLyDonHang\Index.cshtml" />
+    <Content Include="Views\QuanLySanPham\ChiTiet.cshtml" />
+    <Content Include="Views\QuanLyDonHang\ChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

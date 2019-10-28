@@ -36,7 +36,7 @@ namespace Web_BanHang.Models.MetaData
             public string EmailKH { get; set; }
             
             [DisplayName("Tình trạng giao hàng")]
-            public string TinhTrangGiaoHang { get; set; }
+            public Nullable<bool> TinhTrangGiaoHang { get; set; }
 
              
             [DisplayName("Ngày Đặt")]
@@ -49,7 +49,7 @@ namespace Web_BanHang.Models.MetaData
             public Nullable<System.DateTime> NgayGiao { get; set; }
 
             [DisplayName("Tình trạng đơn hàng")]
-            public Nullable<int> DaThanhToan { get; set; }
+            public Nullable<bool> DaThanhToan { get; set; }
 
             [Required(ErrorMessageResourceName = "Vui lòng nhập ngày giao!")]
             [DisplayName("Điện Thoại Khách Hàng(*)")]
