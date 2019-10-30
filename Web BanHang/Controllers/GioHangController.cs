@@ -283,6 +283,8 @@ namespace Web_BanHang.Controllers
                         // nhập các đối tượng 
                         dhct.MaSach = item.iMaSach;
                         dhct.MaDonHang = ddh1.MaDonHang;
+                        // thieu so luong dong hang
+                        dhct.SoLuong = item.iSoLuong;
                         dhct.MaKH = ddh1.MaKH;
                         dhct.DonGia = (decimal)item.dDonGia;
                         // thêm chi tiết đơn hàng vào db
@@ -351,7 +353,8 @@ namespace Web_BanHang.Controllers
                         ChiTietDonHang dhct = new ChiTietDonHang();
                         dhct.MaSach = item.iMaSach;
                         dhct.MaDonHang = ddh.MaDonHang;
-                        dhct.DonGia = (decimal)item.dDonGia; 
+                        dhct.DonGia = (decimal)item.dDonGia;
+                        dhct.SoLuong = item.iSoLuong;
                         db.ChiTietDonHangs.Add(dhct);  
                     }
                 }
@@ -388,7 +391,7 @@ namespace Web_BanHang.Controllers
         {
             // tạo đối tượng gh
             List<GioHang> gh = new List<GioHang>();
-          // trả về View
+            // trả về View
             return View(gh);
         }
         //[HttpPost]

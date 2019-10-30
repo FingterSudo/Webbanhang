@@ -21,7 +21,6 @@ namespace Web_BanHang.Models
         public Nullable<decimal> DonGia { get; set; }
     
         public virtual DonHang DonHang { get; set; }
-        public virtual KhachHang KhachHang { get; set; }
         public virtual Sach Sach { get; set; }
     }
 }

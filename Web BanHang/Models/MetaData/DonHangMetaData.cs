@@ -6,7 +6,7 @@ using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Web_BanHang.Models.MetaData
+namespace Web_BanHang.Models 
 {
     [MetadataType(typeof(DonHangMetaData))]
 
@@ -20,19 +20,20 @@ namespace Web_BanHang.Models.MetaData
             [DisplayName("Mã Khách Hàng")]
             public Nullable<int> MaKH { get; set; }
 
-            [Required(ErrorMessageResourceName = "Vui lòng nhập tên khách hàng này!")]
+            [Required(ErrorMessage = "Vui lòng nhập tên khách hàng này!")]
             [DisplayName("Tên Khách Hàng(*)")]
             public string TenKH { get; set; }
 
-            [Required(ErrorMessageResourceName = "Vui lòng nhập địa chỉ khác hàng này!")]
+            [Required(ErrorMessage = "Vui lòng nhập địa chỉ khác hàng này!")]
             [DisplayName("Địa Chỉ(*)")]
             public string DiaChi { get; set; }
 
-            [Required(ErrorMessageResourceName = "Vui lòng nhập địa chỉ nhận hàng")]
+            [Required(ErrorMessage = "Vui lòng nhập địa chỉ nhận hàng")]
             [DisplayName("Địa Chỉ(*)")]
             public string DiaChiNhanHang { get; set; }
              
             [DisplayName("Email Khách Hàng")]
+            [Required(ErrorMessage ="Vui lòng nhập Email khách hàng")]
             public string EmailKH { get; set; }
             
             [DisplayName("Tình trạng giao hàng")]
@@ -44,14 +45,16 @@ namespace Web_BanHang.Models.MetaData
 
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-            [Required(ErrorMessageResourceName = "Vui lòng nhập ngày giao!")]
+            [Required(ErrorMessage = "Vui lòng nhập ngày giao!")]
             [DisplayName("Ngày Giao(*)")]
             public Nullable<System.DateTime> NgayGiao { get; set; }
 
             [DisplayName("Tình trạng đơn hàng")]
-            public Nullable<bool> DaThanhToan { get; set; }
+            public Nullable<bool> TinhTrangThanhToan { get; set; }
 
-            [Required(ErrorMessageResourceName = "Vui lòng nhập ngày giao!")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+            [Required(ErrorMessage = "Vui lòng nhập ngày giao!")]
             [DisplayName("Điện Thoại Khách Hàng(*)")]
             public string DienThoaiKH { get; set; }
         }

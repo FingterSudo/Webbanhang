@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Models\ListSachViewModel.cs" />
     <Compile Include="Models\MailHelper.cs" />
+    <Compile Include="Models\MetaData\ChiTietDonHangMetaData.cs" />
     <Compile Include="Models\MetaData\DonHangMetaData.cs" />
     <Compile Include="Models\MetaData\SachMetadata.cs" />
     <Compile Include="Models\NhaXuatBan.cs">
@@ -2695,7 +2696,10 @@
     <Content Include="Views\QuanLySanPham\Xoa.cshtml" />
     <Content Include="Views\QuanLyDonHang\Index.cshtml" />
     <Content Include="Views\QuanLySanPham\ChiTiet.cshtml" />
+    <Content Include="Views\QuanLyDonHang\_ChiTietHoaDon.cshtml" />
     <Content Include="Views\QuanLyDonHang\ChiTiet.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Xoa.cshtml" />
+    <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

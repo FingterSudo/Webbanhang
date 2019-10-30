@@ -1,13 +1,15 @@
 ﻿@model  PagedList.IPagedList<Web_BanHang.Models.DonHang>
- 
+
+
 @using PagedList.Mvc
- 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
 
 <h2>Index</h2>
+<a href="@Url.Action("ThemMoi","QuanLyDonHang")"><i class="fas fa-plus-circle">Thêm Mới</i></a>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -45,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.TenKH)
             </td>
             <td>
-                @Html.DisplayFor(modelItem=>item.TongTien)
+                @Html.DisplayFor(modelItem => item.TongTien)
             </td>
             <td>
                 @Html.DropDownListFor(modelItem=>item.TinhTrangGiaoHang, new List<SelectListItem>()
@@ -56,15 +58,15 @@
                            { new SelectListItem{Text="Chưa thanh toán", Value="false", Selected=item.TinhTrangThanhToan.Value?item.TinhTrangThanhToan.Value:true},
                            new SelectListItem{Text="Đã thanh toán", Value="true", Selected=item.TinhTrangThanhToan.Value?item.TinhTrangThanhToan.Value:false}})
             </td>
-             
-            <td>
-                <a href="@Url.Action("ChiTiet","QuanLyDonHang", new {@iMaDonHang= item.MaDonHang })" class="btn"><i class="fas fa-eye"> Xem</i></a>
-                <a href="@Url.Action("Xoa","QuanLyDonHang",new { @MaDonHang = item.MaDonHang })" class="btn"><i class="fas fa-trash-alt"> Xóa</i></a>
 
+            <td>
+                <a href="@Url.Action("ChiTiet","QuanLyDonHang", new {@iMaDonHang = item.MaDonHang })" class="btn"><i class="fas fa-eye"> Xem</i></a>
+                <a href="@Url.Action("Xoa","QuanLyDonHang",new {@iMaDonHang = item.MaDonHang })" class="btn"><i class="fas fa-trash-alt"> Xóa</i></a>
             </td>
         </tr>
     }
 </table>
+ 
 
 <center>
     @Html.PagedListPager(Model, Page =>

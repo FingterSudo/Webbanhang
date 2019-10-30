@@ -1,0 +1,65 @@
+﻿@model Web_BanHang.Models.DonHang
+
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Xoa</h2>
+
+<h3>Bạn  mốn xóa đơn hàng?</h3>
+<table class="table">
+    <tr>
+        <th scope="col" class="th-sm">
+            Mã Dơn Hàng
+        </th>
+        <th scope="col" class="th-sm">
+            Ngày đặt
+        </th>
+        <th scope="col" class="th-sm">
+            Tên Khách Hàng
+        </th>
+        <th scope="col" class="th-sm">
+            Tổng thanh toán
+        </th>
+        <th scope="col" class="th-sm">
+            Tình trạng
+        </th>
+        <th scope="col" class="th-sm"></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.MaDonHang)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.NgayDat)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.TenKH)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.TongTien)
+        </td>
+        <td>
+            @Html.DropDownListFor(model=> model.TinhTrangGiaoHang, new List<SelectListItem>()
+                        { /*new SelectListItem {Text="Chưa Thanh Toán", Value="null", Selected = item.TinhTrangGiaoHang.Value},*/
+                            new SelectListItem{Text="Đang giao hàng", Value="false",Selected=Model.TinhTrangGiaoHang.Value?Model.TinhTrangGiaoHang.Value: false },
+                            new SelectListItem{Text="Đã giao hàng", Value="true",Selected=Model.TinhTrangGiaoHang.Value?Model.TinhTrangGiaoHang.Value: true } })
+            @Html.DropDownListFor(model=> model.TinhTrangThanhToan, new List<SelectListItem>()
+                        { new SelectListItem{Text="Chưa thanh toán", Value="false", Selected= Model.TinhTrangThanhToan.Value?Model.TinhTrangThanhToan.Value:true},
+                        new SelectListItem{Text="Đã thanh toán", Value="true", Selected=Model.TinhTrangThanhToan.Value?Model.TinhTrangThanhToan.Value:false}})
+        </td>
+
+    </tr>
+ 
+</table>
+    @using (Html.BeginForm("XoaDonHang", "QuanLyDonHang", FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+         <input type="hidden" name="iMaDonHang" value="@Model.MaDonHang"/>
+         <input type="hidden" name="cMaDonHang" value="@Model.MaDonHang"/>
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+
