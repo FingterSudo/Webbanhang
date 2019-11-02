@@ -8,12 +8,10 @@
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Đơn Hàng</h2>
 <a href="@Url.Action("ThemMoi","QuanLyDonHang")"><i class="fas fa-plus-circle">Thêm Mới</i></a>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+ 
 <table class="table">
     <tr>
         <th scope="col" class="th-sm">
@@ -50,10 +48,10 @@
                 @Html.DisplayFor(modelItem => item.TongTien)
             </td>
             <td>
-                @Html.DropDownListFor(modelItem=>item.TinhTrangGiaoHang, new List<SelectListItem>()
-                           { /*new SelectListItem {Text="Chưa Thanh Toán", Value="null", Selected = item.TinhTrangGiaoHang.Value},*/
-                             new SelectListItem{Text="Đang giao hàng", Value="false",Selected=item.TinhTrangGiaoHang.Value?item.TinhTrangGiaoHang.Value: false },
-                             new SelectListItem{Text="Đã giao hàng", Value="true",Selected=item.TinhTrangGiaoHang.Value?item.TinhTrangGiaoHang.Value: true } })
+                @*  @Html.DropDownListFor(modelItem=>item.TinhTrangGiaoHang, new List<SelectListItem>()
+        { /*new SelectListItem {Text="Chưa Thanh Toán", Value="null", Selected = item.TinhTrangGiaoHang.Value},*/
+          new SelectListItem{Text="Đang giao hàng", Value="false",Selected=item.TinhTrangGiaoHang.Value?item.TinhTrangGiaoHang.Value: false },
+          new SelectListItem{Text="Đã giao hàng", Value="true",Selected=item.TinhTrangGiaoHang.Value?item.TinhTrangGiaoHang.Value: true } })*@
                 @Html.DropDownListFor(modelItem=>item.TinhTrangThanhToan, new List<SelectListItem>()
                            { new SelectListItem{Text="Chưa thanh toán", Value="false", Selected=item.TinhTrangThanhToan.Value?item.TinhTrangThanhToan.Value:true},
                            new SelectListItem{Text="Đã thanh toán", Value="true", Selected=item.TinhTrangThanhToan.Value?item.TinhTrangThanhToan.Value:false}})

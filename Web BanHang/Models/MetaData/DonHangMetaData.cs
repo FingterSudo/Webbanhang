@@ -37,10 +37,12 @@ namespace Web_BanHang.Models
             public string EmailKH { get; set; }
             
             [DisplayName("Tình trạng giao hàng")]
-            public Nullable<bool> TinhTrangGiaoHang { get; set; }
+            public Nullable<int> TinhTrangGiaoHang { get; set; }
 
-             
-            [DisplayName("Ngày Đặt")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+            [Required(ErrorMessage = "Vui lòng nhập ngày giao!")]
+            [DisplayName("Ngày Đặt(*)")]
             public Nullable<System.DateTime> NgayDat { get; set; }
 
             [DataType(DataType.Date)]
@@ -52,9 +54,7 @@ namespace Web_BanHang.Models
             [DisplayName("Tình trạng đơn hàng")]
             public Nullable<bool> TinhTrangThanhToan { get; set; }
 
-            [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-            [Required(ErrorMessage = "Vui lòng nhập ngày giao!")]
+            
             [DisplayName("Điện Thoại Khách Hàng(*)")]
             public string DienThoaiKH { get; set; }
         }

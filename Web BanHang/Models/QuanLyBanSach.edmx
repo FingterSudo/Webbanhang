@@ -12,6 +12,7 @@
           </Key>
           <Property Name="MaDonHang" Type="int" Nullable="false" />
           <Property Name="MaSach" Type="int" Nullable="false" />
+          <Property Name="MaNXB" Type="int" />
           <Property Name="MaKH" Type="int" />
           <Property Name="SoLuong" Type="int" />
           <Property Name="DonGia" Type="decimal" Precision="18" Scale="2" />
@@ -38,7 +39,7 @@
           <Property Name="DienThoaiKH" Type="varchar" MaxLength="50" />
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
           <Property Name="TinhTrangThanhToan" Type="bit" />
-          <Property Name="TinhTrangGiaoHang" Type="bit" />
+          <Property Name="TinhTrangGiaoHang" Type="int" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -142,6 +143,18 @@
             </Principal>
             <Dependent Role="ChiTietDonHang">
               <PropertyRef Name="MaDonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDonHang_NhaXuatBan">
+          <End Role="NhaXuatBan" Type="Self.NhaXuatBan" Multiplicity="0..1" />
+          <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaXuatBan">
+              <PropertyRef Name="MaNXB" />
+            </Principal>
+            <Dependent Role="ChiTietDonHang">
+              <PropertyRef Name="MaNXB" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -269,6 +282,10 @@
             <End Role="DonHang" EntitySet="DonHang" />
             <End Role="ChiTietDonHang" EntitySet="ChiTietDonHang" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDonHang_NhaXuatBan" Association="Self.FK_ChiTietDonHang_NhaXuatBan">
+            <End Role="NhaXuatBan" EntitySet="NhaXuatBan" />
+            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHang" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChiTietDonHang_Sach" Association="Self.FK_ChiTietDonHang_Sach">
             <End Role="Sach" EntitySet="Sach" />
             <End Role="ChiTietDonHang" EntitySet="ChiTietDonHang" />
@@ -326,6 +343,10 @@
             <End Role="DonHang" EntitySet="DonHangs" />
             <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDonHang_NhaXuatBan" Association="QuanLyBanSachModel.FK_ChiTietDonHang_NhaXuatBan">
+            <End Role="NhaXuatBan" EntitySet="NhaXuatBans" />
+            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChiTietDonHang_Sach" Association="QuanLyBanSachModel.FK_ChiTietDonHang_Sach">
             <End Role="Sach" EntitySet="Saches" />
             <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
@@ -370,10 +391,12 @@
           </Key>
           <Property Name="MaDonHang" Type="Int32" Nullable="false" />
           <Property Name="MaSach" Type="Int32" Nullable="false" />
+          <Property Name="MaNXB" Type="Int32" />
           <Property Name="MaKH" Type="Int32" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="DonGia" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="DonHang" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" FromRole="ChiTietDonHang" ToRole="DonHang" />
+          <NavigationProperty Name="NhaXuatBan" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_NhaXuatBan" FromRole="ChiTietDonHang" ToRole="NhaXuatBan" />
           <NavigationProperty Name="Sach" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_Sach" FromRole="ChiTietDonHang" ToRole="Sach" />
         </EntityType>
         <EntityType Name="ChuDe">
@@ -399,7 +422,7 @@
           <Property Name="DienThoaiKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="TinhTrangThanhToan" Type="Boolean" />
-          <Property Name="TinhTrangGiaoHang" Type="Boolean" />
+          <Property Name="TinhTrangGiaoHang" Type="Int32" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_DonHang" FromRole="DonHang" ToRole="ChiTietDonHang" />
           <NavigationProperty Name="KhachHang" Relationship="QuanLyBanSachModel.FK_DonHang_KhachHang" FromRole="DonHang" ToRole="KhachHang" />
         </EntityType>
@@ -426,6 +449,7 @@
           <Property Name="TenNXB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChiTietDonHangs" Relationship="QuanLyBanSachModel.FK_ChiTietDonHang_NhaXuatBan" FromRole="NhaXuatBan" ToRole="ChiTietDonHang" />
           <NavigationProperty Name="Saches" Relationship="QuanLyBanSachModel.FK_Sach_NhaXuatBan" FromRole="NhaXuatBan" ToRole="Sach" />
         </EntityType>
         <EntityType Name="NhomNguoiDung">
@@ -520,6 +544,18 @@
             </Principal>
             <Dependent Role="ChiTietDonHang">
               <PropertyRef Name="MaDonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDonHang_NhaXuatBan">
+          <End Type="QuanLyBanSachModel.NhaXuatBan" Role="NhaXuatBan" Multiplicity="0..1" />
+          <End Type="QuanLyBanSachModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaXuatBan">
+              <PropertyRef Name="MaNXB" />
+            </Principal>
+            <Dependent Role="ChiTietDonHang">
+              <PropertyRef Name="MaNXB" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -643,6 +679,7 @@
                 <ScalarProperty Name="DonGia" ColumnName="DonGia" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaNXB" ColumnName="MaNXB" />
                 <ScalarProperty Name="MaSach" ColumnName="MaSach" />
                 <ScalarProperty Name="MaDonHang" ColumnName="MaDonHang" />
               </MappingFragment>

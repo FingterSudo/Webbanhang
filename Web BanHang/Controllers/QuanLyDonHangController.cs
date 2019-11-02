@@ -79,19 +79,50 @@ namespace Web_BanHang.Controllers
         [HttpGet]
         public ActionResult ThemMoi()
         {
-           
+            ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
             return View();
         }
         [HttpPost]
-        public ActionResult ThemMoi(DonHang donhang,KhachHang kh)
+        public ActionResult ThemMoi(FormCollection form)
         {
-            if (ModelState.IsValid)
+            DonHang donHang = new DonHang();
+            donHang.TenKH = form["txtTenKh"].ToString();
+            donHang.DiaChi = form["txtDiaChi"].ToString();
+            donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
+            donHang.NgayDat = DateTime.Parse(form["txtNgayDat"]);
+            donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"]);
+            donHang.EmailKH = form["txtEmail"].ToString();
+            donHang.DienThoaiKH = form["txtDienthoaiKh"].ToString();
+            donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtTinhTrang"].ToString());
+            donHang.TinhTrangThanhToan = bool.Parse(form["txtTinhTrang"].ToString());
+            donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
+            ChiTietDonHang ctdh = new ChiTietDonHang();
+            ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
+            ctdh.DonGia = Convert.ToDecimal (form["txtDonGia"]);
+            ctdh.Sach.TenSach = form["txtSach"].ToString();
+            ctdh.Sach.MaChuDe = Convert.ToInt32(form["txtMaChuDe"].ToString());
+            ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
+            return View();
+        }
+        public DateTime? FormatDate(string obj)
+        {
+
+            try
             {
-                db.DonHangs.Add(donhang);
-                db.KhachHangs.Add(kh);
-                db.SaveChanges();
+                if (!string.IsNullOrEmpty(obj))
+                {
+                    var silit = obj.Split('-');
+                    var day = int.Parse(silit[2]);
+                    var month = int.Parse(silit[1]);
+                    var year = int.Parse(silit[0]);
+                    return DateTime.ParseExact(string.Format("{2}/{1}/{0}",  day, month, year), "dd/MM/yyyy", null);
+                }
             }
-            return View(donhang);
+            catch (Exception)
+            {
+                throw;
+            }
+            return null;
         }
     }
 }
