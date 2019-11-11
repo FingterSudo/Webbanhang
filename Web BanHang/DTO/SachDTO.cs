@@ -8,6 +8,7 @@ namespace Web_BanHang.DTO
 {
     public class SachDTO : Sach
     {
+        public string TenSach { get; set; }
         public string TenChuDe { get; set; }
         public string TenNXB { get; set; }
         public string TenTacGia { get; set; }

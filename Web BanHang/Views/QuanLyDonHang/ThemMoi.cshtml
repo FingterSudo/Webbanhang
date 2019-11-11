@@ -1,11 +1,20 @@
 ﻿@using Web_BanHang.Models;
+@using Web_BanHang.DTO;
+@using Newtonsoft.Json;
 @model Web_BanHang.Models.DonHang
 @{
     ViewBag.Title = "ThemMoi";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
+
+    var dataBook = ViewBag.TenSach as List<SachDTO>;
+    var dataJS = Html.Raw(JsonConvert.SerializeObject(dataBook));
 }
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
 <h2>Thêm mới đơn hàng</h2>
-@using (Html.BeginForm("ThemMoi","QuanLyDonHang", FormMethod.Post))
+@using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Post))
 {
     <div class="form-horizontal">
         <div class="form-group">
@@ -37,10 +46,10 @@
         <div class="form-group">
             <span>Ngày Đặt</span>
             <div class="col-md-4">
-                @Html.TextBox("txtNgayDat",DateTime.Now.ToString())
-                
+                @Html.TextBox("txtNgayDat", DateTime.Now.ToString())
+
             </div>
-                
+
         </div>
         <div class="form-group">
             <span>Ngày giao</span>
@@ -48,7 +57,7 @@
                 @*@Html.TextBox("txtNgayGiao")*@
                 @*<input type="datetime"   name="txtNgayGiao" id="txtNgayGiao" />*@
 
-                <input type='text'   class='datepicker' />
+                <input type='text' class='datepicker' name="txtNgayGiao" />
             </div>
         </div>
         <div class="form-group">
@@ -56,15 +65,36 @@
             <div class="col-md-4">@Html.TextBox("txtTongTien")</div>
         </div>
         <div class="form-group">
+
             <span>Trạng thái</span>
+
 
             <div class="col-md-4">
                 <span>Thanh Toán </span>
-                
+                <div class="checkbox" id="check-pay">
+                    <label>
+                        <input type="checkbox" name="txtThanhToan" data-toggle="toggle" data-off="Chưa Thanh Toán" data-on=" Thanh Toán" />
+                    </label>
+                    <div id="alert"></div>
+                </div>
             </div>
             <div class="col-md-4">
-                <span>Giao hàngs</span>
-                
+                <span>Giao hàng</span>
+                <!--khong get duoc tinh trang giao hang -->
+                    <select id="id-check-delivery" onchange="checkGiaoHang()">
+                        @if (Model.TinhTrangGiaoHang == 1)
+                        {
+                            <option value="not delivery">Chưa Giao Hàng</option>
+                        }
+                        @if (Model.TinhTrangGiaoHang == 2)
+                        {
+                            <option value="delivery">Giao Hàng</option>
+                        }
+                        @if (Model.TinhTrangGiaoHang == 3)
+                        {
+                            <option value="delivered">Đã Giao Hàng</option>
+                        }
+                    </select>
             </div>
         </div>
     </div>
@@ -78,13 +108,14 @@
         <div class="form">
             <span>Tên sản phẩm</span>
             <div class="col-md-4">
-                @Html.TextBox("txtTenSP")
+                <input type="text" class="form-control" id="txtSach1" />
+               
             </div>
         </div>
         <div class="form-group">
             <span>Thể loại</span>
             <div class="col-md-4">
-                @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>) ViewBag.MaNXB, "--Select NXB--" )
+                @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>)ViewBag.MaNXB, "--Select NXB--")
             </div>
         </div>
         <div class="form-group">
@@ -98,22 +129,49 @@
             <div class="col-md-4">
                 @Html.TextBox("txtDonGia")
             </div>
-        </div>
+        </div>    
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Tạo Sách" class="btn btn-default" />
+            <input type="submit" value="Tạo đơn hàng" class="btn btn-default" />
         </div>
-    </div> 
+    </div>
 }
 <script type="text/javascript">
     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
-        
+
         //startDate: '-3d'
     });
-    //$(function () {
-    //    $('#datetimepicker').datetimepicker();
-    //});
-    
+    $(function () {
+        $('#id-pay').change(function () {
+            $('#alert').html('Toggle: ' + $(this).prop('checked'))
+        })
+        $('#id-pay').submit();
+    })
+  
+
+    $("#txtSach1").autocomplete({
+        source:
+            function (request, response) {
+                $.ajax({
+                    url: '/QuanLyDonHang/GetBookValue?search=' + $("#txtSach1").val(),
+                    dataType: "json",
+
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { lable: item.TenSach, value: item.TenSach };
+                        }))
+                    },
+                    error: function (xhr, status, error) {
+                        alert("error");
+                    }
+                })
+            }
+    }
+    );
+    function checkGiaoHang() {
+        var selValue = document.getElementById('id-check-delivery').value;
+        selValue.val();
+    }
 </script>

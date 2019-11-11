@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Web_BanHang.Models;
 using PagedList;
 using PagedList.Mvc;
+using Web_BanHang.DTO;
 
 namespace Web_BanHang.Controllers
 {
@@ -77,52 +78,88 @@ namespace Web_BanHang.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public ActionResult ThemMoi()
+        public ActionResult ThemMoi( string search)
         {
+            QuanLyBanSachEntities db = new QuanLyBanSachEntities();
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
+             ViewBag.TenSach = GetBookValue(search).ToString();
+            //List<SachDTO> allbook = db.Saches.Where(n => n.TenSach.Contains(search)).Select(n => new SachDTO
+            //{
+            //    TenSach = n.TenSach
+            //}).ToList();
+
+            //return new JsonResult { Data = allbook, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+             
+            
             return View();
         }
         [HttpPost]
         public ActionResult ThemMoi(FormCollection form)
         {
+            
+        
             DonHang donHang = new DonHang();
             donHang.TenKH = form["txtTenKh"].ToString();
             donHang.DiaChi = form["txtDiaChi"].ToString();
             donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
             donHang.NgayDat = DateTime.Parse(form["txtNgayDat"]);
-            donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"]);
+            donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
             donHang.EmailKH = form["txtEmail"].ToString();
             donHang.DienThoaiKH = form["txtDienthoaiKh"].ToString();
-            donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtTinhTrang"].ToString());
-            donHang.TinhTrangThanhToan = bool.Parse(form["txtTinhTrang"].ToString());
+            //donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtGiaohang"]);
+             if(donHang.TinhTrangThanhToan == null)
+            {
+                donHang.TinhTrangThanhToan = false;
+            }
+            else
+            {
+                donHang.TinhTrangThanhToan = bool.Parse(form["txtThanhToan"]);
+            }
+            if (donHang.TinhTrangGiaoHang == null)
+            {
+                donHang.TinhTrangGiaoHang = 0;
+            }
+            else
+            {
+                donHang.TinhTrangGiaoHang= Convert.ToInt32(form["txtGiaohang"]);
+            }
             donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
             ChiTietDonHang ctdh = new ChiTietDonHang();
             ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
             ctdh.DonGia = Convert.ToDecimal (form["txtDonGia"]);
+
             ctdh.Sach.TenSach = form["txtSach"].ToString();
             ctdh.Sach.MaChuDe = Convert.ToInt32(form["txtMaChuDe"].ToString());
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
-            return View();
+            return View(); 
         }
-        public DateTime? FormatDate(string obj)
+        public JsonResult GetBookValue(string search)
         {
-
-            try
+            QuanLyBanSachEntities db = new QuanLyBanSachEntities();
+            List<SachDTO> allbook = db.Saches.Where(n => n.TenSach.Contains(search)).Select(n => new SachDTO
             {
-                if (!string.IsNullOrEmpty(obj))
-                {
-                    var silit = obj.Split('-');
-                    var day = int.Parse(silit[2]);
-                    var month = int.Parse(silit[1]);
-                    var year = int.Parse(silit[0]);
-                    return DateTime.ParseExact(string.Format("{2}/{1}/{0}",  day, month, year), "dd/MM/yyyy", null);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return null;
+                TenSach = n.TenSach
+            }).ToList();
+            return new JsonResult { Data = allbook, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        //public DateTime? FormatDate(string obj)
+        //{
+        //    try
+        //    {
+        //        if (!string.IsNullOrEmpty(obj))
+        //        {
+        //            var silit = obj.Split('-');
+        //            var day = int.Parse(silit[2]);
+        //            var month = int.Parse(silit[1]);
+        //            var year = int.Parse(silit[0]);
+        //            return DateTime.ParseExact(string.Format("{2}/{1}/{0}",  day, month, year), "dd/MM/yyyy", null);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return null;
+        //}
     }
 }

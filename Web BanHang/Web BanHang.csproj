@@ -164,6 +164,7 @@
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\SachController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
     <Compile Include="DTO\SachDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -324,6 +325,24 @@
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="assets\jQuery v1.6.3.js" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\AUTHORS.txt" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\external\jquery\jquery.js" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_444444_256x240.png" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_555555_256x240.png" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_777620_256x240.png" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_777777_256x240.png" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\index.html" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.css" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.js" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.min.css" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.min.js" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.structure.css" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.structure.min.css" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.theme.css" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.theme.min.css" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\LICENSE.txt" />
     <Content Include="assets\jquery.js" />
     <Content Include="Content\AdmimTemplate\css\checkbox-button-toggle.css" />
     <Content Include="Content\CKEditor\adapters\jquery.js" />
@@ -653,6 +672,7 @@
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker.standalone.css.map" />
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.css.map" />
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="assets\jquery-ui-1.12.1.custom\package.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
@@ -2843,6 +2863,7 @@
     <Content Include="Views\QuanLyDonHang\ChiTiet.cshtml" />
     <Content Include="Views\QuanLyDonHang\Xoa.cshtml" />
     <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
