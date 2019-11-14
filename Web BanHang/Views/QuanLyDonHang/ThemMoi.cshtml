@@ -12,132 +12,199 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
+
 <h2>Thêm mới đơn hàng</h2>
 @using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Post))
 {
-    <div class="form-horizontal">
-        <div class="form-group">
-            <span>Mã Đơn hàng</span>
-            <div class="col-md-4">
-                @Html.DisplayFor(model => model.MaDonHang)
-            </div>
-        </div>
-        <div class="form-group">
-            <span>Tên Khách hàng</span>
-            <div class="col-md-4">@Html.TextBox("txtTenKH")</div>
-        </div>
-        <div class="form-group">
-            <span>Địa chỉ</span>
-            <div class="col-md-4">@Html.TextBox("txtDiaChi")</div>
-        </div>
-        <div>
-            <span>Địa chỉ nhận hàng</span>
-            <div class="col-md-4">@Html.TextBox("txtDiaChiNh")</div>
-        </div>
-        <div class="form-group">
-            <span>Điện thoại KH</span>
-            <div class="col-md-4">@Html.TextBox("txtDienthoaiKh")</div>
-        </div>
-        <div class="form-group">
-            <span>Email khách hàng</span>
-            <div class="col-md-4">@Html.TextBox("txtEmail")</div>
-        </div>
-        <div class="form-group">
-            <span>Ngày Đặt</span>
-            <div class="col-md-4">
-                @Html.TextBox("txtNgayDat", DateTime.Now.ToString())
 
-            </div>
-
-        </div>
-        <div class="form-group">
-            <span>Ngày giao</span>
-            <div class="col-md-4">
-                @*@Html.TextBox("txtNgayGiao")*@
-                @*<input type="datetime"   name="txtNgayGiao" id="txtNgayGiao" />*@
-
-                <input type='text' class='datepicker' name="txtNgayGiao" />
-            </div>
-        </div>
-        <div class="form-group">
-            <span>Tổng tiền</span>
-            <div class="col-md-4">@Html.TextBox("txtTongTien")</div>
-        </div>
-        <div class="form-group">
-
-            <span>Trạng thái</span>
-
-
-            <div class="col-md-4">
-                <span>Thanh Toán </span>
-                <div class="checkbox" id="check-pay">
-                    <label>
-                        <input type="checkbox" name="txtThanhToan" data-toggle="toggle" data-off="Chưa Thanh Toán" data-on=" Thanh Toán" />
-                    </label>
-                    <div id="alert"></div>
+    <div class="col-md-8 order-md-1">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-4 md-3">
+                    <label>Mã Đơn hàng</label>
+                    @Html.DisplayFor(model => model.MaDonHang)
                 </div>
             </div>
-            <div class="col-md-4">
-                <span>Giao hàng</span>
-                <!--khong get duoc tinh trang giao hang -->
-                    <select id="id-check-delivery" onchange="checkGiaoHang()">
-                        @if (Model.TinhTrangGiaoHang == 1)
-                        {
-                            <option value="not delivery">Chưa Giao Hàng</option>
-                        }
-                        @if (Model.TinhTrangGiaoHang == 2)
-                        {
-                            <option value="delivery">Giao Hàng</option>
-                        }
-                        @if (Model.TinhTrangGiaoHang == 3)
-                        {
-                            <option value="delivered">Đã Giao Hàng</option>
-                        }
-                    </select>
+            <div class="form-group">
+                <div class="row col">
+                    <div class="col-md-4 md-3">
+                        <label>Tên Khách hàng</label>
+                        @*<input type="text" name="txtTenKH" id="txtTenKH"/>*@
+                        @Html.TextBox("txtTenKH", " ", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 md-3">
+                        <label>Địa chỉ</label>
+                        @*<input type="text" name="txtDiaChi" id="txtDiaChi"/>*@
+                        @Html.TextBox("txtDiaChi", " ", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 md-3">
+                        <label>Địa chỉ nhận hàng</label>
+                        @Html.TextBox("txtDiaChiNh", " ", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row col">
+                    <div class="col-md-4 md-3">
+                        <label>Điện thoại KH</label>
+                        @Html.TextBox("txtDienthoaiKh", " ", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 md-3">
+                        <label>Email khách hàng</label>
+                        @Html.TextBox("txtEmail", " ", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row col">
+                    <div class="col-md-4 md-3">
+                        <label>Ngày Đặt</label>
+
+                        @Html.TextBox("txtNgayDat", DateTime.Now.ToString(), new { disabled = "disabled", @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-4 md-3">
+                        <label>Ngày giao</label>
+                        <input type='text' class='form-control datepicker' name="txtNgayGiao" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row col">
+                    <label>Trạng thái</label>
+                    @*<div class="col-md-4 md-3">
+                            <div class="checkbox" id="check-pay">
+                                <label>Thanh Toán </label>
+                                    <input type="checkbox" name="txtThanhToan" data-toggle="toggle" data-off="Chưa Thanh Toán" data-on=" Thanh Toán" class="form-control" />
+                                <div id="alert"></div>
+                            </div>
+                        </div>*@
+                    <div class="col-md-4 md-3">
+
+                        <!--khong get duoc tinh trang giao hang -->
+                        @Html.DropDownList("TinhTrang", ViewBag.GiaoHang as List<SelectListItem>, "-Chọn tình trạng-", new { @class = "form-control" })
+
+                        @*<select id="id-check-delivery" onchange="checkGiaoHang()">
+                                @if (Model.TinhTrangGiaoHang == 1)
+                                {
+                                    <option value="not delivery">Chưa Giao Hàng</option>
+                                }
+                                @if (Model.TinhTrangGiaoHang == 2)
+                                {
+                                    <option value="delivery">Giao Hàng</option>
+                                }
+                                @if (Model.TinhTrangGiaoHang == 3)
+                                {
+                                    <option value="delivered">Đã Giao Hàng</option>
+                                }
+                            </select>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal">
+            @*<div class="form-group">
+                    <div class="row col">
+                        <div class="col-md-4 md-3">
+                            <label>Mã Đơn Hàng</label>
+                            @Html.DisplayFor(model => model.MaDonHang, " ", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>*@
+            <div class="form-group ">
+                <div class="row col">
+                    <div class="col-md-4 md-3">
+                        <label>Tên sản phẩm</label>
+                        <input type="text" name="TenSanpham" class="form-control" id="txtSach1" />
+                    </div>
+                    <div class="col-md-1 md-3">
+                        <label>Mã Sách</label>
+                        <input type="text" name="MaSanPham" class="form-control" id="txtMaSach" disabled />
+                    </div>
+                    <div class="col-md-3 md-3">
+                        <label>Nhà xuất bản</label>
+                        @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>)ViewBag.MaNXB, "--Select NXB--", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-1 md-3">
+                        <label>Mã NXB</label>
+                        <input type="text" name="MaChuDe" class="form-control" id="txtChuDe" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row col">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row col">
+                    <div class="col-md-4 md-3">
+                        <label>Số lượng</label>
+                        <input id="txtSoLuong" name="txtSoLuong" type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-4 md-3">
+                        <label>Đơn giá</label>
+                        <input id="txtDonGia" name="txtDonGia" type="text" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row col">
+                    <div class="col-md-8 md-3">
+                        <label>Tổng tiền </label>
+                        <input id="txtTongTien" name="txtTongTien" type="text" class="form-control" disabled />
+                        @*@Html.TextBox("txtTongTien", " ", new { @class = "form-control", @attribute= "displayMode" } )*@
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <span>Mã Đơn Hàng</span>
-            <div class="col-md-4">
-                @Html.DisplayFor(model => model.MaDonHang)
+    <div class="col-md-8 order-md-2">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <span class="text-muted">Sản phẩm</span>
+                <span class="badge badge-secondary badge-pill">0</span>
+                <div class="form-group">
+                    <div class="row col">
+                        <div class="col-md-4">
+                            <span class="text-muted">Tên sản phẩm</span>
+                            <input type="text" name="txtSanPham1" id="txtSanPham1" class="form-control" disabled />
+                            <span class="text-muted">Số lượng</span>
+                            <input type="text" name="txtSoLuong1" id="txtSoLuong1" class="form-control" disabled />
+                            <span class="text-muted">Đơn Giá</span>
+                            <input type="text" name="txtDonGia1" id="txtDonGia1" class="form-control" disabled />
+                            <span class="text-muted">Tạm Tính</span>
+                            <input type="text" name="txtTamTinh" id="TamTinh" class="form-control" disabled />
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-muted">Tổng tiền</span>
+                            <input type="text" name="txtTongTien1" id="txtTongTien1" class="form-control" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div />
             </div>
         </div>
-        <div class="form">
-            <span>Tên sản phẩm</span>
-            <div class="col-md-4">
-                <input type="text" class="form-control" id="txtSach1" />
-               
-            </div>
-        </div>
-        <div class="form-group">
-            <span>Thể loại</span>
-            <div class="col-md-4">
-                @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>)ViewBag.MaNXB, "--Select NXB--")
-            </div>
-        </div>
-        <div class="form-group">
-            <span>Số lương</span>
-            <div class="col-md-4">
-                @Html.TextBox("txtSoluong")
-            </div>
-        </div>
-        <div class="form-group">
-            <span>Đơn giá</span>
-            <div class="col-md-4">
-                @Html.TextBox("txtDonGia")
-            </div>
-        </div>    
     </div>
-    <div class="form-group">
+    <button class="btn btn-primary btn-lg btn-block" type="submit">Tạo đơn hàng</button>
+    @*<div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Tạo đơn hàng" class="btn btn-default" />
-        </div>
-    </div>
+        </div> *@
 }
+<div class="container">
+    <table class="table">
+        <tr  scope="col">
+          <td>Col1</td>
+        </tr>
+        <tr scope="col">
+            <td>col</td>
+        </tr>
+    </table>
+</div>
 <script type="text/javascript">
+
     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
 
@@ -149,7 +216,7 @@
         })
         $('#id-pay').submit();
     })
-  
+
 
     $("#txtSach1").autocomplete({
         source:
@@ -170,8 +237,48 @@
             }
     }
     );
+
+    //$(document).ready(function(){
+    //    $("input[name='TenSanpham']").blur(function () {
+    //        alert("Sự kiện blur() vừa mới xảy ra");
+    //    })
+    //})
+
+    $("input[name=TenSanpham]").on("blur", function () {
+        const valueTenSP = $(this).val();
+        if (!!valueTenSP) {
+            //TODO: call ajax to get txtDonGia from server
+            $.ajax({
+                url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
+                method: "GET",
+                success: function (rs) {
+                    $("#txtDonGia").val(rs);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            //console.log("oke sanpham")
+        }
+    })
+
     function checkGiaoHang() {
         var selValue = document.getElementById('id-check-delivery').value;
         selValue.val();
+    }
+
+    $("input[name=txtSoLuong]").on("blur", calculateTotal);
+    $("input[name=txtDonGia]").on("blur", calculateTotal);
+    function calculateTotal() {
+        var donGia = +$("input[name=txtDonGia]").val();
+        var soLuong = +$("input[name=txtSoLuong]").val();
+        if (soLuong == 0) {
+            soLuong == 1;
+            var tong = donGia * 1;
+        }
+        else {
+            var tong = donGia * soLuong;
+        }
+        $("input[name=txtTongTien]").val(tong);
     }
 </script>

@@ -1,0 +1,13 @@
+﻿@using Web_BanHang.Models;
+@using Web_BanHang.DTO;
+@using Newtonsoft.Json;
+@model Web_BanHang.Models.DonHang
+<h2>Thêm mới đơn hàng</h2>
+@using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Get)) {
+    <div class="form-group">
+        <form>
+            <input type="radio"  value="true" /> Đã thanh toán <br />
+            <input type="radio" value="false" /> Chưa thanh toán 
+        </form>
+    </div>
+}

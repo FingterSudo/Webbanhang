@@ -182,6 +182,7 @@
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DonHangChiTiet.cs" />
+    <Compile Include="Models\DonHangViewModels.cs" />
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\KhachHang.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
@@ -2864,6 +2865,7 @@
     <Content Include="Views\QuanLyDonHang\Xoa.cshtml" />
     <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Thanhtoan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
