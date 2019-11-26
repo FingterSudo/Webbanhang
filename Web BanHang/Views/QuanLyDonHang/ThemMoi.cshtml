@@ -3,11 +3,13 @@
 @using Newtonsoft.Json;
 @model Web_BanHang.Models.DonHang
 @{
-    ViewBag.Title = "ThemMoi";
-    Layout = "~/Views/Layout/AdminLayout.cshtml";
+                /**/
 
-    var dataBook = ViewBag.TenSach as List<SachDTO>;
-    var dataJS = Html.Raw(JsonConvert.SerializeObject(dataBook));
+                ViewBag.Title = "ThemMoi";
+                Layout = "~/Views/Layout/AdminLayout.cshtml";
+
+                var dataBook = ViewBag.TenSach as List<SachDTO>;
+                var dataJS = Html.Raw(JsonConvert.SerializeObject(dataBook));
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -16,185 +18,175 @@
 <h2>Thêm mới đơn hàng</h2>
 @using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Post))
 {
-<div class="row">
-    <div class="col-md-6 order-md-1">
-        <div class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-6 md-3">
-                    <label>Mã Đơn hàng</label>
-                    @Html.DisplayFor(model => model.MaDonHang)
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row col">
-                    <div class="col-md-6 ">
-                        <label>Tên Khách hàng</label>
-                        @*<input type="text" name="txtTenKH" id="txtTenKH"/>*@
-                        @Html.TextBox("txtTenKH", " ", new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6 ">
-                        <label>Địa chỉ</label>
-                        @*<input type="text" name="txtDiaChi" id="txtDiaChi"/>*@
-                        @Html.TextBox("txtDiaChi", " ", new { @class = "form-control" })
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row col">
+    <div class="row">
+        <div class="col-md-6 order-md-1">
+            <div class="form-horizontal">
+                <div class="form-group">
                     <div class="col-md-6 md-3">
-                        <label>Điện thoại KH</label>
-                        @Html.TextBox("txtDienthoaiKh", " ", new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6 ">
-                        <label>Địa chỉ nhận hàng</label>
-                        @Html.TextBox("txtDiaChiNh", " ", new { @class = "form-control" })
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row col">
-                    <div class="col-md-6 md-3">
-                        <label>Email khách hàng</label>
-                        @Html.TextBox("txtEmail", " ", new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6 md-3">
-                        <label>Ngày Đặt</label>
-
-                        @Html.TextBox("txtNgayDat", DateTime.Now.ToString(), new { disabled = "disabled", @class = "form-control" })
-
+                        <label>Mã Đơn hàng</label>
+                        @Html.DisplayFor(model => model.MaDonHang)
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row col">
-
-                    <div class="col-md-6 md-3">
-                        <label>Ngày giao</label>
-                        <input type='text' class='form-control datepicker' name="txtNgayGiao" />
-                    </div>
-                    <div class="col-md-6 md-3">
-                        <label>Trạng thái</label>
-                        <!--khong get duoc tinh trang giao hang -->
-                        @Html.DropDownList("TinhTrang", ViewBag.GiaoHang as List<SelectListItem>, "-Chọn tình trạng-", new { @class = "form-control" })
-
-                        @*<select id="id-check-delivery" onchange="checkGiaoHang()">
-                            @if (Model.TinhTrangGiaoHang == 1)
-                            {
-                                <option value="not delivery">Chưa Giao Hàng</option>
-                            }
-                            @if (Model.TinhTrangGiaoHang == 2)
-                            {
-                                <option value="delivery">Giao Hàng</option>
-                            }
-                            @if (Model.TinhTrangGiaoHang == 3)
-                            {
-                                <option value="delivered">Đã Giao Hàng</option>
-                            }
-                        </select>*@
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="form-horizontal">
-
-            <div class="form-group ">
-                <div class="row col">
-                    <div class="col-md-6 md-3">
-                        <label>Tên sản phẩm</label>
-                        <input type="text" name="TenSanpham" class="form-control" id="txtSach1" />
-                    </div>
-                    <div class="col-md-6 md-3">
-                        <label>Mã Sách</label>
-                        <input type="text" name="MaSanPham" class="form-control" id="txtMaSach" disabled />
-                    </div>
-                    <div class="col-md-6 md-3">
-                        <label>Nhà xuất bản</label>
-                        @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>)ViewBag.MaNXB, "--Select NXB--", new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6 md-3">
-                        <label>Mã NXB</label>
-                        <input type="text" name="MaChuDe" class="form-control" id="txtChuDe" disabled />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row col">
-                    <div class="col-md-6 md-3">
-                        <label>Số lượng</label>
-                        <input id="txtSoLuong" name="txtSoLuong" type="text" class="form-control" />
-                    </div>
-                    <div class="col-md-6 md-3">
-                        <label>Đơn giá</label>
-                        <input id="txtDonGia" name="txtDonGia" type="text" class="form-control" disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row col">
-                    <div class="col-md-12 md-3">
-                        <label>Tổng tiền </label>
-                        <input id="txtTongTien" name="txtTongTien" type="text" class="form-control" disabled />
-                        @*@Html.TextBox("txtTongTien", " ", new { @class = "form-control", @attribute= "displayMode" } )*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Tạo đơn hàng</button>
-        @*<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Tạo đơn hàng" class="btn btn-default" />
-        </div> *@   
-    </div>
-    <div class="col-md-6 order-md-2">
-        <div class="form-horizontal">
-            <div class="form-group">
-                <span class="text-muted">Sản phẩm</span>
-                <span class="badge badge-secondary badge-pill">0</span>
                 <div class="form-group">
                     <div class="row col">
-                        <div class="col-md-6">
-                            <span class="text-muted">Tên sản phẩm</span>
-                            <input type="text" name="txtSanPham1" id="txtSanPham1" class="form-control" disabled />
-                            <span class="text-muted">Số lượng</span>
-                            <input type="text" name="txtSoLuong1" id="txtSoLuong1" class="form-control" disabled />
-                            <span class="text-muted">Tổng tiền</span>
-                            <input type="text" name="txtTongTien1" id="txtTongTien1" class="form-control" disabled />
+                        <div class="col-md-6 ">
+                            <label>Tên Khách hàng</label>
+                            @*<input type="text" name="txtTenKH" id="txtTenKH"/>*@
+                            @Html.TextBox("txtTenKH", " ", new { @class = "form-control" })
                         </div>
-                        <div class="col-md-6">
-                            <span class="text-muted">Đơn Giá</span>
-                            <input type="text" name="txtDonGia1" id="txtDonGia1" class="form-control" disabled />
-                            <span class="text-muted">Tạm Tính</span>
-                            <input type="text" name="txtTamTinh" id="TamTinh" class="form-control" disabled />
+                        <div class="col-md-6 ">
+                            <label>Địa chỉ</label>
+                            @*<input type="text" name="txtDiaChi" id="txtDiaChi"/>*@
+                            @Html.TextBox("txtDiaChi", " ", new { @class = "form-control" })
+                        </div>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row col">
+                        <div class="col-md-6 md-3">
+                            <label>Điện thoại KH</label>
+                            @Html.TextBox("txtDienthoaiKh", " ", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 ">
+                            <label>Địa chỉ nhận hàng</label>
+                            @Html.TextBox("txtDiaChiNh", " ", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row col">
+                        <div class="col-md-6 md-3">
+                            <label>Email khách hàng</label>
+                            @Html.TextBox("txtEmail", " ", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <label>Ngày Đặt</label>
+
+                            @Html.TextBox("txtNgayDat", DateTime.Now.ToString(), new { disabled = "disabled", @class = "form-control" })
 
                         </div>
                     </div>
                 </div>
-                <div />
+                <div class="form-group">
+                    <div class="row col">
+
+                        <div class="col-md-6 md-3">
+                            <label>Ngày giao</label>
+                            <input type='text' class='form-control datepicker' name="txtNgayGiao" />
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <label>Trạng thái</label>
+                            <!--khong get duoc tinh trang giao hang -->
+                            @Html.DropDownList("TinhTrang", ViewBag.GiaoHang as List<SelectListItem>, "-Chọn tình trạng-", new { @class = "form-control" })
+ 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+
+                <div class="form-group ">
+                    <div class="row col">
+                        <div class="col-md-6 md-3">
+                            <label>Tên sản phẩm</label>
+                            <input type="text" name="TenSanpham" class="form-control" id="txtSach1" />
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <label>Mã Sách</label>
+                            <input type="text" name="MaSanPham" class="form-control" id="txtMaSach" disabled />
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <label>Nhà xuất bản</label>
+                            @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>)ViewBag.MaNXB, "--Select NXB--", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <label>Mã NXB</label>
+                            <input type="text" name="MaNXB" class="form-control" id="txtMXB" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row col">
+                        <div class="col-md-6 md-3">
+                            <label>Số lượng</label>
+                            <input id="txtSoLuong" name="txtSoLuong" type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <label>Đơn giá</label>
+                            <input id="txtDonGia" name="txtDonGia" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                <div="row col">
+                <div class="col-md-8 md-3">
+                <button class="btn btn-primary btn-sm btn-block" type="button" id="addProduct">Thêm sản phẩm</button>
+                </div>
+                </div>
+                <div class="form-group">
+                <div class="row col">
+                <div class="col-md-12 md-3">
+                <label>Thành tiền </label>
+                <input id="txtThanhTien" name="txtThanhTien" type="text" class="form-control" value="0" disabled />
+
+                </div>
+                </div>
+                </div>
+                </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Tạo đơn hàng</button>
+            </div>
+        <!--#region Danh sách sản phẩm-->
+        <div class="col-md-6 order-md-2">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <span class="text-muted">Sản phẩm</span>
+                    <span class="badge badge-secondary badge-pill">0</span>
+                    @*<div class="form-group">
+                        <div class="row col">
+                            <div class="col-md-6">
+                                <span class="text-muted">Tên sản phẩm</span>
+                                <input type="text" name="txtSanPham1" id="txtSanPham1" class="form-control" disabled />
+                                <span class="text-muted">Số lượng</span>
+                                <input type="text" name="txtSoLuong1" id="txtSoLuong1" class="form-control" disabled />
+                                <span class="text-muted">Tổng tiền</span>
+                                <input type="text" name="txtTongTien1" id="txtTongTien1" class="form-control" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <span class="text-muted">Đơn Giá</span>
+                                <input type="text" name="txtDonGia1" id="txtDonGia1" class="form-control" disabled />
+                                <span class="text-muted">Tạm Tính</span>
+                                <input type="text" name="txtTamTinh" id="TamTinh" class="form-control" disabled />
+
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="table">
+                        <table class="table table-bordered table-danger" id="tableOrder">
+                            <tr>
+                                <input class="fa fa-trash" />
+                                <th scope="col" class="th-sm" id="productId">Mã Sản Phẩm</th>
+                                <th scope="col" class="th-sm" id="productName">Tên sản phẩm</th>
+                                <th scope="col" class="th-sm" id="productQuantity ">Số lượng</th>
+                                <th scope="col" class="th-sm" id="productPrice">Đơn giá</th>
+                                <th scope="col" class="th-sm" id="price">Thành tiền</th>
+                                <th scope="col" class="th-sm" id="selectRemove">Xoas</th>
+                            </tr>                            
+                        </table>
+                         <button type="button" id="deleteRow">Xóa</button>
+                        <div class="col-md-12">
+                            <label>Tổng tiền</label>
+                            <input type="text" name="totalPrice" id="totalPrice" class="form-control" value="0" disabled/>
+                        </div>
+                    </div>
+                    <div />
+                </div>
             </div>
         </div>
+        <!--#endregion -->
     </div>
-   
-</div>
-   
-    
 }
-<div class="container">
-    <table class="table">
-        <tr  scope="col">
-          <td>Col1</td>
-        </tr>
-        <tr scope="col">
-            <td>col</td>
-        </tr>
-    </table>
-</div>
+
 <script type="text/javascript">
 
     $('.datepicker').datepicker({
@@ -230,13 +222,13 @@
     }
     );
 
-    //$(document).ready(function(){
-    //    $("input[name='TenSanpham']").blur(function () {
-    //        alert("Sự kiện blur() vừa mới xảy ra");
-    //    })
-    //})
+    $(document).ready(function(){
+        $("input[name='MaNXB']").blur(function () {
+            alert("Sự kiện blur() vừa mới xảy ra");
+        })
+    })
 
-    $("input[name=TenSanpham]").on("blur", function () {
+    $("input[name='TenSanpham']").on("blur", function () {
         const valueTenSP = $(this).val();
         if (!!valueTenSP) {
             //TODO: call ajax to get txtDonGia from server
@@ -253,12 +245,44 @@
             //console.log("oke sanpham")
         }
     })
+    $("input[name='TenSanpham']").on("blur", function () {
+        const valueMaNXB = $(this).val();
+        if (!!valueMaNXB) {
+            //Call ajax get ma tac gia from server
+            $.ajax({
+                url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
+                method: 'GET',
+                success: function (author) {
+                    $("#txtMXB").val(author);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+    })
+    $("input[name='TenSanpham']").on("blur", function () {
+        const valueMS = $(this).val();
+        if (!!valueMS) {
+            //call ajax get ma sach from server
+            $.ajax({
+                url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
+                method: 'GET',
+                success: function (ms) {
+                    $("#txtMaSach").val(ms);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+    })
 
     function checkGiaoHang() {
         var selValue = document.getElementById('id-check-delivery').value;
         selValue.val();
     }
-
+    // tinh tong tien
     $("input[name=txtSoLuong]").on("blur", calculateTotal);
     $("input[name=txtDonGia]").on("blur", calculateTotal);
     function calculateTotal() {
@@ -271,6 +295,78 @@
         else {
             var tong = donGia * soLuong;
         }
-        $("input[name=txtTongTien]").val(tong);
+        $("input[name=txtThanhTien]").val(tong);
     }
+    //them san pham vao gio hang va tinh tong tien 
+    // ?? day la cai me gi :D :D ????
+    var tongSP = 0;
+    var Arrays = new Array();
+    $(document).ready(function () {
+         
+        $("#addProduct").click(function () {
+           
+
+            // lay gia tri san pham
+            var product = $("#txtSach1").val();
+            var number = $("#txtSoLuong").val();
+            var productPrice = $("#txtDonGia").val();
+            var intoMoney = $("#txtThanhTien").val();
+            var bookId = $("#txtMaSach").val();
+            //if (include, bookId) {
+            //    intoMoney1 = number * productPrice;
+            //    var totalPrice_Changes = $("#totalPrice").val();
+            //    tongSP = totalPrice_Changes + intoMoney1;
+            //    $("input[name=totalPrice]").val(totalPrice_Changes);
+            //}
+            //else {
+            //    Arrays.push(bookId);
+            //    var totalPrice_Changes = $("#totalPrice").val();
+            //    tongSP = totalPrice_ChangesintoMoney + intoMoney ;
+            //    $("#tableOrder").append("<tr><th><input type='checkbox' name='record'></th><th>" + bookId + "</th><th>" + product + "</th><th>" + number + "</th><th>" + productPrice + "</th><th>" + intoMoney + "</th><tr>");
+            //    $("input[name=totalPrice]").val(tongSP);
+            //}
+           //  them san pham vao gio hang  
+            $("#tableOrder").append("tr><th>"  + bookId + "</th><th>" + product + "</th><th>" + number + "</th><th>" + productPrice + "</th><th>" + intoMoney + " </th><th>"+  <input  + "</th><tr>");
+            totalPrice();
+        })
+        $("#deleteRow").click(function () {
+            $("table tbody").find('input[name="record"]').each(function () {
+                if ($(this).is(":checked")) {    
+                    $(this).parents("tr").remove();    
+                }
+            })
+            function () {
+                $("#tableOrder tbody tr th:nth-child(6)") 
+                 
+            } 
+
+           
+        })
+
+    })
+    
+    var tong1 = 0;
+    function totalPrice() {
+        var deduct = $("#producctId").val();
+        var number = $("#txtSoLuong").val();
+        var productPrice = $("#txtDonGia").val();
+        //if (deduct == null) {
+
+        //}
+            tong1 += number * productPrice;
+        $("input[name=totalPrice]").val(tong1);
+    }
+    function include(arr, obj) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == obj)
+                return i;
+        }
+    }
+    //$("input=[name=totalPrice]").on('change', uploadToTal);
+    //function()uploadToTal {
+    //    if -> tr maast 
+    //        - thi gia tri tong se duoc tru di cai gia tri vau chon:))))
+    //    ????? 
+    //}
+   
 </script>

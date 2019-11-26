@@ -14,7 +14,7 @@ namespace Web_BanHang.Controllers
     {
         private readonly QuanLyBanSachEntities db = new QuanLyBanSachEntities();
         // GET: QuanLyDonHang
-       
+
         public ActionResult Index(int?Page)
         {
             int pageSize = 10;
@@ -121,10 +121,9 @@ namespace Web_BanHang.Controllers
             ChiTietDonHang ctdh = new ChiTietDonHang();
             ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
             ctdh.DonGia = Convert.ToDecimal (form["txtDonGia"]);
-
             ctdh.Sach.TenSach = form["txtSach"].ToString();
-            ctdh.MaSach = Convert.ToInt32(form["txtMaCD"].ToString());
-            ctdh.MaNXB = Convert.ToInt32(form["txtMaChuDe"].ToString());
+            ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
+            ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
             db.DonHangs.Add(donHang);
             db.ChiTietDonHangs.Add(ctdh);
@@ -144,7 +143,28 @@ namespace Web_BanHang.Controllers
         {
             QuanLyBanSachEntities db = new QuanLyBanSachEntities();
             var giaban = db.Saches.Where(n => n.TenSach.Contains(search)).Select(x => x.GiaBan).FirstOrDefault();
+           
             return Json(giaban, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetBookId (string search)
+        {
+            QuanLyBanSachEntities db = new QuanLyBanSachEntities();
+            var BookId = db.Saches.Where(n => n.TenSach.Contains(search)).Select(x => x.MaSach).FirstOrDefault();
+            return  Json(BookId, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetPublishersId(string search)
+        {
+            QuanLyBanSachEntities db = new QuanLyBanSachEntities();
+            var PublishersId  = db.Saches.Where(n => n.TenSach.Contains(search)).Select(x => x.MaNXB).FirstOrDefault();
+            return Json(PublishersId, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetAuthor(string search)
+        {
+            QuanLyBanSachEntities db = new QuanLyBanSachEntities();
+            var Author = db.Saches.Where(n => n.TenSach.Contains(search)).Select(x => x.TacGia.TenTacGia).FirstOrDefault();
+            return Json(Author, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Thanhtoan()
         {
