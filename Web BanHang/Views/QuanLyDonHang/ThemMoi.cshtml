@@ -3,191 +3,108 @@
 @using Newtonsoft.Json;
 @model Web_BanHang.Models.DonHang
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "ThemMoi";
-                Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "ThemMoi";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
 
-                var dataBook = ViewBag.TenSach as List<SachDTO>;
-                var dataJS = Html.Raw(JsonConvert.SerializeObject(dataBook));
+    var dataBook = ViewBag.TenSach as List<SachDTO>;
+    var dataJS = Html.Raw(JsonConvert.SerializeObject(dataBook));
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+<link href="~/Content/jquerysteps/css/main.css" rel="stylesheet" />
+<link href="~/Content/jquerysteps/css/jquery.steps.css" rel="stylesheet" />
+<link href="~/Content/jquerysteps/css/normalize.css" rel="stylesheet" />
+<script src="~/Content/jquerysteps/jquery.steps.js"></script>
+<script src="~/Content/jquerysteps/jquery.steps.min.js"></script>
 
 <h2>Thêm mới đơn hàng</h2>
-@using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Post))
-{
-    <div class="row">
-        <div class="col-md-6 order-md-1">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-md-6 md-3">
-                        <label>Mã Đơn hàng</label>
-                        @Html.DisplayFor(model => model.MaDonHang)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row col">
-                        <div class="col-md-6 ">
-                            <label>Tên Khách hàng</label>
-                            @*<input type="text" name="txtTenKH" id="txtTenKH"/>*@
-                            @Html.TextBox("txtTenKH", " ", new { @class = "form-control" })
-                        </div>
-                        <div class="col-md-6 ">
-                            <label>Địa chỉ</label>
-                            @*<input type="text" name="txtDiaChi" id="txtDiaChi"/>*@
-                            @Html.TextBox("txtDiaChi", " ", new { @class = "form-control" })
-                        </div>
-                   </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row col">
-                        <div class="col-md-6 md-3">
-                            <label>Điện thoại KH</label>
-                            @Html.TextBox("txtDienthoaiKh", " ", new { @class = "form-control" })
-                        </div>
-                        <div class="col-md-6 ">
-                            <label>Địa chỉ nhận hàng</label>
-                            @Html.TextBox("txtDiaChiNh", " ", new { @class = "form-control" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row col">
-                        <div class="col-md-6 md-3">
-                            <label>Email khách hàng</label>
-                            @Html.TextBox("txtEmail", " ", new { @class = "form-control" })
-                        </div>
-                        <div class="col-md-6 md-3">
-                            <label>Ngày Đặt</label>
-
-                            @Html.TextBox("txtNgayDat", DateTime.Now.ToString(), new { disabled = "disabled", @class = "form-control" })
-
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row col">
-
-                        <div class="col-md-6 md-3">
-                            <label>Ngày giao</label>
-                            <input type='text' class='form-control datepicker' name="txtNgayGiao" />
-                        </div>
-                        <div class="col-md-6 md-3">
-                            <label>Trạng thái</label>
-                            <!--khong get duoc tinh trang giao hang -->
-                            @Html.DropDownList("TinhTrang", ViewBag.GiaoHang as List<SelectListItem>, "-Chọn tình trạng-", new { @class = "form-control" })
- 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-horizontal">
-
-                <div class="form-group ">
-                    <div class="row col">
-                        <div class="col-md-6 md-3">
-                            <label>Tên sản phẩm</label>
-                            <input type="text" name="TenSanpham" class="form-control" id="txtSach1" />
-                        </div>
-                        <div class="col-md-6 md-3">
-                            <label>Mã Sách</label>
-                            <input type="text" name="MaSanPham" class="form-control" id="txtMaSach" disabled />
-                        </div>
-                        <div class="col-md-6 md-3">
-                            <label>Nhà xuất bản</label>
-                            @Html.DropDownList("MaNXB", (IEnumerable<SelectListItem>)ViewBag.MaNXB, "--Select NXB--", new { @class = "form-control" })
-                        </div>
-                        <div class="col-md-6 md-3">
-                            <label>Mã NXB</label>
-                            <input type="text" name="MaNXB" class="form-control" id="txtMXB" disabled />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row col">
-                        <div class="col-md-6 md-3">
-                            <label>Số lượng</label>
-                            <input id="txtSoLuong" name="txtSoLuong" type="text" class="form-control" />
-                        </div>
-                        <div class="col-md-6 md-3">
-                            <label>Đơn giá</label>
-                            <input id="txtDonGia" name="txtDonGia" type="text" class="form-control" disabled>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group"
-                <div="row col">
-                <div class="col-md-8 md-3">
-                <button class="btn btn-primary btn-sm btn-block" type="button" id="addProduct">Thêm sản phẩm</button>
-                </div>
-                </div>
-                <div class="form-group">
-                <div class="row col">
-                <div class="col-md-12 md-3">
-                <label>Thành tiền </label>
-                <input id="txtThanhTien" name="txtThanhTien" type="text" class="form-control" value="0" disabled />
-
-                </div>
-                </div>
-                </div>
-                </div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Tạo đơn hàng</button>
-            </div>
-        <!--#region Danh sách sản phẩm-->
-        <div class="col-md-6 order-md-2">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <span class="text-muted">Sản phẩm</span>
-                    <span class="badge badge-secondary badge-pill">0</span>
-                    @*<div class="form-group">
-                        <div class="row col">
-                            <div class="col-md-6">
-                                <span class="text-muted">Tên sản phẩm</span>
-                                <input type="text" name="txtSanPham1" id="txtSanPham1" class="form-control" disabled />
-                                <span class="text-muted">Số lượng</span>
-                                <input type="text" name="txtSoLuong1" id="txtSoLuong1" class="form-control" disabled />
-                                <span class="text-muted">Tổng tiền</span>
-                                <input type="text" name="txtTongTien1" id="txtTongTien1" class="form-control" disabled />
-                            </div>
-                            <div class="col-md-6">
-                                <span class="text-muted">Đơn Giá</span>
-                                <input type="text" name="txtDonGia1" id="txtDonGia1" class="form-control" disabled />
-                                <span class="text-muted">Tạm Tính</span>
-                                <input type="text" name="txtTamTinh" id="TamTinh" class="form-control" disabled />
-
-                            </div>
-                        </div>
-                    </div>*@
-                    <div class="table">
-                        <table class="table table-bordered table-danger" id="tableOrder">
-                            <tr>
-                                <input class="fa fa-trash" />
-                                <th scope="col" class="th-sm" id="productId">Mã Sản Phẩm</th>
-                                <th scope="col" class="th-sm" id="productName">Tên sản phẩm</th>
-                                <th scope="col" class="th-sm" id="productQuantity ">Số lượng</th>
-                                <th scope="col" class="th-sm" id="productPrice">Đơn giá</th>
-                                <th scope="col" class="th-sm" id="price">Thành tiền</th>
-                                <th scope="col" class="th-sm" id="selectRemove">Xoas</th>
-                            </tr>                            
-                        </table>
-                         <button type="button" id="deleteRow">Xóa</button>
-                        <div class="col-md-12">
-                            <label>Tổng tiền</label>
-                            <input type="text" name="totalPrice" id="totalPrice" class="form-control" value="0" disabled/>
-                        </div>
-                    </div>
-                    <div />
-                </div>
-            </div>
-        </div>
-        <!--#endregion -->
-    </div>
-}
 
 <script type="text/javascript">
+   
+      
+      
+</script>
+@using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Post))
+{
+
+    <form id="example-form" action="#">
+        <div>
+            <h3>Account</h3>
+            <section>
+                <label for="userName">User name *</label>
+                <input id="userName" name="userName" type="text" class="required">
+                <label for="password">Password *</label>
+                <input id="password" name="password" type="text" class="required">
+                <label for="confirm">Confirm Password *</label>
+                <input id="confirm" name="confirm" type="text" class="required">
+                <p>(*) Mandatory</p>
+            </section>
+            <h3>Profile</h3>
+            <section>
+                <label for="name">First name *</label>
+                <input id="name" name="name" type="text" class="required">
+                <label for="surname">Last name *</label>
+                <input id="surname" name="surname" type="text" class="required">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="text" class="required email">
+                <label for="address">Address</label>
+                <input id="address" name="address" type="text">
+                <p>(*) Mandatory</p>
+            </section>
+            <h3>Hints</h3>
+            <section>
+                <ul>
+                    <li>Foo</li>
+                    <li>Bar</li>
+                    <li>Foobar</li>
+                </ul>
+            </section>
+            <h3>Finish</h3>
+            <section>
+                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+            </section>
+        </div>
+    </form>
+
+}
+
+
+
+
+<script type="text/javascript">
+
+    var form = $("#example-form").show();
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+    form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function (event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function (event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function (event, currentIndex) {
+            alert("Submitted!");
+        }
+    });
+
+
 
     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
@@ -199,7 +116,7 @@
             $('#alert').html('Toggle: ' + $(this).prop('checked'))
         })
         $('#id-pay').submit();
-    })
+    });
 
 
     $("#txtSach1").autocomplete({
@@ -222,7 +139,7 @@
     }
     );
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("input[name='MaNXB']").blur(function () {
             alert("Sự kiện blur() vừa mới xảy ra");
         })
@@ -234,7 +151,7 @@
             //TODO: call ajax to get txtDonGia from server
             $.ajax({
                 url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
-                method: "GET",
+                method: "GET", // mac dinh la get
                 success: function (rs) {
                     $("#txtDonGia").val(rs);
                 },
@@ -297,63 +214,46 @@
         }
         $("input[name=txtThanhTien]").val(tong);
     }
-    //them san pham vao gio hang va tinh tong tien 
+    //them san pham vao gio hang va tinh tong tien
     // ?? day la cai me gi :D :D ????
     var tongSP = 0;
     var Arrays = new Array();
     $(document).ready(function () {
-         
         $("#addProduct").click(function () {
-           
-
             // lay gia tri san pham
             var product = $("#txtSach1").val();
             var number = $("#txtSoLuong").val();
             var productPrice = $("#txtDonGia").val();
             var intoMoney = $("#txtThanhTien").val();
             var bookId = $("#txtMaSach").val();
-            //if (include, bookId) {
-            //    intoMoney1 = number * productPrice;
-            //    var totalPrice_Changes = $("#totalPrice").val();
-            //    tongSP = totalPrice_Changes + intoMoney1;
-            //    $("input[name=totalPrice]").val(totalPrice_Changes);
-            //}
-            //else {
-            //    Arrays.push(bookId);
-            //    var totalPrice_Changes = $("#totalPrice").val();
-            //    tongSP = totalPrice_ChangesintoMoney + intoMoney ;
-            //    $("#tableOrder").append("<tr><th><input type='checkbox' name='record'></th><th>" + bookId + "</th><th>" + product + "</th><th>" + number + "</th><th>" + productPrice + "</th><th>" + intoMoney + "</th><tr>");
-            //    $("input[name=totalPrice]").val(tongSP);
-            //}
-           //  them san pham vao gio hang  
-            $("#tableOrder").append("tr><th>"  + bookId + "</th><th>" + product + "</th><th>" + number + "</th><th>" + productPrice + "</th><th>" + intoMoney + " </th><th>"+  <input  + "</th><tr>");
+            $("#tableOrder").append("<tr><th >" + bookId + "</th><th>" + product + "</th><th><input class='form-control' type='text' value" + number + "></th><th>" + productPrice + "</th><th class=product>" + intoMoney + "<th><button type='button'  class='btn btn-dark'><i " + " class= 'far fa-trash-alt'></i></th></tr>");
             totalPrice();
         })
-        $("#deleteRow").click(function () {
-            $("table tbody").find('input[name="record"]').each(function () {
-                if ($(this).is(":checked")) {    
-                    $(this).parents("tr").remove();    
-                }
-            })
-            function () {
-                $("#tableOrder tbody tr th:nth-child(6)") 
-                 
-            } 
-
-           
+        //$("#deleteRow").click(function () {
+        //    $("table tbody").find('input[name="record"]').each(function () {
+        //        if ($(this).is(":checked")) {
+        //            $(this).parents("tr").remove();
+        //        }
+        //    })
+        //})
+    });
+    $(document).ready(function () {
+        $(" .btn-danger ").on('click', function () {
+            $('#tableOrder tbody tr:gt(0) ').remove();
         })
-
-    })
-    
+    });
+    $(document).ready(function () {
+        $("#tableOrder").on('click', '.btn-dark', function () {
+            $(this).closest('tr').remove();
+        })
+    });
     var tong1 = 0;
     function totalPrice() {
         var deduct = $("#producctId").val();
         var number = $("#txtSoLuong").val();
         var productPrice = $("#txtDonGia").val();
-        //if (deduct == null) {
 
-        //}
-            tong1 += number * productPrice;
+        tong1 += number * productPrice;
         $("input[name=totalPrice]").val(tong1);
     }
     function include(arr, obj) {
@@ -364,9 +264,214 @@
     }
     //$("input=[name=totalPrice]").on('change', uploadToTal);
     //function()uploadToTal {
-    //    if -> tr maast 
+    //    if -> tr maast
     //        - thi gia tri tong se duoc tru di cai gia tri vau chon:))))
-    //    ????? 
+    //    ?????
     //}
-   
+    //var array = [];
+    //var tong = 0;
+    //$(function () {
+    //    $("#tableOrder tbody tr th:nth-child(6) ").each(function ( ) {
+
+    //        }
+    //       // include(array);
+
+    //    })
+    //    console.log(array);
+    //})
+
+    //function include(arr) {
+    //    for (var i = 0; i < arr.length; i++) {
+    //        tong += arr[i];
+
+    //    }
+    //}
+
+    //  }
+
+
+    // format date
+
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+
+        //startDate: '-3d'
+    });
+    $(function () {
+        $('#id-pay').change(function () {
+            $('#alert').html('Toggle: ' + $(this).prop('checked'))
+        })
+        $('#id-pay').submit();
+    });
+
+    $("#txtSach1").autocomplete({
+        source:
+            function (request, response) {
+                $.ajax({
+                    url: '/QuanLyDonHang/GetBookValue?search=' + $("#txtSach1").val(),
+                    dataType: "json",
+
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { lable: item.TenSach, value: item.TenSach };
+                        }))
+                    },
+                    error: function (xhr, status, error) {
+                        alert("error");
+                    }
+                })
+            }
+    }
+    );
+    $(document).ready(function () {
+        $("input[name='MaNXB']").blur(function () {
+            alert("Sự kiện blur() vừa mới xảy ra");
+        })
+    })
+
+    $("input[name='TenSanpham']").on("blur", function () {
+        const valueTenSP = $(this).val();
+        if (!!valueTenSP) {
+            //TODO: call ajax to get txtDonGia from server
+            $.ajax({
+                url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
+                method: "GET", // mac dinh la get
+                success: function (rs) {
+                    $("#txtDonGia").val(rs);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            //console.log("oke sanpham")
+        }
+    })
+    $("input[name='TenSanpham']").on("blur", function () {
+        const valueMaNXB = $(this).val();
+        if (!!valueMaNXB) {
+            //Call ajax get ma tac gia from server
+            $.ajax({
+                url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
+                method: 'GET',
+                success: function (author) {
+                    $("#txtMXB").val(author);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+    })
+    $("input[name='TenSanpham']").on("blur", function () {
+        const valueMS = $(this).val();
+        if (!!valueMS) {
+            //call ajax get ma sach from server
+            $.ajax({
+                url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
+                method: 'GET',
+                success: function (ms) {
+                    $("#txtMaSach").val(ms);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+    })
+
+    function checkGiaoHang() {
+        var selValue = document.getElementById('id-check-delivery').value;
+        selValue.val();
+    }
+    // tinh tong tien
+    $("input[name=txtSoLuong]").on("blur", calculateTotal);
+    $("input[name=txtDonGia]").on("blur", calculateTotal);
+    function calculateTotal() {
+        var donGia = +$("input[name=txtDonGia]").val();
+        var soLuong = +$("input[name=txtSoLuong]").val();
+        if (soLuong == 0) {
+            soLuong == 1;
+            var tong = donGia * 1;
+        }
+        else {
+            var tong = donGia * soLuong;
+        }
+        $("input[name=txtThanhTien]").val(tong);
+    }
+    //them san pham vao gio hang va tinh tong tien
+    // ?? day la cai me gi :D :D ????
+    var tongSP = 0;
+    var Arrays = new Array();
+    $(document).ready(function () {
+        $("#addProduct").click(function () {
+            // lay gia tri san pham
+            var product = $("#txtSach1").val();
+            var number = $("#txtSoLuong").val();
+            var productPrice = $("#txtDonGia").val();
+            var intoMoney = $("#txtThanhTien").val();
+            var bookId = $("#txtMaSach").val();
+            $("#tableOrder").append("<tr><th >" + bookId + "</th><th>" + product + "</th><th><input class='form-control' type='text' value" + number + "></th><th>" + productPrice + "</th><th class=product>" + intoMoney + "<th><button type='button'  class='btn btn-dark'><i " + " class= 'far fa-trash-alt'></i></th></tr>");
+            totalPrice();
+        })
+        //$("#deleteRow").click(function () {
+        //    $("table tbody").find('input[name="record"]').each(function () {
+        //        if ($(this).is(":checked")) {
+        //            $(this).parents("tr").remove();
+        //        }
+        //    })
+        //})
+    });
+
+    $(document).ready(function () {
+        $(" .btn-danger ").on('click', function () {
+            $('#tableOrder tbody tr:gt(0) ').remove();
+        })
+    });
+    $(document).ready(function () {
+        $("#tableOrder").on('click', '.btn-dark', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+    var tong1 = 0;
+    function totalPrice() {
+        var deduct = $("#producctId").val();
+        var number = $("#txtSoLuong").val();
+        var productPrice = $("#txtDonGia").val();
+
+        tong1 += number * productPrice;
+        $("input[name=totalPrice]").val(tong1);
+    }
+    function include(arr, obj) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == obj)
+                return i;
+        }
+    }
+                //$("input=[name=totalPrice]").on('change', uploadToTal);
+                //function()uploadToTal {
+                //    if -> tr maast
+                //        - thi gia tri tong se duoc tru di cai gia tri vau chon:))))
+                //    ?????
+                //}
+                //var array = [];
+                //var tong = 0;
+                //$(function () {
+                //    $("#tableOrder tbody tr th:nth-child(6) ").each(function ( ) {
+
+                //        }
+                //       // include(array);
+
+                //    })
+                //    console.log(array);
+                //})
+
+                //function include(arr) {
+                //    for (var i = 0; i < arr.length; i++) {
+                //        tong += arr[i];
+
+                //    }
+    //}
+    
+       
+    
 </script>

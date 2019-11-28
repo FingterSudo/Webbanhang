@@ -189,5 +189,9 @@ namespace Web_BanHang.Controllers
             }
             return null;
         }
+        public ActionResult View()
+        {
+            return View();
+        }
     }
 }

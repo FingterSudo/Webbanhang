@@ -325,7 +325,6 @@
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\locales\bootstrap-datepicker.zh-TW.min.js" />
-    <Content Include="assets\jQuery v1.6.3.js" />
     <Content Include="assets\jquery-ui-1.12.1.custom\AUTHORS.txt" />
     <Content Include="assets\jquery-ui-1.12.1.custom\external\jquery\jquery.js" />
     <Content Include="assets\jquery-ui-1.12.1.custom\images\ui-icons_444444_256x240.png" />
@@ -345,6 +344,9 @@
     <Content Include="assets\jquery-ui-1.12.1.custom\jquery-ui.theme.min.css" />
     <Content Include="assets\jquery-ui-1.12.1.custom\LICENSE.txt" />
     <Content Include="assets\jquery.js" />
+    <Content Include="Content\jquerysteps\css\jquery.steps.css" />
+    <Content Include="Content\jquerysteps\css\main.css" />
+    <Content Include="Content\jquerysteps\css\normalize.css" />
     <Content Include="Content\AdmimTemplate\css\checkbox-button-toggle.css" />
     <Content Include="Content\CKEditor\adapters\jquery.js" />
     <Content Include="Content\CKEditor\build-config.js" />
@@ -510,6 +512,9 @@
     <Content Include="Content\CKEditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Content\CKEditor\styles.js" />
     <Content Include="Content\CKEditor\vendor\promise.js" />
+    <Content Include="Content\jquerysteps\jquery.steps.css" />
+    <Content Include="Content\jquerysteps\jquery.steps.js" />
+    <Content Include="Content\jquerysteps\jquery.steps.min.js" />
     <Content Include="Content\NguoiDungCssLayout\bootstrap-grid.css" />
     <Content Include="Content\NguoiDungCssLayout\bootstrap-grid.min.css" />
     <Content Include="Content\NguoiDungCssLayout\bootstrap-reboot.css" />
@@ -674,7 +679,6 @@
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.css.map" />
     <Content Include="assets\bootstrap-datepicker-1.9.0-dist\css\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="assets\jquery-ui-1.12.1.custom\package.json" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
     <Content Include="Scripts\ckeditor\ckeditor_basic_source.js" />
@@ -1018,15 +1022,14 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.steps.js" />
+    <Content Include="Scripts\jquery.steps.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Content\jquerysteps\steps.jquery.json" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2866,6 +2869,8 @@
     <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\QuanLyDonHang\Thanhtoan.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Index123.cshtml" />
+    <Content Include="Views\QuanLyDonHang\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2877,8 +2882,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
