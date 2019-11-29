@@ -329,8 +329,10 @@
     <Content Include="Content\AdmimTemplate\css\jquery.steps.css" />
     <Content Include="Content\AdmimTemplate\css\main.css" />
     <Content Include="Content\AdmimTemplate\css\normalize.css" />
-    <Content Include="Content\AdmimTemplate\js\jquery.steps.js" />
-    <Content Include="Content\AdmimTemplate\js\jquery.steps.min.js" />
+    <Content Include="Content\AdmimTemplate\css\StyleSheet1.css" />
+    <Content Include="Content\AdmimTemplate\css\StyleSheet2.css" />
+    <Content Include="Content\AdmimTemplate\vendor\jquery\jquery.steps.js" />
+    <Content Include="Content\AdmimTemplate\vendor\jquery\jquery.steps.min.js" />
     <Content Include="Content\CKEditor\adapters\jquery.js" />
     <Content Include="Content\CKEditor\build-config.js" />
     <Content Include="Content\CKEditor\ckeditor.js" />

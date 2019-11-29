@@ -11,76 +11,101 @@
     var dataBook = ViewBag.TenSach as List<SachDTO>;
     var dataJS = Html.Raw(JsonConvert.SerializeObject(dataBook));
 }
+<link href="~/Content/AdmimTemplate/css/StyleSheet1.css" rel="stylesheet" />
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<link href="~/Content/AdmimTemplate/css/StyleSheet2.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!-- MultiStep Form -->
 
-<script src="~/Content/CKEditor/ckeditor.js"></script>
-<script src="~/Content/AdmimTemplate/js/jquery.steps.js"></script>
-<script src="~/assets/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js"></script>
-<link href="~/Content/Jquery Ui/jquery-ui.theme.min.css" rel="stylesheet" />
-<link href="~/Content/Jquery Ui/jquery-ui.structure.min.css" rel="stylesheet" />
-<link href="~/Content/Jquery Ui/jquery-ui.min.css" rel="stylesheet" />
-<link href="~/Content/AdmimTemplate/css/sb-admin-2.min.css" rel="stylesheet" />
-<link href="~/Content/CKEditor/samples/css/samples.css" rel="stylesheet" />
-<link href="~/Content/AdmimTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<link href="~/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
-<link href="~/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <div class="container-fluid" id="grad1">
+        <div class="row justify-content-center mt-0">
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <h2><strong>Sign Up Your User Account</strong></h2>
+                    <p>Fill all form field to go to next step</p>
+                    <div class="row">
+                        <div class="col-md-12 mx-0">
 
-<link href="~/Content/AdmimTemplate/css/main.css" rel="stylesheet" />
-<link href="~/Content/AdmimTemplate/css/normalize.css" rel="stylesheet" />
-@*<link href="~/Content/AdmimTemplate/css/jquery.steps.css" rel="stylesheet" />*@
-<link href="~/Content/jquery2.css" rel="stylesheet" />
- 
-<h2>Thêm mới đơn hàng</h2>
+                            @using (Html.BeginForm("ThemMoi", "QuanLyDonhang", FormMethod.Post, new { @class = "form-group", id = "msform" }))
+                            {
+                                <ul id="progressbar">
+                                    <li class="active" id="account"><strong>Account</strong></li>
+                                    <li id="personal"><strong>Personal</strong></li>
+                                    <li id="payment"><strong>Payment</strong></li>
+                                    <li id="confirm"><strong>Finish</strong></li>
+                                </ul> <!-- fieldsets -->
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Account Information</h2> <input type="email" name="email" placeholder="Email Id" /> <input type="text" name="uname" placeholder="UserName" /> <input type="password" name="pwd" placeholder="Password" /> <input type="password" name="cpwd" placeholder="Confirm Password" />
+                                    </div> <input type="button" name="next" class="next action-button" value="Next Step" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Personal Information</h2> <input type="text" name="fname" placeholder="First Name" /> <input type="text" name="lname" placeholder="Last Name" /> <input type="text" name="phno" placeholder="Contact No." /> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+                                    </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="next" class="next action-button" value="Next Step" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Payment Information</h2>
+                                        <div class="radio-group">
+                                            <div class='radio' data-value="credit"><img src="https://i.imgur.com/XzOzVHZ.jpg" width="200px" height="100px"></div>
+                                            <div class='radio' data-value="paypal"><img src="https://i.imgur.com/jXjwZlj.jpg" width="200px" height="100px"></div> <br>
+                                        </div> <label class="pay">Card Holder Name*</label> <input type="text" name="holdername" placeholder="" />
+                                        <div class="row">
+                                            <div class="col-9"> <label class="pay">Card Number*</label> <input type="text" name="cardno" placeholder="" /> </div>
+                                            <div class="col-3"> <label class="pay">CVC*</label> <input type="password" name="cvcpwd" placeholder="***" /> </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3"> <label class="pay">Expiry Date*</label> </div>
+                                            <div class="col-9">
+                                                <select class="list-dt" id="month" name="expmonth">
+                                                    <option selected>Month</option>
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>October</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </select> <select class="list-dt" id="year" name="expyear">
+                                                    <option selected>Year</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="make_payment" class="next action-button" value="Confirm" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title text-center">Success !</h2> <br><br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                                        </div> <br><br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-7 text-center">
+                                                <h5>You Have Successfully Signed Up</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
 
+                            }
+                            <!-- progressbar -->
 
-@using (Html.BeginForm("ThemMoi", "QuanLyDonHang", FormMethod.Post, new { id = "example-advanced-form" }))
-{
-    <div id="wizard">
-        <h2>First Step</h2>
-        <section>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nulla nunc. Maecenas arcu sem, hendrerit a tempor quis,
-                sagittis accumsan tellus. In hac habitasse platea dictumst. Donec a semper dui. Nunc eget quam libero. Nam at felis metus.
-                Nam tellus dolor, tristique ac tempus nec, iaculis quis nisi.
-            </p>
-        </section>
-
-        <h2>Second Step</h2>
-        <section>
-            <p>
-                Donec mi sapien, hendrerit nec egestas a, rutrum vitae dolor. Nullam venenatis diam ac ligula elementum pellentesque.
-                In lobortis sollicitudin felis non eleifend. Morbi tristique tellus est, sed tempor elit. Morbi varius, nulla quis condimentum
-                dictum, nisi elit condimentum magna, nec venenatis urna quam in nisi. Integer hendrerit sapien a diam adipiscing consectetur.
-                In euismod augue ullamcorper leo dignissim quis elementum arcu porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum leo velit, blandit ac tempor nec, ultrices id diam. Donec metus lacus, rhoncus sagittis iaculis nec, malesuada a diam.
-                Donec non pulvinar urna. Aliquam id velit lacus.
-            </p>
-        </section>
-
-        <h2>Third Step</h2>
-        <section>
-            <p>
-                Morbi ornare tellus at elit ultrices id dignissim lorem elementum. Sed eget nisl at justo condimentum dapibus. Fusce eros justo,
-                pellentesque non euismod ac, rutrum sed quam. Ut non mi tortor. Vestibulum eleifend varius ullamcorper. Aliquam erat volutpat.
-                Donec diam massa, porta vel dictum sit amet, iaculis ac massa. Sed elementum dui commodo lectus sollicitudin in auctor mauris
-                venenatis.
-            </p>
-        </section>
-
-        <h2>Forth Step</h2>
-        <section>
-            <p>
-                Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor.
-                Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae.
-                Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut commodo tortor.
-            </p>
-        </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-}
 
 
 
@@ -90,17 +115,34 @@
 
     //Todo stepper jquery
 
-    $(function () {
-        $("#wizard").steps({
-            headerTag: "h2",
-            bodyTag: "section",
-            transitionEffect: "slideLeft",
-            stepsOrientation: "vertical"
-        });
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+}
     });
+    form.children("div").steps({
+headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function (event, currentIndex, newIndex) {
+        form.validate().settings.ignore = ":disabled,:hidden";
+        return form.valid();
+    },
+        onFinishing: function (event, currentIndex) {
+        form.validate().settings.ignore = ":disabled";
+        return form.valid();
+    },
+        onFinished: function (event, currentIndex) {
+        alert("Submitted!");
+    }
+});
     // ToDo Datepicker
     $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
+format: 'mm/dd/yyyy',
 
         //startDate: '-3d'
     });
@@ -113,115 +155,115 @@
 
     // autocomplete
     $("#txtSach1").autocomplete({
-        source:
-            function (request, response) {
+source:
+    function (request, response) {
                 $.ajax({
-                    url: '/QuanLyDonHang/GetBookValue?search=' + $("#txtSach1").val(),
+        url: '/QuanLyDonHang/GetBookValue?search=' + $("#txtSach1").val(),
                     dataType: "json",
 
                     success: function (data) {
-                        response($.map(data, function (item) {
-                            return { lable: item.TenSach, value: item.TenSach };
-                        }))
+                response($.map(data, function (item) {
+                    return { lable: item.TenSach, value: item.TenSach };
+                }))
                     },
                     error: function (xhr, status, error) {
-                        alert("error");
-                    }
-                })
+                alert("error");
             }
-    }
+        })
+            }
+}
     );
 
     $(document).ready(function () {
         $("input[name='MaNXB']").blur(function () {
-            alert("Sự kiện blur() vừa mới xảy ra");
-        })
+        alert("Sự kiện blur() vừa mới xảy ra");
+    })
     })
 
     $("input[name='TenSanpham']").on("blur", function () {
-        const valueTenSP = $(this).val();
-        if (!!valueTenSP) {
+    const valueTenSP = $(this).val();
+    if (!!valueTenSP) {
             //TODO: call ajax to get txtDonGia from server
             $.ajax({
-                url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
+        url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
                 method: "GET", // mac dinh la get
                 success: function (rs) {
                     $("#txtDonGia").val(rs);
-                },
+            },
                 error: function (err) {
-                    console.log(err);
-                }
-            })
+                console.log(err);
+            }
+        })
             //console.log("oke sanpham")
         }
-    })
+})
     $("input[name='TenSanpham']").on("blur", function () {
-        const valueMaNXB = $(this).val();
-        if (!!valueMaNXB) {
+    const valueMaNXB = $(this).val();
+    if (!!valueMaNXB) {
             //Call ajax get ma tac gia from server
             $.ajax({
-                url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
+        url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
                 method: 'GET',
                 success: function (author) {
                     $("#txtMXB").val(author);
-                },
+            },
                 error: function (err) {
-                    console.log(err);
-                }
-            })
+                console.log(err);
+            }
+        })
         }
-    })
+})
     $("input[name='TenSanpham']").on("blur", function () {
-        const valueMS = $(this).val();
-        if (!!valueMS) {
+    const valueMS = $(this).val();
+    if (!!valueMS) {
             //call ajax get ma sach from server
             $.ajax({
-                url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
+        url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
                 method: 'GET',
                 success: function (ms) {
                     $("#txtMaSach").val(ms);
-                },
+            },
                 error: function (err) {
-                    console.log(err);
-                }
-            })
+                console.log(err);
+            }
+        })
         }
-    })
+})
 
     function checkGiaoHang() {
-        var selValue = document.getElementById('id-check-delivery').value;
-        selValue.val();
-    }
+    var selValue = document.getElementById('id-check-delivery').value;
+    selValue.val();
+}
     // tinh tong tien
     $("input[name=txtSoLuong]").on("blur", calculateTotal);
     $("input[name=txtDonGia]").on("blur", calculateTotal);
-    function calculateTotal() {
-        var donGia = +$("input[name=txtDonGia]").val();
-        var soLuong = +$("input[name=txtSoLuong]").val();
-        if (soLuong == 0) {
-            soLuong == 1;
-            var tong = donGia * 1;
-        }
-        else {
-            var tong = donGia * soLuong;
-        }
-        $("input[name=txtThanhTien]").val(tong);
+function calculateTotal() {
+    var donGia = +$("input[name=txtDonGia]").val();
+    var soLuong = +$("input[name=txtSoLuong]").val();
+    if (soLuong == 0) {
+        soLuong == 1;
+        var tong = donGia * 1;
     }
-    //them san pham vao gio hang va tinh tong tien
-    // ?? day la cai me gi :D :D ????
-    var tongSP = 0;
-    var Arrays = new Array();
+    else {
+        var tong = donGia * soLuong;
+    }
+        $("input[name=txtThanhTien]").val(tong);
+}
+//them san pham vao gio hang va tinh tong tien
+// ?? day la cai me gi :D :D ????
+var tongSP = 0;
+var Arrays = new Array();
     $(document).ready(function () {
         $("#addProduct").click(function () {
-            // lay gia tri san pham
-            var product = $("#txtSach1").val();
-            var number = $("#txtSoLuong").val();
-            var productPrice = $("#txtDonGia").val();
-            var intoMoney = $("#txtThanhTien").val();
-            var bookId = $("#txtMaSach").val();
+        // lay gia tri san pham
+        var product = $("#txtSach1").val();
+        var number = $("#txtSoLuong").val();
+        var productPrice = $("#txtDonGia").val();
+        var intoMoney = $("#txtThanhTien").val();
+        var bookId = $("#txtMaSach").val();
             $("#tableOrder").append("<tr><th >" + bookId + "</th><th>" + product + "</th><th><input class='form-control' type='text' value" + number + "></th><th>" + productPrice + "</th><th class=product>" + intoMoney + "<th><button type='button'  class='btn btn-dark'><i " + " class= 'far fa-trash-alt'></i></th></tr>");
-            totalPrice();
-        })
+        totalPrice();
+    })
         //$("#deleteRow").click(function () {
         //    $("table tbody").find('input[name="record"]').each(function () {
         //        if ($(this).is(":checked")) {
@@ -233,28 +275,28 @@
     $(document).ready(function () {
         $(" .btn-danger ").on('click', function () {
             $('#tableOrder tbody tr:gt(0) ').remove();
-        })
+    })
     });
     $(document).ready(function () {
         $("#tableOrder").on('click', '.btn-dark', function () {
             $(this).closest('tr').remove();
-        })
+    })
     });
     var tong1 = 0;
-    function totalPrice() {
-        var deduct = $("#producctId").val();
-        var number = $("#txtSoLuong").val();
-        var productPrice = $("#txtDonGia").val();
+function totalPrice() {
+    var deduct = $("#producctId").val();
+    var number = $("#txtSoLuong").val();
+    var productPrice = $("#txtDonGia").val();
 
-        tong1 += number * productPrice;
+    tong1 += number * productPrice;
         $("input[name=totalPrice]").val(tong1);
+}
+function include(arr, obj) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == obj)
+            return i;
     }
-    function include(arr, obj) {
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i] == obj)
-                return i;
-        }
-    }
+}
     //$("input=[name=totalPrice]").on('change', uploadToTal);
     //function()uploadToTal {
     //    if -> tr maast
@@ -286,7 +328,7 @@
     // format date
 
     $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
+format: 'mm/dd/yyyy',
 
         //startDate: '-3d'
     });
@@ -298,114 +340,114 @@
     });
 
     $("#txtSach1").autocomplete({
-        source:
-            function (request, response) {
+source:
+    function (request, response) {
                 $.ajax({
-                    url: '/QuanLyDonHang/GetBookValue?search=' + $("#txtSach1").val(),
+        url: '/QuanLyDonHang/GetBookValue?search=' + $("#txtSach1").val(),
                     dataType: "json",
 
                     success: function (data) {
-                        response($.map(data, function (item) {
-                            return { lable: item.TenSach, value: item.TenSach };
-                        }))
+                response($.map(data, function (item) {
+                    return { lable: item.TenSach, value: item.TenSach };
+                }))
                     },
                     error: function (xhr, status, error) {
-                        alert("error");
-                    }
-                })
+                alert("error");
             }
-    }
+        })
+            }
+}
     );
     $(document).ready(function () {
         $("input[name='MaNXB']").blur(function () {
-            alert("Sự kiện blur() vừa mới xảy ra");
-        })
+        alert("Sự kiện blur() vừa mới xảy ra");
+    })
     })
 
     $("input[name='TenSanpham']").on("blur", function () {
-        const valueTenSP = $(this).val();
-        if (!!valueTenSP) {
+    const valueTenSP = $(this).val();
+    if (!!valueTenSP) {
             //TODO: call ajax to get txtDonGia from server
             $.ajax({
-                url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
+        url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
                 method: "GET", // mac dinh la get
                 success: function (rs) {
                     $("#txtDonGia").val(rs);
-                },
+            },
                 error: function (err) {
-                    console.log(err);
-                }
-            })
+                console.log(err);
+            }
+        })
             //console.log("oke sanpham")
         }
-    })
+})
     $("input[name='TenSanpham']").on("blur", function () {
-        const valueMaNXB = $(this).val();
-        if (!!valueMaNXB) {
+    const valueMaNXB = $(this).val();
+    if (!!valueMaNXB) {
             //Call ajax get ma tac gia from server
             $.ajax({
-                url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
+        url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
                 method: 'GET',
                 success: function (author) {
                     $("#txtMXB").val(author);
-                },
+            },
                 error: function (err) {
-                    console.log(err);
-                }
-            })
+                console.log(err);
+            }
+        })
         }
-    })
+})
     $("input[name='TenSanpham']").on("blur", function () {
-        const valueMS = $(this).val();
-        if (!!valueMS) {
+    const valueMS = $(this).val();
+    if (!!valueMS) {
             //call ajax get ma sach from server
             $.ajax({
-                url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
+        url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
                 method: 'GET',
                 success: function (ms) {
                     $("#txtMaSach").val(ms);
-                },
+            },
                 error: function (err) {
-                    console.log(err);
-                }
-            })
+                console.log(err);
+            }
+        })
         }
-    })
+})
 
     function checkGiaoHang() {
-        var selValue = document.getElementById('id-check-delivery').value;
-        selValue.val();
-    }
+    var selValue = document.getElementById('id-check-delivery').value;
+    selValue.val();
+}
     // tinh tong tien
     $("input[name=txtSoLuong]").on("blur", calculateTotal);
     $("input[name=txtDonGia]").on("blur", calculateTotal);
-    function calculateTotal() {
-        var donGia = +$("input[name=txtDonGia]").val();
-        var soLuong = +$("input[name=txtSoLuong]").val();
-        if (soLuong == 0) {
-            soLuong == 1;
-            var tong = donGia * 1;
-        }
-        else {
-            var tong = donGia * soLuong;
-        }
-        $("input[name=txtThanhTien]").val(tong);
+function calculateTotal() {
+    var donGia = +$("input[name=txtDonGia]").val();
+    var soLuong = +$("input[name=txtSoLuong]").val();
+    if (soLuong == 0) {
+        soLuong == 1;
+        var tong = donGia * 1;
     }
-    //them san pham vao gio hang va tinh tong tien
-    // ?? day la cai me gi :D :D ????
-    var tongSP = 0;
-    var Arrays = new Array();
+    else {
+        var tong = donGia * soLuong;
+    }
+        $("input[name=txtThanhTien]").val(tong);
+}
+//them san pham vao gio hang va tinh tong tien
+// ?? day la cai me gi :D :D ????
+var tongSP = 0;
+var Arrays = new Array();
     $(document).ready(function () {
         $("#addProduct").click(function () {
-            // lay gia tri san pham
-            var product = $("#txtSach1").val();
-            var number = $("#txtSoLuong").val();
-            var productPrice = $("#txtDonGia").val();
-            var intoMoney = $("#txtThanhTien").val();
-            var bookId = $("#txtMaSach").val();
+        // lay gia tri san pham
+        var product = $("#txtSach1").val();
+        var number = $("#txtSoLuong").val();
+        var productPrice = $("#txtDonGia").val();
+        var intoMoney = $("#txtThanhTien").val();
+        var bookId = $("#txtMaSach").val();
             $("#tableOrder").append("<tr><th >" + bookId + "</th><th>" + product + "</th><th><input class='form-control' type='text' value" + number + "></th><th>" + productPrice + "</th><th class=product>" + intoMoney + "<th><button type='button'  class='btn btn-dark'><i " + " class= 'far fa-trash-alt'></i></th></tr>");
-            totalPrice();
-        })
+        totalPrice();
+    })
         //$("#deleteRow").click(function () {
         //    $("table tbody").find('input[name="record"]').each(function () {
         //        if ($(this).is(":checked")) {
@@ -418,53 +460,123 @@
     $(document).ready(function () {
         $(" .btn-danger ").on('click', function () {
             $('#tableOrder tbody tr:gt(0) ').remove();
-        })
+    })
     });
     $(document).ready(function () {
         $("#tableOrder").on('click', '.btn-dark', function () {
             $(this).closest('tr').remove();
-        })
+    })
     });
     var tong1 = 0;
-    function totalPrice() {
-        var deduct = $("#producctId").val();
-        var number = $("#txtSoLuong").val();
-        var productPrice = $("#txtDonGia").val();
+function totalPrice() {
+    var deduct = $("#producctId").val();
+    var number = $("#txtSoLuong").val();
+    var productPrice = $("#txtDonGia").val();
 
-        tong1 += number * productPrice;
+    tong1 += number * productPrice;
         $("input[name=totalPrice]").val(tong1);
+}
+function include(arr, obj) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == obj)
+            return i;
     }
-    function include(arr, obj) {
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i] == obj)
-                return i;
-        }
-    }
-                    //$("input=[name=totalPrice]").on('change', uploadToTal);
-                    //function()uploadToTal {
-                    //    if -> tr maast
-                    //        - thi gia tri tong se duoc tru di cai gia tri vau chon:))))
-                    //    ?????
-                    //}
-                    //var array = [];
-                    //var tong = 0;
-                    //$(function () {
-                    //    $("#tableOrder tbody tr th:nth-child(6) ").each(function ( ) {
+}
+    //$("input=[name=totalPrice]").on('change', uploadToTal);
+    //function()uploadToTal {
+    //    if -> tr maast
+    //        - thi gia tri tong se duoc tru di cai gia tri vau chon:))))
+    //    ?????
+    //}
+    //var array = [];
+    //var tong = 0;
+    //$(function () {
+    //    $("#tableOrder tbody tr th:nth-child(6) ").each(function ( ) {
 
-                    //        }
-                    //       // include(array);
+    //        }
+    //       // include(array);
 
-                    //    })
-                    //    console.log(array);
-                    //})
+    //    })
+    //    console.log(array);
+    //})
 
-                    //function include(arr) {
-                    //    for (var i = 0; i < arr.length; i++) {
-                    //        tong += arr[i];
+    //function include(arr) {
+    //    for (var i = 0; i < arr.length; i++) {
+    //        tong += arr[i];
 
-                    //    }
-        //}
+    //    }
+    //}
 
 
 
+</script>
+<script>
+    $(document).ready(function () {
+
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+
+        $(".next").click(function () {
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+            //Add Class Active
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+        step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                        'position': 'relative'
+                    });
+                next_fs.css({ 'opacity': opacity });
+            },
+                duration: 600
+            });
+    });
+
+        $(".previous").click(function () {
+
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+            //Remove class active
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show();
+
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+        step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                        'position': 'relative'
+                    });
+                previous_fs.css({ 'opacity': opacity });
+            },
+                duration: 600
+            });
+    });
+
+        $('.radio-group .radio').click(function () {
+            $(this).parent().find('.radio').removeClass('selected');
+            $(this).addClass('selected');
+    });
+
+        $(".submit").click(function () {
+        return false;
+    })
+
+    });
 </script>
