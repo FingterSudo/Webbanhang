@@ -6,7 +6,7 @@
 .tabcontrol
 {
     display: block;
-    width: 100%;
+    width: 100 %;
     overflow: hidden;
 }
 
@@ -19,7 +19,7 @@
 .wizard ul,
 .tabcontrol ul
 {
-    list-style: none !important;
+    list - style: none!important;
     padding: 0;
     margin: 0;
 }
@@ -32,8 +32,8 @@
 }
 
 /* Accessibility */
-.wizard > .steps .current-info,
-.tabcontrol > .steps .current-info
+.wizard > .steps.current - info,
+.tabcontrol > .steps.current - info
 {
     position: absolute;
     left: -999em;
@@ -56,24 +56,24 @@
 {
     position: relative;
     display: block;
-    width: 100%;
+    width: 100 %;
 }
 
 .wizard.vertical > .steps
 {
     display: inline;
     float: left;
-    width: 30%;
+    width: 30 %;
 }
 
-.wizard > .steps .number
+.wizard > .steps.number
 {
-    font-size: 1.429em;
+    font - size: 1.429em;
 }
 
 .wizard > .steps > ul > li
 {
-    width: 25%;
+    width: 25 %;
 }
 
 .wizard > .steps > ul > li,
@@ -85,53 +85,53 @@
 .wizard.vertical > .steps > ul > li
 {
     float: none;
-    width: 100%;
+    width: 100 %;
 }
 
 .wizard > .steps a,
-.wizard > .steps a:hover,
-.wizard > .steps a:active
+.wizard > .steps a: hover,
+.wizard > .steps a: active
 {
     display: block;
     width: auto;
     margin: 0 0.5em 0.5em;
     padding: 1em 1em;
-    text-decoration: none;
+    text - decoration: none;
 
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit - border - radius: 5px;
+    -moz - border - radius: 5px;
+    border - radius: 5px;
 }
 
-.wizard > .steps .disabled a,
-.wizard > .steps .disabled a:hover,
-.wizard > .steps .disabled a:active
+.wizard > .steps.disabled a,
+.wizard > .steps.disabled a: hover,
+.wizard > .steps.disabled a: active
 {
     background: #eee;
     color: #aaa;
-    cursor: default;
+    cursor: default ;
 }
 
-.wizard > .steps .current a,
-.wizard > .steps .current a:hover,
-.wizard > .steps .current a:active
+.wizard > .steps.current a,
+.wizard > .steps.current a: hover,
+.wizard > .steps.current a: active
 {
     background: #2184be;
     color: #fff;
-    cursor: default;
+    cursor: default ;
 }
 
-.wizard > .steps .done a,
-.wizard > .steps .done a:hover,
-.wizard > .steps .done a:active
+.wizard > .steps.done a,
+.wizard > .steps.done a: hover,
+.wizard > .steps.done a: active
 {
     background: #9dc8e2;
     color: #fff;
 }
 
-.wizard > .steps .error a,
-.wizard > .steps .error a:hover,
-.wizard > .steps .error a:active
+.wizard > .steps.error a,
+.wizard > .steps.error a: hover,
+.wizard > .steps.error a: active
 {
     background: #ff3111;
     color: #fff;
@@ -142,48 +142,48 @@
     background: #eee;
     display: block;
     margin: 0.5em;
-    min-height: 35em;
+    min - height: 35em;
     overflow: hidden;
     position: relative;
     width: auto;
 
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit - border - radius: 5px;
+    -moz - border - radius: 5px;
+    border - radius: 5px;
 }
 
 .wizard.vertical > .content
 {
     display: inline;
     float: left;
-    margin: 0 2.5% 0.5em 2.5%;
-    width: 65%;
+    margin: 0 2.5 % 0.5em 2.5 %;
+    width: 65 %;
 }
 
 .wizard > .content > .body
 {
     float: left;
     position: absolute;
-    width: 95%;
-    height: 95%;
-    padding: 2.5%;
+    width: 95 %;
+    height: 95 %;
+    padding: 2.5 %;
 }
 
 .wizard > .content > .body ul
 {
-    list-style: disc !important;
+    list - style: disc!important;
 }
 
 .wizard > .content > .body ul > li
 {
-    display: list-item;
+    display: list - item;
 }
 
 .wizard > .content > .body > iframe
 {
     border: 0 none;
-    width: 100%;
-    height: 100%;
+    width: 100 %;
+    height: 100 %;
 }
 
 .wizard > .content > .body input
@@ -192,9 +192,9 @@
     border: 1px solid #ccc;
 }
 
-.wizard > .content > .body input[type="checkbox"]
+.wizard > .content > .body input[type = "checkbox"]
 {
-    display: inline-block;
+    display: inline - block;
 }
 
 .wizard > .content > .body input.error
@@ -206,37 +206,37 @@
 
 .wizard > .content > .body label
 {
-    display: inline-block;
-    margin-bottom: 0.5em;
+    display: inline - block;
+    margin - bottom: 0.5em;
 }
 
 .wizard > .content > .body label.error
 {
     color: #8a1f11;
-    display: inline-block;
-    margin-left: 1.5em;
+    display: inline - block;
+    margin - left: 1.5em;
 }
 
 .wizard > .actions
 {
     position: relative;
     display: block;
-    text-align: right;
-    width: 100%;
+    text - align: right;
+    width: 100 %;
 }
 
 .wizard.vertical > .actions
 {
     display: inline;
     float: right;
-    margin: 0 2.5%;
-    width: 95%;
+    margin: 0 2.5 %;
+    width: 95 %;
 }
 
 .wizard > .actions > ul
 {
-    display: inline-block;
-    text-align: right;
+    display: inline - block;
+    text - align: right;
 }
 
 .wizard > .actions > ul > li
@@ -250,23 +250,23 @@
 }
 
 .wizard > .actions a,
-.wizard > .actions a:hover,
-.wizard > .actions a:active
+.wizard > .actions a: hover,
+.wizard > .actions a: active
 {
     background: #2184be;
     color: #fff;
     display: block;
     padding: 0.5em 1em;
-    text-decoration: none;
+    text - decoration: none;
 
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit - border - radius: 5px;
+    -moz - border - radius: 5px;
+    border - radius: 5px;
 }
 
-.wizard > .actions .disabled a,
-.wizard > .actions .disabled a:hover,
-.wizard > .actions .disabled a:active
+.wizard > .actions.disabled a,
+.wizard > .actions.disabled a: hover,
+.wizard > .actions.disabled a: active
 {
     background: #eee;
     color: #aaa;
@@ -276,7 +276,7 @@
 {
 }
 
-.wizard > .loading .spinner
+.wizard > .loading.spinner
 {
 }
 
@@ -290,7 +290,7 @@
 {
     position: relative;
     display: block;
-    width: 100%;
+    width: 100 %;
 }
 
 .tabcontrol > .steps > ul
@@ -298,7 +298,7 @@
     position: relative;
     margin: 6px 0 0 0;
     top: 1px;
-    z-index: 1;
+    z - index: 1;
 }
 
 .tabcontrol > .steps > ul > li
@@ -307,15 +307,15 @@
     margin: 5px 2px 0 0;
     padding: 1px;
 
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    -webkit - border - top - left - radius: 5px;
+    -webkit - border - top - right - radius: 5px;
+    -moz - border - radius - topleft: 5px;
+    -moz - border - radius - topright: 5px;
+    border - top - left - radius: 5px;
+    border - top - right - radius: 5px;
 }
 
-.tabcontrol > .steps > ul > li:hover
+.tabcontrol > .steps > ul > li: hover
 {
     background: #edecec;
     border: 1px solid #bbb;
@@ -326,24 +326,24 @@
 {
     background: #fff;
     border: 1px solid #bbb;
-    border-bottom: 0 none;
+    border - bottom: 0 none;
     padding: 0 0 1px 0;
-    margin-top: 0;
+    margin - top: 0;
 }
 
 .tabcontrol > .steps > ul > li > a
 {
     color: #5f5f5f;
-    display: inline-block;
+    display: inline - block;
     border: 0 none;
     margin: 0;
     padding: 10px 30px;
-    text-decoration: none;
+    text - decoration: none;
 }
 
-.tabcontrol > .steps > ul > li > a:hover
+.tabcontrol > .steps > ul > li > a: hover
 {
-    text-decoration: none;
+    text - decoration: none;
 }
 
 .tabcontrol > .steps > ul > li.current > a
@@ -354,29 +354,29 @@
 .tabcontrol > .content
 {
     position: relative;
-    display: inline-block;
-    width: 100%;
+    display: inline - block;
+    width: 100 %;
     height: 35em;
     overflow: hidden;
-    border-top: 1px solid #bbb;
-    padding-top: 20px;
+    border - top: 1px solid #bbb;
+    padding - top: 20px;
 }
 
 .tabcontrol > .content > .body
 {
     float: left;
     position: absolute;
-    width: 95%;
-    height: 95%;
-    padding: 2.5%;
+    width: 95 %;
+    height: 95 %;
+    padding: 2.5 %;
 }
 
 .tabcontrol > .content > .body ul
 {
-    list-style: disc !important;
+    list - style: disc!important;
 }
 
 .tabcontrol > .content > .body ul > li
 {
-    display: list-item;
+    display: list - item;
 }

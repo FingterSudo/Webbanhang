@@ -189,7 +189,7 @@ namespace Web_BanHang.Controllers
             }
             return null;
         }
-        public ActionResult View()
+        public ActionResult Test()
         {
             return View();
         }
