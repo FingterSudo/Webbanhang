@@ -1,0 +1,254 @@
+﻿@using Web_BanHang.Models;
+@using Web_BanHang.DTO;
+@using Newtonsoft.Json;
+@model Web_BanHang.Models.DonHang
+@{
+    ViewBag.Title = "ThemMoiFinal";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+
+@*<script src="~/Content/jquerystep/jquerysteps/jquery-1.9.1.min.js"></script>*@
+
+<script src="~/Content/jquery-3.1.1.js"></script>
+<link href="~/Content/stepui.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<link href="~/Content/stepui.css" rel="stylesheet" />
+ <div class="container">
+    @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
+    {
+
+        <h1>Thêm mới đơn hàng </h1>
+
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab form-group">
+            <div class="namealert">
+                <label>Họ tên *  </label>
+                <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name"></p>
+            </div>
+            <div class="phonealert">
+                <label>Điện thoại *</label>
+                <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone"id="phone" /></p>
+            </div>
+            <div class="adressalert">
+                <label>Địa chỉ</label>
+                <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="adress"/></p>
+            </div>
+            <div class="emailalert">
+                <label>Email</label>
+                <p><input placeholder="Email" oninput="this.className = 'form-control form-control'"id="email" /></p>
+            </div>    
+        </div>
+
+        <div class="tab  form-group">
+            Sản phẩm
+            <p><input placeholder="E-mail..." oninput="this.className = 'form-control form-control'"></p>
+            <p><input placeholder="Phone..." oninput="this.className = 'form-control form-control'"></p>
+        </div>
+
+        <div class="tab  form-group">
+            Birthday:
+            <p><input placeholder="dd" oninput="this.className = 'form-control form-control'"></p>
+            <p><input placeholder="mm" oninput="this.className = 'form-control form-control'"></p>
+            <p><input placeholder="yyyy" oninput="this.className = 'form-control form-control'"></p>
+        </div>
+
+        <div class="tab">
+            Login Info:
+            <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
+            <p><input placeholder="Password..." oninput="this.className = 'form-control form-control'"></p>
+        </div>
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger">Next</button>
+            </div>
+        </div>
+
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+    }
+</div>
+
+
+@section scripts{
+    <script>
+        var currentTab = 0; // Tab hiện tại được đặt là tab đầu tiên [0]
+        showTab(currentTab); // Hiển thị tab hiện tại
+
+        function showTab(n) {
+            // This function will display the specified tab of the form ...
+            // Function này sẽ hiển thị tab được chỉ định của biểu mẫu
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            // và sửa chữa Previous/ Next buttons:
+            // ... and fix the Previous/Next buttons:
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            // và chạy một function chỉ báo hiển thị bước tiếp theo
+            // ... and run a function that displays the correct step indicator:
+            fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+            // hàn này chỉ ra tab nào sẽ hiển thị
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("tab");
+            // thoát function nếu bất kỳ trường nào trong tab không hợp lệ
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) return false;
+            // Ẩn tab hiện tại
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // tăng hoặc giảm tab hiện tại thêm 1
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+            // nếu bạn đã đạt tới form cuối
+            // if you have reached the end of the form... :
+            if (currentTab >= x.length) {
+                //...the form gets submitted:
+                // mẫu được submit
+                document.getElementById("regForm").submit();
+                return false;
+            }
+            // Otherwise, display the correct tab:
+            // nếu không hiển thị tab chính xác
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            // funtion này liên quan tới validate
+            // This function deals with validation of the form fields
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("input");
+            // A loop that checks every input field in the current tab:
+            // Một vòng lặp kiểm tra tất các input trong tab hiện tại
+            var numbers = /^[0-9]+$/;
+            var nameval = document.getElementById('name').value;
+            var phoneval = document.getElementById('phone').value;
+            var adressval = document.getElementById('adress').value;
+            var emailval = document.getElementById('email').value;
+
+            var namecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>vui lòng điều họ tên</strong> </div > ";
+            var namecheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập tên 200 ký tự </strong> </div > ";
+            var phonecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng điền số điện thoại</strong> </div > ";
+            var phonecheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Định dạng số điện thoại không đúng</strong> </div > ";
+            var phonecheckbuttonnum = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>vui lòng nhập số</strong> </div > ";
+            var addresscheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng điền địa chỉ</strong> </div > ";
+            var addresscheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập địa chỉ dưới 200 ký tự</strong> </div > ";
+            var emailcheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng nhập email</strong> </div > ";
+            var emailcheckbuttoncheck = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập đúng định dạng email</strong> </div > ";
+          
+            for (i = 0; i < y.length; i++) {
+                // If a field is empty...
+                // nếu nó trống
+   
+                if (y[i].value == "") {
+                      //add an "invalid" class to the field:
+                    // thêm một lớp không hợp lệ vào trường
+
+                    y[i].className += "invalid";
+                
+                     //and set the current valid status to false:
+                     //và set trạng thái hợp lệ thành false
+                    valid = false;
+                }
+            }
+            if ( nameval == "") {
+
+                $(".namealert").append(namecheckbutton) ;
+
+            }
+            // gioi han chu tu 16 ky tu tro len
+            if (nameval.length > 200) {
+                $(".namealert").append(namecheckbuttonlg);
+                valid = false;
+            }
+           
+            if (  phoneval=="") {
+                $(".phonealert").append(phonecheckbutton);
+
+            }
+            if (phoneval.match(numbers)) {
+                
+            }
+            else {
+                $(".phonealert").append(phonecheckbuttonnum);
+                valid = false
+            }
+          // chinh 1 mess hien thi tung truong hop
+            if (phoneval.length > 10) {
+                $(".phonealert").append(phonecheckbuttonlg);
+                valid = false;
+            }
+            
+            if ( adressval=="") {
+                $(".adressalert").append(addresscheckbutton);
+
+            }
+            if (adressval.length > 200) {
+                $(".adressalert").append(addresscheckbuttonlg);
+            }
+            if (  emailval=="") {
+                $(".emailalert").append(emailcheckbutton);
+               
+            }
+            if (/^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailval)) {
+
+            }
+            else {
+                $(".emailalert").append(emailcheckbuttoncheck);
+            }
+            
+            // If the valid status is true, mark the step as finished and valid:
+            // Nếu valid status true đánh dấu kết thúc và hợp lệ
+           
+            if (valid) {
+                    document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid; // return the valid status
+            // return  valid status
+        }
+
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            // the function hủy tất các các hoạt động của các bước
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class to the current step:
+            // và thêm hoạt động lớp và bước hiện tại
+            x[n].className += " active";
+        }
+      // check numbert
+         
+       
+    </script>
+}

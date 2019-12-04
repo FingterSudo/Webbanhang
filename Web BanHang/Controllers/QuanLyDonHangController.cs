@@ -78,7 +78,7 @@ namespace Web_BanHang.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public ActionResult ThemMoi( string search)
+        public ActionResult ThemMoiFinal( string search)
         {
             QuanLyBanSachEntities db = new QuanLyBanSachEntities();
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
@@ -103,24 +103,74 @@ namespace Web_BanHang.Controllers
             }
             return View();
         }
-        [HttpPost]
-        public ActionResult ThemMoi(FormCollection form)
-        {
+        //[HttpPost]
+        //public ActionResult ThemMoi(FormCollection form)
+        //{
             
         
+        //    DonHang donHang = new DonHang();
+        //    var statusDonHang =form["TinhTrang"].ToString();
+        //    donHang.TenKH = form["txtTenKh"].ToString();
+        //    donHang.DiaChi = form["txtDiaChi"].ToString();
+        //    donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
+        //    donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
+        //    donHang.EmailKH = form["txtEmail"].ToString();
+        //    //donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtGiaohang"]);
+            
+        //    donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
+        //    ChiTietDonHang ctdh = new ChiTietDonHang();
+        //    ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
+        //    ctdh.DonGia = Convert.ToDecimal (form["txtDonGia"]);
+        //    ctdh.Sach.TenSach = form["txtSach"].ToString();
+        //    ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
+        //    ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
+        //    ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
+        //    db.DonHangs.Add(donHang);
+        //    db.ChiTietDonHangs.Add(ctdh);
+        //    db.SaveChanges();
+        //    return View(); 
+        //}
+        //[HttpPost]
+        //public ActionResult ThemMoi2(FormCollection form)
+        //{
+        //    DonHang donHang = new DonHang();
+        //    var statusDonHang = form["TinhTrang"].ToString();
+        //    donHang.TenKH = form["txtTenKh"].ToString();
+        //    donHang.DiaChi = form["txtDiaChi"].ToString();
+        //    donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
+        //    donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
+        //    donHang.EmailKH = form["txtEmail"].ToString();
+        //    //donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtGiaohang"]);
+
+        //    donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
+        //    ChiTietDonHang ctdh = new ChiTietDonHang();
+        //    ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
+        //    ctdh.DonGia = Convert.ToDecimal(form["txtDonGia"]);
+        //    ctdh.Sach.TenSach = form["txtSach"].ToString();
+        //    ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
+        //    ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
+        //    ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
+        //    db.DonHangs.Add(donHang);
+        //    db.ChiTietDonHangs.Add(ctdh);
+        //    db.SaveChanges();
+        //    return View();
+        //}
+        [HttpPost]
+        public ActionResult ThemMoiFinal(FormCollection form)
+        {
             DonHang donHang = new DonHang();
-            var statusDonHang =form["TinhTrang"].ToString();
+            var statusDonHang = form["TinhTrang"].ToString();
             donHang.TenKH = form["txtTenKh"].ToString();
             donHang.DiaChi = form["txtDiaChi"].ToString();
             donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
             donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
             donHang.EmailKH = form["txtEmail"].ToString();
             //donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtGiaohang"]);
-            
+
             donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
             ChiTietDonHang ctdh = new ChiTietDonHang();
             ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
-            ctdh.DonGia = Convert.ToDecimal (form["txtDonGia"]);
+            ctdh.DonGia = Convert.ToDecimal(form["txtDonGia"]);
             ctdh.Sach.TenSach = form["txtSach"].ToString();
             ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
             ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
@@ -128,8 +178,14 @@ namespace Web_BanHang.Controllers
             db.DonHangs.Add(donHang);
             db.ChiTietDonHangs.Add(ctdh);
             db.SaveChanges();
-            return View(); 
+            return View();
+            
         }
+        //[HttpPost]
+        //public ActionResult hihi()
+        //{
+        //    return View();
+        //}
         public JsonResult GetBookValue(string search)
         {
             QuanLyBanSachEntities db = new QuanLyBanSachEntities();
@@ -189,9 +245,6 @@ namespace Web_BanHang.Controllers
             }
             return null;
         }
-        public ActionResult Test()
-        {
-            return View();
-        }
+       
     }
 }

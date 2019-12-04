@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+   @*template su dung bootstrap 4*@
     <title>Quản Lý Sản Phẩm</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,35 +10,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    @*<script src="~/Content/AdmimTemplate/vendor/jquery/jquery.min.js"></script>*@
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="~/Content/AdmimTemplate/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Content/AdmimTemplate/vendor/jquery/jquery.slim.js"></script>
-    <script src="~/Content/CKEditor/ckeditor.js"></script>
+  
 
-    <script src="~/assets/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js"></script>
-    <link href="~/Content/Jquery Ui/jquery-ui.theme.min.css" rel="stylesheet" />
-    <link href="~/Content/Jquery Ui/jquery-ui.structure.min.css" rel="stylesheet" />
-    <link href="~/Content/Jquery Ui/jquery-ui.min.css" rel="stylesheet" />
-    <link href="~/Content/AdmimTemplate/css/sb-admin-2.min.css" rel="stylesheet" />
+
+    <link href="~/Content/AdmimTemplate/css/sb-admin-2.min.css" rel="stylesheet" />  
     <link href="~/Content/CKEditor/samples/css/samples.css" rel="stylesheet" />
     <link href="~/Content/AdmimTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="~/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
-    <link href="~/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-    <script src="~/Content/AdmimTemplate/js/jquery.steps.js"></script>
-    <link rel="stylesheet" href="~/Content/AdmimTemplate/css/main.css" />
-    <link rel="stylesheet" href="~/Content/AdmimTemplate/css/normalize.css" />
-    <link rel="stylesheet" href="~/Content/AdmimTemplate/css/jquery.steps.css" />
+    @*<link href="~/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="~/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />*@
     <link href="~/Content/AdmimTemplate/css/StyleSheet1.css" rel="stylesheet" />
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
-
-
+ 
     <style>
         .toggle.ios, .toggle-on.ios, .toggle-off.ios {
             border-radius: 20px;
@@ -377,11 +365,25 @@
     </footer>
     <!-- Bootstrap core JavaScript-->
     <script src="~/Content/AdmimTemplate/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Content/AdmimTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    @*<script src="~/Content/AdmimTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/Content/AdmimTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="~/Content/AdmimTemplate/js/sb-admin-2.min.js"></script>
     <script src="~/Content/AdmimTemplate/vendor/chart.js/Chart.min.js"></script>
 
+    <script src="~/Content/AdmimTemplate/vendor/jquery/jquery.slim.js"></script>
+    @*<script src="~/assets/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js"></script>*@
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
+    <script src="~/Content/CKEditor/ckeditor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+
+    <!--Test-->
+  
+    @RenderSection("scripts")
 </body>
 
 </html>
