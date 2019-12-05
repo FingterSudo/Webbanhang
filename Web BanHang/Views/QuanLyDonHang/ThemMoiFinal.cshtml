@@ -1,6 +1,8 @@
 ﻿@using Web_BanHang.Models;
 @using Web_BanHang.DTO;
 @using Newtonsoft.Json;
+
+
 @model Web_BanHang.Models.DonHang
 @{
     ViewBag.Title = "ThemMoiFinal";
@@ -16,69 +18,105 @@
         integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
         crossorigin="anonymous"></script>
 <link href="~/Content/stepui.css" rel="stylesheet" />
- <div class="container">
-    @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
-    {
+<div class="container  " >
+    <div class="container-fluid">
+        <br /><br />
+        <ul class="list-unstyled multi-steps">
+            <li class=" step1 is-active ">Nhập họ tên</li>
+            <li class="step1 ">Nhập sản phẩm</li>
+            <li class="step1 ">Chi Tiết Hóa Đơn</li>
+            <li class="step1 ">Hoàn Thành</li>
+        </ul>
+    </div>
+     
+        @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
+        {
 
-        <h1>Thêm mới đơn hàng </h1>
 
-        <!-- One "tab" for each step in the form: -->
-        <div class="tab form-group">
-            <div class="namealert">
-                <label>Họ tên *</label>
-                <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name"></p>
+
+            <h1>Thêm mới đơn hàng </h1>
+            <div class="progress-track"></div>
+            <!-- One "tab" for each step in the form: -->
+
+            <div class="tab form-group ">
+                
+                    <label>Họ tên *</label>
+                    <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name" autocomplete="off"></p>
+                    <div class="namealert">
+                    </div>
+                <div class="phonealert">
+                    <label>Điện thoại *</label>
+                    <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone" id="phone" autocomplete="off" /></p>
+                </div>
+                <div class="adressalert">
+                    <label>Địa chỉ *</label>
+                    <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="adress" autocomplete="off" /></p>
+                </div>
+                <div class="emailalert">
+                    <label>Email *</label>
+                    <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="email" autocomplete="off" /></p>
+                </div>
             </div>
-            <div class="phonealert">
-                <label>Điện thoại *</label>
-                <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone"id="phone" /></p>
+             
+            <div class="tab form-group">
+                <div class="product">
+                    <label>Sản Phẩm</label>
+                    <p><input placeholder="Nhập tên sản phẩm " oninput="this.className = 'form-control form-control'" name="productName" id="productName" autocomplete="on"></p>
+                </div>
+                <div class="  productPrice">
+                    <label>Giá sản phẩm</label>
+                    <p><input oninput="this.className ='form-control form-control'" name="productPrice" disabled/></p>
+                </div>
+                     
+                <div class="publiser ">
+                    <label>Nhà Xuất Bản</label>
+                    <p><input oninput="this.className = 'form-control form-control'"></p>
+                </div>
+                <div class="IdProduct">
+                    <label>Mã Sản Phẩm</label>
+                    <p><input oninput="this.className = 'form-control form-control'"disabled></p>
+                </div>
+                <div class="author-1">
+                    <label>Tác Giả</label>
+                    <p><input oninput="this.className = 'form-control form-control'"disabled></p>
+                </div>
+
+                <div class="productButton">
+                    <button class="Button badge-dark">Thêm sản phẩm</button>
+                </div>
             </div>
-            <div class="adressalert">
-                <label>Địa chỉ *</label>
-                <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="adress"/></p>
+             
+            <div class="tab form-group">
+                Birthday:
+                <p><input placeholder="dd" oninput="this.className = 'form-control form-control'"></p>
+                <p><input placeholder="mm" oninput="this.className = 'form-control form-control'"></p>
+                <p><input placeholder="yyyy" oninput="this.className = 'form-control form-control'"></p>
             </div>
-            <div class="emailalert">
-                <label>Email *</label>
-                <p><input placeholder="Email" oninput="this.className = 'form-control form-control'"id="email" /></p>
-            </div>    
-        </div>
 
-        <div class="tab  form-group">
-            Sản phẩm
-            <p><input placeholder="E-mail..." oninput="this.className = 'form-control form-control'"></p>
-            <p><input placeholder="Phone..." oninput="this.className = 'form-control form-control'"></p>
-        </div>
-
-        <div class="tab  form-group">
-            Birthday:
-            <p><input placeholder="dd" oninput="this.className = 'form-control form-control'"></p>
-            <p><input placeholder="mm" oninput="this.className = 'form-control form-control'"></p>
-            <p><input placeholder="yyyy" oninput="this.className = 'form-control form-control'"></p>
-        </div>
-
-        <div class="tab">
-            Login Info:
-            <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
-            <p><input placeholder="Password..." oninput="this.className = 'form-control form-control'"></p>
-        </div>
-
-        <div style="overflow:auto;">
-            <div style="float:right;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger">Next</button>
+            <div class="tab form-group">
+                Login Info:
+                <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
+                <p><input placeholder="Password..." oninput="this.className = 'form-control form-control'"></p>
             </div>
-        </div>
 
-        <!-- Circles which indicates the steps of the form: -->
-        <div style="text-align:center;margin-top:40px;">
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-        </div>
-    }
-</div>
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger">Next</button>
+                </div>
+            </div>
 
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
 
+        }
+
+ </div>
+ 
 @section scripts{
     <script>
         var currentTab = 0; // Tab hiện tại được đặt là tab đầu tiên [0]
@@ -96,11 +134,13 @@
             } else {
                 document.getElementById("prevBtn").style.display = "inline";
             }
+            
             if (n == (x.length - 1)) {
                 document.getElementById("nextBtn").innerHTML = "Submit";
             } else {
                 document.getElementById("nextBtn").innerHTML = "Next";
             }
+            
             // và chạy một function chỉ báo hiển thị bước tiếp theo
             // ... and run a function that displays the correct step indicator:
             fixStepIndicator(n)
@@ -130,6 +170,8 @@
             // Otherwise, display the correct tab:
             // nếu không hiển thị tab chính xác
             showTab(currentTab);
+             
+           // prevStep();
         }
 
         function validateForm() {
@@ -146,24 +188,26 @@
             var adressval = document.getElementById('adress').value;
             var emailval = document.getElementById('email').value;
 
-            var namecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var namecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>vui lòng điều họ tên</strong> </div > ";
-            var namecheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var namecheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập tên 200 ký tự </strong> </div > ";
-            var phonecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var phonecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng điền số điện thoại</strong> </div > ";
-            var phonecheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var phonecheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Định dạng số điện thoại không đúng</strong> </div > ";
-            var phonecheckbuttonnum = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var phonecheckbuttonnum = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>vui lòng nhập số</strong> </div > ";
-            var addresscheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var addresscheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng điền địa chỉ</strong> </div > ";
-            var addresscheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var addresscheckbuttonlg = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập từ 16-200 ký tự</strong> </div > ";
-            var emailcheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var emailcheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng nhập email</strong> </div > ";
-            var emailcheckbuttoncheck = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close>"
+            var emailcheckbuttoncheck = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập đúng định dạng email</strong> </div > ";
+            var produccheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
+                + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng nhập tên sản phẩm</strong> </div > ";
           
             for (i = 0; i < y.length; i++) {
                 // If a field is empty...
@@ -174,18 +218,16 @@
                     // thêm một lớp không hợp lệ vào trường
 
                     y[i].className += "invalid";
-                
+                    
                      //and set the current valid status to false:
                      //và set trạng thái hợp lệ thành false
                     valid = false;
                 }
             }
-           
+    
+                          // start button alert
             if ( nameval == "") {
-
-                $(".namealert").append(namecheckbutton);
-                
-
+                $(".namealert").append(namecheckbutton);                
             }
             // gioi han chu tu 16 ky tu tro len
             if (nameval.length > 200 && nameval.length < 16) {
@@ -197,7 +239,6 @@
                 $(".phonealert").append(phonecheckbutton);
 
             }
-            
           // chinh 1 mess hien thi tung truong hop
             if (phoneval.length > 10) {
                 $(".phonealert").append(phonecheckbuttonlg);
@@ -233,6 +274,7 @@
             $(".alert").fadeTo(1000, 200).slideUp(200, function () {
                 $(".alert").slideUp(200);
             })
+                    //  end
             // If the valid status is true, mark the step as finished and valid:
             // Nếu valid status true đánh dấu kết thúc và hợp lệ
            
@@ -247,15 +289,61 @@
             // This function removes the "active" class of all steps...
             // the function hủy tất các các hoạt động của các bước
             var i, x = document.getElementsByClassName("step");
+            var y = document.getElementsByClassName("step1")
             for (i = 0; i < x.length; i++) {
                 x[i].className = x[i].className.replace(" active", "");
+                y[i].className = y[i].className.replace("is-active", "");
             }
             //... and adds the "active" class to the current step:
             // và thêm hoạt động lớp và bước hiện tại
             x[n].className += " active";
+            y[n].className += "is-active";
         }
-      // check numbert
-         
-       
+        // check numbert
+        //function nextStep() {
+        //    var avticeStep = $('.is-active');
+             
+        //    avticeStep.next().addClass('is-active');
+        //    avticeStep.removeClass();
+        //}
+        //function prevStep() {
+        //    var activeStep = $('.is-active');
+        //    activeStep.prev().removeClass('is-active');
+        //    activeStep.addClass();
+        //}
+        // auto Complete
+        $("#productName").autocomplete({
+            source:
+                function (request, response) {
+                    $.ajax({
+                        url: '/QuanLyDonHang/GetBookValue?search=' + $("#productName").val(),
+                        dataType: "json",
+                        data: { search: $("#productName").val() },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.TenSach, value: item.TenSach };
+                            }))
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Error");
+                        }
+                    })
+                }
+        })
+        $("input[ name='productPrice']").on('blur', function () {
+            const priceValue = $(this).val;
+            if (!!priceValue) {
+                $.ajax({
+                    url: '/QuanLyDonHang/GetPrice?search=' + priceValue,
+                    method: 'GET',
+                    success: function (getPrice) {
+                        $(".productPrice").val(getPrice);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }
+        })
     </script>
 }

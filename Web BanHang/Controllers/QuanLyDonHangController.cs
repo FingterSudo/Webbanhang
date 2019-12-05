@@ -160,11 +160,12 @@ namespace Web_BanHang.Controllers
         {
             DonHang donHang = new DonHang();
             var statusDonHang = form["TinhTrang"].ToString();
-            donHang.TenKH = form["txtTenKh"].ToString();
-            donHang.DiaChi = form["txtDiaChi"].ToString();
+            donHang.TenKH = form["name"].ToString();
+            donHang.DiaChi = form["adress"].ToString();
             donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
             donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
-            donHang.EmailKH = form["txtEmail"].ToString();
+            donHang.EmailKH = form["email"].ToString();
+            donHang.DienThoaiKH = form["phone"].ToString();
             //donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtGiaohang"]);
 
             donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
@@ -175,8 +176,9 @@ namespace Web_BanHang.Controllers
             ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
             ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
+        
             db.DonHangs.Add(donHang);
-            db.ChiTietDonHangs.Add(ctdh);
+            db.ChiTietDonHangs.Add(ctdh);  
             db.SaveChanges();
             return View();
             

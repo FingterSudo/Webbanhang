@@ -1,7 +1,7 @@
 ﻿@using Web_BanHang.Models;
 @using Web_BanHang.DTO;
 @using Newtonsoft.Json;
-@model Web_BanHang.Models.DonHangf
+@model Web_BanHang.Models.DonHang
     @{
         /**/
 
@@ -192,7 +192,7 @@
                     })
                 }
             })
-            $("input[name='TenSanpham']").on("blur", function () {
+            $("input[name='TenSanpham']").on('blur', function () {
                 const valueMS = $(this).val();
                 if (!!valueMS) {
                     //call ajax get ma sach from server
@@ -330,135 +330,135 @@
             //        }
             //}
             //);
-            $(document).ready(function () {
-                $("input[name='MaNXB']").blur(function () {
-                    alert("Sự kiện blur() vừa mới xảy ra");
-                })
-            })
-
-            $("input[name='TenSanpham']").on("blur", function gnbg() {
-                const valueTenSP = $(this).val();
-                if (!!valueTenSP) {
-                    //TODO: call ajax to get txtDonGia from server
-                    $.ajax({
-                        url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
-                        method: "GET", // mac dinh la get
-                        success: function (rs) {
-                            $("#txtDonGia").val(rs);
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    })
-                    //console.log("oke sanpham")
-                }
-            })
-            $("input[name='TenSanpham']").on("blur", function () {
-                const valueMaNXB = $(this).val();
-                if (!!valueMaNXB) {
-                    //Call ajax get ma tac gia from server
-                    $.ajax({
-                        url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
-                        method: 'GET',
-                        success: function (author) {
-                            $("#txtMXB").val(author);
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    })
-                }
-            })
-            $("input[name='TenSanpham']").on("blur", function () {
-                const valueMS = $(this).val();
-                if (!!valueMS) {
-                    //call ajax get ma sach from server
-                    $.ajax({
-                        url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
-                        method: 'GET',
-                        success: function (ms) {
-                            $("#txtMaSach").val(ms);
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    })
-                }
-            })
-
-            function checkGiaoHang() {
-                var selValue = document.getElementById('id-check-delivery').value;
-                selValue.val();
-            }
-            // tinh tong tien
-            $("input[name=txtSoLuong]").on("blur", calculateTotal);
-            $("input[name=txtDonGia]").on("blur", calculateTotal);
-            function calculateTotal() {
-                var donGia = +$("input[name=txtDonGia]").val();
-                var soLuong = +$("input[name=txtSoLuong]").val();
-                if (soLuong == 0) {
-                    soLuong == 1;
-                    var tong = donGia * 1;
-                }
-                else {
-                    var tong = donGia * soLuong;
-                }
-                $("input[name=txtThanhTien]").val(tong);
-            }
-            //them san pham vao gio hang va tinh tong tien
-            // ?? day la cai me gi :D :D ????
-            var tongSP = 0;
-            var Arrays = new Array();
-            $(document).ready(function () {
-                $("#addProduct").click(function () {
-                    // lay gia tri san pham
-                    var product = $("#txtSach1").val();
-                    var number = $("#txtSoLuong").val();
-                    var productPrice = $("#txtDonGia").val();
-                    var intoMoney = $("#txtThanhTien").val();
-                    var bookId = $("#txtMaSach").val();
-                    $("#tableOrder").append("
-                        < tr >
-                        <th>" + bookId + "</th>
-                        <th>" + product + "</th>
-                        <th>
-                            <input class='form-control' type='text' value" + number + "></th> <th>" + productPrice + "</th> <th class=product>" + intoMoney + "<th><button type='button' class='btn btn-dark'><i " + " class= 'far fa-trash-alt'></i></th></tr>" );
-                                       totalPrice();
-                })
-                //$("#deleteRow").click(function () {
-                //    $("table tbody").find('input[name="record"]').each(function () {
-                //        if ($(this).is(":checked")) {
-                //            $(this).parents("tr").remove();
-                //        }
+                //$(document).ready(function () {
+                //    $("input[name='MaNXB']").blur(function () {
+                //        alert("Sự kiện blur() vừa mới xảy ra");
                 //    })
                 //})
-            });
 
-            $(document).ready(function () {
-                $(" .btn-danger ").on('click', function () {
-                    $('#tableOrder tbody tr:gt(0) ').remove();
-                })
-            });
-            $(document).ready(function () {
-                $("#tableOrder").on('click', '.btn-dark', function () {
-                    $(this).closest('tr').remove();
-                })
-            });
-            var tong1 = 0;
-            function totalPrice() {
-                var deduct = $("#producctId").val();
-                var number = $("#txtSoLuong").val();
-                var productPrice = $("#txtDonGia").val();
+            //$("input[name='TenSanpham']").on("blur", function gnbg() {
+            //    const valueTenSP = $(this).val();
+            //    if (!!valueTenSP) {
+            //        //TODO: call ajax to get txtDonGia from server
+            //        $.ajax({
+            //            url: '/QuanLyDonHang/GetPrice?search=' + valueTenSP,
+            //            method: "GET", // mac dinh la get
+            //            success: function (rs) {
+            //                $("#txtDonGia").val(rs);
+            //            },
+            //            error: function (err) {
+            //                console.log(err);
+            //            }
+            //        })
+            //        //console.log("oke sanpham")
+            //    }
+            //})
+            //$("input[name='TenSanpham']").on("blur", function () {
+            //    const valueMaNXB = $(this).val();
+            //    if (!!valueMaNXB) {
+            //        //Call ajax get ma tac gia from server
+            //        $.ajax({
+            //            url: '/QuanLyDonHang/GetPublishersId?search=' + valueMaNXB,
+            //            method: 'GET',
+            //            success: function (author) {
+            //                $("#txtMXB").val(author);
+            //            },
+            //            error: function (err) {
+            //                console.log(err);
+            //            }
+            //        })
+            //    }
+            //})
+            //$("input[name='TenSanpham']").on("blur", function () {
+            //    const valueMS = $(this).val();
+            //    if (!!valueMS) {
+            //        //call ajax get ma sach from server
+            //        $.ajax({
+            //            url: '/QuanLyDonHang/GetBookId?search=' + valueMS,
+            //            method: 'GET',
+            //            success: function (ms) {
+            //                $("#txtMaSach").val(ms);
+            //            },
+            //            error: function (err) {
+            //                console.log(err);
+            //            }
+            //        })
+            //    }
+            //})
 
-                tong1 += number * productPrice;
-                $("input[name=totalPrice]").val(tong1);
-            }
-            function include(arr, obj) {
-                for (var i = 0; i < arr.length; i++) {
-                    if (arr[i] == obj)
-                        return i;
-                }
-            }
+            //function checkGiaoHang() {
+            //    var selValue = document.getElementById('id-check-delivery').value;
+            //    selValue.val();
+            //}
+            //// tinh tong tien
+            //$("input[name=txtSoLuong]").on("blur", calculateTotal);
+            //$("input[name=txtDonGia]").on("blur", calculateTotal);
+            //function calculateTotal() {
+            //    var donGia = +$("input[name=txtDonGia]").val();
+            //    var soLuong = +$("input[name=txtSoLuong]").val();
+            //    if (soLuong == 0) {
+            //        soLuong == 1;
+            //        var tong = donGia * 1;
+            //    }
+            //    else {
+            //        var tong = donGia * soLuong;
+            //    }
+            //    $("input[name=txtThanhTien]").val(tong);
+            //}
+            //them san pham vao gio hang va tinh tong tien
+            // ?? day la cai me gi :D :D ????
+            //var tongSP = 0;
+            //var Arrays = new Array();
+            //$(document).ready(function () {
+            //    $("#addProduct").click(function () {
+            //        // lay gia tri san pham
+            //        var product = $("#txtSach1").val();
+            //        var number = $("#txtSoLuong").val();
+            //        var productPrice = $("#txtDonGia").val();
+            //        var intoMoney = $("#txtThanhTien").val();
+            //        var bookId = $("#txtMaSach").val();
+            //        $("#tableOrder").append("
+            //            < tr >
+            //            <th>" + bookId + "</th>
+            //            <th>" + product + "</th>
+            //            <th>
+            //                <input class='form-control' type='text' value" + number + "></th> <th>" + productPrice + "</th> <th class=product>" + intoMoney + "<th><button type='button' class='btn btn-dark'><i " + " class= 'far fa-trash-alt'></i></th></tr>" );
+            //                           totalPrice();
+            //    })
+            //    //$("#deleteRow").click(function () {
+            //    //    $("table tbody").find('input[name="record"]').each(function () {
+            //    //        if ($(this).is(":checked")) {
+            //    //            $(this).parents("tr").remove();
+            //    //        }
+            //    //    })
+            //    //})
+            //});
+
+            //$(document).ready(function () {
+            //    $(" .btn-danger ").on('click', function () {
+            //        $('#tableOrder tbody tr:gt(0) ').remove();
+            //    })
+            //});
+            //$(document).ready(function () {
+            //    $("#tableOrder").on('click', '.btn-dark', function () {
+            //        $(this).closest('tr').remove();
+            //    })
+            //});
+            //var tong1 = 0;
+            //function totalPrice() {
+            //    var deduct = $("#producctId").val();
+            //    var number = $("#txtSoLuong").val();
+            //    var productPrice = $("#txtDonGia").val();
+
+            //    tong1 += number * productPrice;
+            //    $("input[name=totalPrice]").val(tong1);
+            //}
+            //function include(arr, obj) {
+            //    for (var i = 0; i < arr.length; i++) {
+            //        if (arr[i] == obj)
+            //            return i;
+            //    }
+            //}
                                 //$("input=[name=totalPrice]").on('change', uploadToTal);
                                 //function()uploadToTal {
                                 //    if -> tr maast

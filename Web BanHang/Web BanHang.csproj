@@ -2679,6 +2679,7 @@
     <Content Include="Content\AdmimTemplate\vendor\jquery\jquery.min.js" />
     <Content Include="Content\AdmimTemplate\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\AdmimTemplate\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Views\TimKiem\HtmlPage1.html" />
     <Content Include="Views\Web.config" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -2880,13 +2881,12 @@
     <Content Include="Views\QuanLyDonHang\_ChiTietHoaDon.cshtml" />
     <Content Include="Views\QuanLyDonHang\ChiTiet.cshtml" />
     <Content Include="Views\QuanLyDonHang\Xoa.cshtml" />
-    <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\QuanLyDonHang\Thanhtoan.cshtml" />
     <Content Include="Views\QuanLyDonHang\Index123.cshtml" />
-    <Content Include="Views\QuanLyDonHang\ThemMoi2.cshtml" />
     <Content Include="Views\QuanLyDonHang\ThemMoiFinal.cshtml" />
     <Content Include="Views\QuanLyDonHang\hihi.cshtml" />
+    <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
