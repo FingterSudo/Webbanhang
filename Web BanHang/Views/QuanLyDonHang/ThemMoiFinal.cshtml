@@ -39,11 +39,10 @@
             <!-- One "tab" for each step in the form: -->
 
             <div class="tab form-group ">
-                
+                <div class="namealert">
                     <label>Họ tên *</label>
                     <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name" autocomplete="off"></p>
-                    <div class="namealert">
-                    </div>
+                </div>
                 <div class="phonealert">
                     <label>Điện thoại *</label>
                     <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone" id="phone" autocomplete="off" /></p>
@@ -206,7 +205,7 @@
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng nhập email</strong> </div > ";
             var emailcheckbuttoncheck = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập đúng định dạng email</strong> </div > ";
-            var produccheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
+            var productcheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng nhập tên sản phẩm</strong> </div > ";
           
             for (i = 0; i < y.length; i++) {
@@ -258,21 +257,25 @@
             if (adressval.length > 200) {
                 $(".adressalert").append(addresscheckbuttonlg);
             }
-            if (  emailval=="") {
+            if (emailval == "") {
                 $(".emailalert").append(emailcheckbutton);
-                valid = false;
-               
+              
+
             }
-            if (/^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailval)) {
+            var mailcheck = /^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (mailcheck.test(emailval) || emailval == "") {
 
             }
             else {
                 $(".emailalert").append(emailcheckbuttoncheck);
                 valid = false;
             }
-            $(".alert").hide();
-            $(".alert").fadeTo(1000, 200).slideUp(200, function () {
-                $(".alert").slideUp(200);
+
+            $(".alert").css("display", "none");
+            $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+                $(".alert").slideUp(500);
+                $(".alert").remove();
+                
             })
                     //  end
             // If the valid status is true, mark the step as finished and valid:
