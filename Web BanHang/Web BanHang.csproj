@@ -165,6 +165,7 @@
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\SachController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TimKiemAdminController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
     <Compile Include="DTO\SachDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -2885,8 +2886,9 @@
     <Content Include="Views\QuanLyDonHang\Thanhtoan.cshtml" />
     <Content Include="Views\QuanLyDonHang\Index123.cshtml" />
     <Content Include="Views\QuanLyDonHang\ThemMoiFinal.cshtml" />
-    <Content Include="Views\QuanLyDonHang\hihi.cshtml" />
     <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
+    <Content Include="Views\TimKiemAdmin\_searchBook.cshtml" />
+    <Content Include="Views\TimKiemAdmin\searchValueBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Web_BanHang.Models.Sach>
+
+@{ 
+    ViewBag.Title = "Tìm kiếm";
+
+
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSach)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongTon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ChuDe.TenChuDe)
+        </th>
+        <th>Checkbox</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSach)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuDe.TenChuDe)
+            </td>
+            <td><input type="checkbox" /></td>
+        </tr>
+    }
+     
+    @section  scripts {
+    }
+</table>

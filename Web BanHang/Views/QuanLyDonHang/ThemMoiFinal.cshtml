@@ -1,13 +1,17 @@
 ﻿@using Web_BanHang.Models;
 @using Web_BanHang.DTO;
 @using Newtonsoft.Json;
+ 
 
 
-@model Web_BanHang.Models.DonHang
+@*@model Web_BanHang.Models.DonHang*@
+@model  Web_BanHang.Models.Sach 
 @{
+
     ViewBag.Title = "ThemMoiFinal";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
+
 
 
 @*<script src="~/Content/jquerystep/jquerysteps/jquery-1.9.1.min.js"></script>*@
@@ -18,106 +22,128 @@
         integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
         crossorigin="anonymous"></script>
 <link href="~/Content/stepui.css" rel="stylesheet" />
-<div class="container  " >
-    <div class="container-fluid">
-        <br /><br />
-        <ul class="list-unstyled multi-steps">
-            <li class=" step1 is-active ">Nhập họ tên</li>
-            <li class="step1 ">Nhập sản phẩm</li>
-            <li class="step1 ">Chi Tiết Hóa Đơn</li>
-            <li class="step1 ">Hoàn Thành</li>
-        </ul>
-    </div>
-     
-        @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
-        {
-
-
-
-            <h1>Thêm mới đơn hàng </h1>
-            <div class="progress-track"></div>
-            <!-- One "tab" for each step in the form: -->
-
-            <div class="tab form-group ">
-                <div class="namealert">
-                    <label>Họ tên *</label>
-                    <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name" autocomplete="off"></p>
-                </div>
-                <div class="phonealert">
-                    <label>Điện thoại *</label>
-                    <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone" id="phone" autocomplete="off" /></p>
-                </div>
-                <div class="adressalert">
-                    <label>Địa chỉ *</label>
-                    <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="adress" autocomplete="off" /></p>
-                </div>
-                <div class="emailalert">
-                    <label>Email *</label>
-                    <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="email" autocomplete="off" /></p>
-                </div>
-            </div>
-             
-            <div class="tab form-group">
-                <div class="product">
-                    <label>Sản Phẩm</label>
-                    <p><input placeholder="Nhập tên sản phẩm " oninput="this.className = 'form-control form-control'" name="productName" id="productName" autocomplete="on"></p>
-                </div>
-                <div class="  productPrice">
-                    <label>Giá sản phẩm</label>
-                    <p><input oninput="this.className ='form-control form-control'" name="productPrice" disabled/></p>
-                </div>
-                     
-                <div class="publiser ">
-                    <label>Nhà Xuất Bản</label>
-                    <p><input oninput="this.className = 'form-control form-control'"></p>
-                </div>
-                <div class="IdProduct">
-                    <label>Mã Sản Phẩm</label>
-                    <p><input oninput="this.className = 'form-control form-control'"disabled></p>
-                </div>
-                <div class="author-1">
-                    <label>Tác Giả</label>
-                    <p><input oninput="this.className = 'form-control form-control'"disabled></p>
-                </div>
-
-                <div class="productButton">
-                    <button class="Button badge-dark">Thêm sản phẩm</button>
-                </div>
-            </div>
-             
-            <div class="tab form-group">
-                Birthday:
-                <p><input placeholder="dd" oninput="this.className = 'form-control form-control'"></p>
-                <p><input placeholder="mm" oninput="this.className = 'form-control form-control'"></p>
-                <p><input placeholder="yyyy" oninput="this.className = 'form-control form-control'"></p>
-            </div>
-
-            <div class="tab form-group">
-                Login Info:
-                <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
-                <p><input placeholder="Password..." oninput="this.className = 'form-control form-control'"></p>
-            </div>
-
-            <div style="overflow:auto;">
-                <div style="float:right;">
-                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
-                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger">Next</button>
-                </div>
-            </div>
-
-            <div style="text-align:center;margin-top:40px;">
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-            </div>
-
-        }
-
- </div>
  
-@section scripts{
-    <script>
+    <div class="container  ">
+            <div class="container-fluid">
+                <br /><br />
+                <ul class="list-unstyled multi-steps">
+                    <li class=" step1 is-active ">Nhập họ tên</li>
+                    <li class="step1 ">Nhập sản phẩm</li>
+                    <li class="step1 ">Chi Tiết Hóa Đơn</li>
+                    <li class="step1 ">Hoàn Thành</li>
+                </ul>
+            </div>
+
+            @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
+            {
+
+
+
+                <h1>Thêm mới đơn hàng </h1>
+                <div class="progress-track"></div>
+                //Tab 1 thong tin khach hang
+                //ToDo: dien thong tin khach hang
+                <div class="tab form-group ">
+                    <div class="namealert">
+                        <label>Họ tên *</label>
+                        <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name" autocomplete="off"></p>
+                    </div>
+                    <div class="phonealert">
+                        <label>Điện thoại *</label>
+                        <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone" id="phone" autocomplete="off" /></p>
+                    </div>
+                    <div class="adressalert">
+                        <label>Địa chỉ *</label>
+                        <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="adress"  name="adress" autocomplete="off" /></p>
+                    </div>
+                    <div class="emailalert">
+                        <label>Email *</label>
+                        <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="email" autocomplete="off" /></p>
+                    </div>
+                </div>
+                // Tab 2: Thong tin san pham
+                //form hoa don tim kiem duoc
+                // sau khi tim kiem thi them sp vao don hang
+                // don hang co the chinh sua duoc so luong, va xoa duoc
+                <div class="tab form-group ">                           
+                    <input type="text" id="searchBook"/>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="Search">
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng tồn</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="DataSearching">     
+                                <tr class="Search">
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td><input type="checkbox" name="checkBox" value="False"/></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="productButton">
+                        <button class="Button badge-dark" id="productAdd" type="button">Thêm sản phẩm</button>
+                    </div>
+                    <div class="text-center">
+                        <label><button type="button" class=" btn btn-danger">Chit tiết đơn hàng</button></label>
+                        <div class="OrderDetail">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Đơn giá</th>
+                                        <th> Số lượng</th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="addOrderDetail"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+                    // tab 3
+                    <div class="tab form-group">
+                        Birthday:
+                        <p><input placeholder="dd" oninput="this.className = 'form-control form-control'"></p>
+                        <p><input placeholder="mm" oninput="this.className = 'form-control form-control'"></p>
+                        <p><input placeholder="yyyy" oninput="this.className = 'form-control form-control'"></p>
+                    </div>
+
+                    <div class="tab form-group">
+                        Login Info:
+                        <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
+                        <p><input placeholder="Password..." oninput="this.className = 'form-control form-control'"></p>
+                    </div>
+
+                    <div style="overflow:auto;">
+                        <div style="float:right;">
+                            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
+                            <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger">Next</button>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center;margin-top:40px;">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                    </div>
+                    
+
+                }
+
+                </div>
+
+    @section scripts{
+        <script>
         var currentTab = 0; // Tab hiện tại được đặt là tab đầu tiên [0]
         showTab(currentTab); // Hiển thị tab hiện tại
 
@@ -133,13 +159,13 @@
             } else {
                 document.getElementById("prevBtn").style.display = "inline";
             }
-            
+
             if (n == (x.length - 1)) {
                 document.getElementById("nextBtn").innerHTML = "Submit";
             } else {
                 document.getElementById("nextBtn").innerHTML = "Next";
             }
-            
+
             // và chạy một function chỉ báo hiển thị bước tiếp theo
             // ... and run a function that displays the correct step indicator:
             fixStepIndicator(n)
@@ -169,7 +195,7 @@
             // Otherwise, display the correct tab:
             // nếu không hiển thị tab chính xác
             showTab(currentTab);
-             
+
            // prevStep();
         }
 
@@ -182,6 +208,7 @@
             // A loop that checks every input field in the current tab:
             // Một vòng lặp kiểm tra tất các input trong tab hiện tại
             var numbers = /^[0-9]+$/;
+             var mailcheck = /^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             var nameval = document.getElementById('name').value;
             var phoneval = document.getElementById('phone').value;
             var adressval = document.getElementById('adress').value;
@@ -207,33 +234,33 @@
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Nhập đúng định dạng email</strong> </div > ";
             var productcheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>Vui lòng nhập tên sản phẩm</strong> </div > ";
-          
+
             for (i = 0; i < y.length; i++) {
-                // If a field is empty...
+                // If a field is empty...r
                 // nếu nó trống
-   
+
                 if (y[i].value == "") {
                       //add an "invalid" class to the field:
                     // thêm một lớp không hợp lệ vào trường
 
                     y[i].className += "invalid";
-                    
+
                      //and set the current valid status to false:
                      //và set trạng thái hợp lệ thành false
                     valid = false;
                 }
             }
-    
+
                           // start button alert
             if ( nameval == "") {
-                $(".namealert").append(namecheckbutton);                
+                $(".namealert").append(namecheckbutton);
             }
             // gioi han chu tu 16 ky tu tro len
             if (nameval.length > 200 && nameval.length < 16) {
                 $(".namealert").append(namecheckbuttonlg);
                 valid = false;
             }
-           
+
             if (  phoneval=="") {
                 $(".phonealert").append(phonecheckbutton);
 
@@ -245,11 +272,11 @@
 
                 }
                 else {
-                    $(".phonealert").append(phonecheckbuttonnum);   
+                    $(".phonealert").append(phonecheckbuttonnum);
                 }
                 valid = false;
             }
-            
+
             if ( adressval=="") {
                 $(".adressalert").append(addresscheckbutton);
 
@@ -259,28 +286,28 @@
             }
             if (emailval == "") {
                 $(".emailalert").append(emailcheckbutton);
-              
-
             }
-            var mailcheck = /^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (mailcheck.test(emailval) || emailval == "") {
 
+            if (mailcheck.test(emailval) || emailval == "") {
             }
             else {
                 $(".emailalert").append(emailcheckbuttoncheck);
                 valid = false;
             }
 
-            $(".alert").css("display", "none");
-            $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+           // hiển thị  class alert độ mờ 1000, độ bền 500, slideUp độ bền 500
+            // sau khi heiern thị xong thfi hủy class alert để tránh lặp lại thông báo
+            // bat su kien onblur remove alert button khi khach go vao thi mat nut
+            // giu lai message
+            $(".alert").fadeTo(1000, 1000).slideUp(500, function () {
                 $(".alert").slideUp(500);
                 $(".alert").remove();
-                
+
             })
                     //  end
             // If the valid status is true, mark the step as finished and valid:
             // Nếu valid status true đánh dấu kết thúc và hợp lệ
-           
+
             if (valid) {
                     document.getElementsByClassName("step")[currentTab].className += " finish";
             }
@@ -305,7 +332,7 @@
         // check numbert
         //function nextStep() {
         //    var avticeStep = $('.is-active');
-             
+
         //    avticeStep.next().addClass('is-active');
         //    avticeStep.removeClass();
         //}
@@ -347,6 +374,109 @@
                     }
                 })
             }
-        })
-    </script>
-}
+            })
+            // autocomplete search book
+            //$(document).ready(function () {
+            //    $("searchBtn").click(function () {
+            //        var searchValue = $("Search").val();
+            //        var setData = $("#DataSearching");
+            //        setData.html("");
+            //        $.ajax({
+            //            type: "post",
+            //            url: "/TimKiemAdmin/GetSearching?searchBookValue=" + searchValue,
+            //            contentType: "html",
+            //            success: function (result) {
+            //                if (result.length == 0) {
+            //                    setData.append('<tr style="color:red"><td colspan="3">No Match Data</td></tr>');
+            //                }
+            //                else {
+            //                    $.each(result, function (index, value) {
+            //                        var Data = "<tr>" +
+            //                            "<td>" + value.MaSach+ "</td>" +
+            //                            "<td>" + value.TenSach + "</td>" +
+            //                            "<td>" + value.SoLuongTon + "</td>" +
+            //                            "<td>" + value.GiaBan + "</td>" +
+            //                            "<td> <td><input type='checkbox' name='checkBox'/></td>" +
+            //                            "</tr>";
+            //                        setData.append(Data);
+            //                    })
+            //                }
+            //            }
+            //        })
+            //    })
+            //})
+            $("#searchBook").autocomplete({
+                source:
+                    function (request, respone) {
+                        var setData = $("#DataSearching");
+                        setData.html("");
+                        $.ajax({
+                            url: '/QuanLyDonHang/GetBookValue?search=' + $("#searchBook").val(),
+                            method: 'GET',
+                            dataType: 'json',
+                            success: function (data) {
+                                respone($.map(data, function (item) {
+                                    var Data = "<tr>" +
+                                        "<td>" + item.MaSach + "</td>" +
+                                        "<td>" + item.TenSach + "</td>" +
+                                        "<td>" +  item.GiaBan  + "</td>" +
+                                        "<td>" + item.SoLuongTon + "</td>" +
+                                        "<td><input type='checkbox' name='checkBox'/></td>" +                                    
+                                        "</tr>"; 
+                                     return setData.append(Data);
+                                }))         
+                            },
+                            error: function (xhr, staus, error) {
+                                alert("không tìm thấy ");
+                            }
+                        })
+                }
+            })
+          
+            $("#productAdd").on('click', function () {
+                
+                $(".table tbody tr ").each(function () {
+                    // von
+                    var BookId = $(this).find("td").eq(0).text();
+                    var BookName = $(this).find("td").eq(1).text();
+                    var BookPrice = $(this).find("td").eq(2).text();
+                    //var BookNumber = $('.valInput').val(); // ?? in put da xuat hien dau ma lay gia tri
+                   // var toTalprice = BookNumber * BookPrice;
+                    // var PriceTotal = BookNumber * BookPrice
+                   
+                    var BookTable = "<tr>" +
+                        
+                        "<td>" + BookId + "</td>" +
+                        "<td>" + BookName + "</td>" +
+                        "<td>" + BookPrice + " </td>" +
+                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput()' />"+ "</td>" +
+                        "<td class='priceTotal'>" + BookPrice + "</td>" +
+                        "</tr>";
+                  
+                   
+                     // thêm dòng tr vào table
+                    $(".addOrderDetail").append(BookTable);
+                  
+                })
+              
+            })
+            //$("#valInput").on("change", function () {
+            //    var totalPrice = $("#table tr td: nth-child(6)").val();
+            //    var inputVal = $(" #table tr td #valIpunt").val();
+            //    totalPrice = totalPrice * inputVal;
+            //})
+            function ChangevalInput() {
+                var valInPut = $("input[name='inputVal123']").val();
+                //valInPut = 10;
+                if (valInPut <= 0 || isNaN(valInPut)) {
+                    $("input[name='inputVal123']").val(1)
+                };
+
+                //$(".table tbody tr").each(function () {
+                //    var BookPrice = $(this).find("td").eq(4).text('hhhh') ;
+                //    console.log(BookPrice);
+                //    BookPrice += valInPut * BookPrice;
+                //})
+            }
+        </script>
+    }
