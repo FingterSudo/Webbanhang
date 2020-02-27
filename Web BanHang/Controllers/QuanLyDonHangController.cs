@@ -163,7 +163,7 @@ namespace Web_BanHang.Controllers
             // var statusDonHang = form["TinhTrang"].ToString();
             donHang.TenKH = form["name"].ToString();
             donHang.DiaChi = form["adress"].ToString();
-            donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
+           // donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
             donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
             donHang.EmailKH = form["email"].ToString();
             donHang.DienThoaiKH = form["phone"].ToString();
@@ -184,11 +184,7 @@ namespace Web_BanHang.Controllers
             return View();
 
         }
-        //[HttpPost]
-        //public ActionResult hihi()
-        //{
-        //    return View();
-        //}
+        
         public JsonResult GetBookValue(string search)
         {
             QuanLyBanSachEntities db = new QuanLyBanSachEntities();

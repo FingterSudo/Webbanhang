@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web_BanHang.Models;
-
+using System.Data.Entity.Validation;
 namespace Web_BanHang.Controllers
 {
     public class GioHangController : Controller
@@ -315,62 +315,83 @@ namespace Web_BanHang.Controllers
             // nếu khác hàng không null thì chuyển sang ẩn danh các cmt la lá như trên
             else
             {
-                if (Session["GioHang"] == null)
-                {
-                    return RedirectToAction("GioHangRong", "GioHang");
-                }
-                // them don hang
-                List<GioHang> giohang = LayGioHang();
-                // tinh toang tien
-                var tongtien = giohang.Sum(n => n.dThanhTien);
-                //them don vi khach hang 
-                KhachHang kh = new KhachHang();
-                kh.Hoten = name;
-                kh.DiaChi = address;
-                kh.DienThoai = mobile;
-                kh.Email = email;
-                kh.GioiTinh = gender;
-                db.KhachHangs.Add(kh);  
-                db.SaveChanges();
-                DonHang ddh = new DonHang();
-                ddh.NgayDat = DateTime.Now;
-                ddh.MaKH = kh.MaKH;
-                ddh.TenKH = kh.Hoten;
-                ddh.DiaChi = kh.DiaChi;
-                ddh.DiaChiNhanHang = address;
-                ddh.EmailKH = email;
-                ddh.DienThoaiKH = mobile;
-                ddh.NgayDat = DateTime.Now;
-                ddh.TongTien = Convert.ToDecimal(tongtien);
-                db.DonHangs.Add(ddh);
-                db.SaveChanges();
-                string content = MailHelper.MailOrder(ddh, kh, giohang);
-                string mail = email;
+
                 try
                 {
-                    foreach (var item in giohang)
+
+                    if (Session["GioHang"] == null)
                     {
-                        ChiTietDonHang dhct = new ChiTietDonHang();
-                        dhct.MaSach = item.iMaSach;
-                        dhct.MaDonHang = ddh.MaDonHang;
-                        dhct.DonGia = (decimal)item.dDonGia;
-                        dhct.SoLuong = item.iSoLuong;
-                        db.ChiTietDonHangs.Add(dhct);  
+                        return RedirectToAction("GioHangRong", "GioHang");
                     }
+                    // them don hang
+                    List<GioHang> giohang = LayGioHang();
+                    // tinh toang tien
+                    var tongtien = giohang.Sum(n => n.dThanhTien);
+                    //them don vi khach hang 
+                    KhachHang kh = new KhachHang();
+                    kh.Hoten = name;
+                    kh.DiaChi = address;
+                    kh.DienThoai = mobile;
+                    kh.Email = email;
+                    //kh.GioiTinh = gender;
+                    db.KhachHangs.Add(kh);
+                    db.SaveChanges();
+                    DonHang ddh = new DonHang();
+                    ddh.NgayDat = DateTime.Now;
+                    ddh.MaKH = kh.MaKH;
+                    ddh.TenKH = kh.Hoten;
+                    ddh.DiaChi = kh.DiaChi;
+                    ddh.DiaChiNhanHang = address;
+                    ddh.EmailKH = email;
+                    ddh.DienThoaiKH = mobile;
+                    ddh.NgayDat = DateTime.Now;
+                    ddh.TongTien = Convert.ToDecimal(tongtien);
+                    db.DonHangs.Add(ddh);
+                    //db.SaveChanges();
+                    string content = MailHelper.MailOrder(ddh, kh, giohang);
+                    string mail = email;
+                    try
+                    {
+                        foreach (var item in giohang)
+                        {
+                            ChiTietDonHang dhct = new ChiTietDonHang();
+                            dhct.MaSach = item.iMaSach;
+                            dhct.MaDonHang = ddh.MaDonHang;
+                            dhct.DonGia = (decimal)item.dDonGia;
+                            dhct.SoLuong = item.iSoLuong;
+                            db.ChiTietDonHangs.Add(dhct);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
+                    db.SaveChanges();
+
                 }
-                catch (Exception ex)
+                catch (DbEntityValidationException e)
                 {
-                    return RedirectToAction("Index", "Home");
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+
                 }
-                db.SaveChanges();
-               
-                MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
+
                 if (Session["GioHang"] != null)
                 {
                     return RedirectToAction("ThanhToan", "GioHang");
                 }
                 return RedirectToAction("Index", "Home");
             }
+           
             // truong hop dang nhap an danh
             // kiem tra gio hang
         }

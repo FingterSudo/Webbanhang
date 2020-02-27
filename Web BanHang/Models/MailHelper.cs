@@ -47,7 +47,7 @@ namespace Web_BanHang.Models
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
             smtp.Credentials = new System.Net.NetworkCredential(fromEmail, passEmail);// tài khoản Gmail của bạn
-            smtp.EnableSsl = true;
+            smtp.EnableSsl = true;       
             smtp.Send(mail);
         }
         public static string MailRegister(string emailCustomer, string customerName,string moblie, string codeConfirm)

@@ -15,7 +15,7 @@
 
 
 @*<script src="~/Content/jquerystep/jquerysteps/jquery-1.9.1.min.js"></script>*@
-
+`
 <script src="~/Content/jquery-3.1.1.js"></script>
 <link href="~/Content/stepui.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.1.1.js"
@@ -58,7 +58,7 @@
                     </div>
                     <div class="emailalert">
                         <label>Email *</label>
-                        <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="email" autocomplete="off" /></p>
+                        <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="email" name="email" autocomplete="off" /></p>
                     </div>
                 </div>
                 // Tab 2: Thong tin san pham
@@ -67,7 +67,7 @@
                 // don hang co the chinh sua duoc so luong, va xoa duoc
                 <div class="tab form-group ">                           
                     <input type="text" id="searchBook"/>
-                    <table class="table table-striped">
+                    <table class="table-active  table table-striped">
                         <thead>
                             <tr class="Search">
                                 <th>Mã sản phẩm</th>
@@ -78,23 +78,23 @@
                             </tr>
                         </thead>
                         <tbody id="DataSearching">     
-                                <tr class="Search">
+                                @*<tr class="Search">
                                     <td> </td>
                                     <td> </td>
                                     <td> </td>
                                     <td> </td>
                                     <td><input type="checkbox" name="checkBox" value="False"/></td>
-                                </tr>
+                                </tr>*@
+
                         </tbody>
-                    </table>
-                    
+                    </table>                    
                     <div class="productButton">
                         <button class="Button badge-dark" id="productAdd" type="button">Thêm sản phẩm</button>
                     </div>
                     <div class="text-center">
                         <label><button type="button" class=" btn btn-danger">Chit tiết đơn hàng</button></label>
                         <div class="OrderDetail">
-                            <table class="table table-striped">
+                            <table class="table-order table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Mã sản phẩm</th>
@@ -104,18 +104,75 @@
                                         <th>Tổng tiền</th>
                                     </tr>
                                 </thead>
-                                <tbody class="addOrderDetail"></tbody>
+                                <tbody class="addOrderDetail" >      
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Tổng tiền</td>
+                                        <td onclick="ChangevalInput()"></td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
                   </div>
-                    // tab 3
-                    <div class="tab form-group">
-                        Birthday:
-                        <p><input placeholder="dd" oninput="this.className = 'form-control form-control'"></p>
-                        <p><input placeholder="mm" oninput="this.className = 'form-control form-control'"></p>
-                        <p><input placeholder="yyyy" oninput="this.className = 'form-control form-control'"></p>
+                    // tab  Chi tiet hoa don 
+                <div class="tab form-group">
+                    Thông tin hóa đơn
+                   <label><button class="btn btn-dark" id="ViewOders" type="button">Click Button</button></label>
+                    <div class="viewOder">
+                        <input name="CustomerName" />
+                        <input name="CustomerAdr" />
+                        <input name="CustomerEmail" />
+                        <input name="CustomerPhone" />
                     </div>
+                    <div class=" BillDetail">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Mã Hóa Đơn:</td>
+                                <td> </td>
+                                <td>Tên Khách Hàng:</td>
+                                <td></td>
+                                <td>Ngày sinh:</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Địa chỉ:</td>
+                                <td></td>
+                                <td>Giới tính</td>
+                                <td></td>
+                                <td>Sđt:</td>
+                                <td></td>
+                                <td>Email:</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <label><button type="button" class=" btn btn-danger">Chit tiết đơn hàng</button></label>
+                        <table class="table">
+                            <tr>
+                                <td>Mã sách</td>
+                                <td>Tên sách</td>
+                                <td>Số lượng</td>
+                                <td>Đơn giá</td>
+                                <td>Tổng giá</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Tổng tiền: </td>
+                                <td></td>
+                                <td>6</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
                     <div class="tab form-group">
                         Login Info:
@@ -136,8 +193,6 @@
                         <span class="step"></span>
                         <span class="step"></span>
                     </div>
-                    
-
                 }
 
                 </div>
@@ -208,7 +263,7 @@
             // A loop that checks every input field in the current tab:
             // Một vòng lặp kiểm tra tất các input trong tab hiện tại
             var numbers = /^[0-9]+$/;
-             var mailcheck = /^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var mailcheck = /^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             var nameval = document.getElementById('name').value;
             var phoneval = document.getElementById('phone').value;
             var adressval = document.getElementById('adress').value;
@@ -250,8 +305,7 @@
                     valid = false;
                 }
             }
-
-                          // start button alert
+                   // start button alert
             if ( nameval == "") {
                 $(".namealert").append(namecheckbutton);
             }
@@ -329,7 +383,7 @@
             x[n].className += " active";
             y[n].className += "is-active";
         }
-        // check numbert
+        // check number
         //function nextStep() {
         //    var avticeStep = $('.is-active');
 
@@ -418,7 +472,7 @@
                                 respone($.map(data, function (item) {
                                     var Data = "<tr>" +
                                         "<td>" + item.MaSach + "</td>" +
-                                        "<td>" + item.TenSach + "</td>" +
+                                        "<td><a href='javascript:void(0)' onclick='addProduct(" + item.MaSach + ",\"" + item.TenSach + "\"," + item.GiaBan+")'>" + item.TenSach + "</a></td>" +
                                         "<td>" +  item.GiaBan  + "</td>" +
                                         "<td>" + item.SoLuongTon + "</td>" +
                                         "<td><input type='checkbox' name='checkBox'/></td>" +                                    
@@ -432,51 +486,89 @@
                         })
                 }
             })
-          
+            function addProduct(BookId, BookName, BookPrice) {
+               
+                    var BookTable =
+                        "<tr>" +
+                        "<td>" + BookId + "</td>" +
+                        "<td>" + BookName + "</td>" +
+                        "<td>" + BookPrice + "</td>" +
+                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this)' />" + "</td>" +
+                        "<td class='priceTotal'>" + BookPrice + "</td>" +
+                        "</tr>";
+
+                    // thêm dòng tr vào table
+                    $(".addOrderDetail").append(BookTable);
+               
+            }
             $("#productAdd").on('click', function () {
                 
-                $(".table tbody tr ").each(function () {
+                $(".table-active tbody tr ").each(function () {
                     // von
                     var BookId = $(this).find("td").eq(0).text();
                     var BookName = $(this).find("td").eq(1).text();
-                    var BookPrice = $(this).find("td").eq(2).text();
-                    //var BookNumber = $('.valInput').val(); // ?? in put da xuat hien dau ma lay gia tri
-                   // var toTalprice = BookNumber * BookPrice;
-                    // var PriceTotal = BookNumber * BookPrice
-                   
-                    var BookTable = "<tr>" +
-                        
+                    var BookPrice = $(this).find("td").eq(2).text();             
+                    var BookTable  =
+                        "<tr>" +
                         "<td>" + BookId + "</td>" +
                         "<td>" + BookName + "</td>" +
-                        "<td>" + BookPrice + " </td>" +
-                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput()' />"+ "</td>" +
+                        "<td>" + BookPrice + "</td>" +
+                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this)' />" + "</td>" +
                         "<td class='priceTotal'>" + BookPrice + "</td>" +
                         "</tr>";
-                  
                    
                      // thêm dòng tr vào table
                     $(".addOrderDetail").append(BookTable);
-                  
                 })
-              
             })
-            //$("#valInput").on("change", function () {
-            //    var totalPrice = $("#table tr td: nth-child(6)").val();
-            //    var inputVal = $(" #table tr td #valIpunt").val();
-            //    totalPrice = totalPrice * inputVal;
-            //})
-            function ChangevalInput() {
-                var valInPut = $("input[name='inputVal123']").val();
-                //valInPut = 10;
+            //$("input[name='inputVal123']").on("change", function () {
+            //    const curVal = $(this).val();
+            //    console.log(curVal);
+            //    if (curVal <= 0 || isNaN(curVal)) {
+            //        $(this).val(1)
+            //    };
+            //});
+          
+            function ChangevalInput(that) {
+                var valInPut = $(that).val();
                 if (valInPut <= 0 || isNaN(valInPut)) {
-                    $("input[name='inputVal123']").val(1)
+                    $(that).val(1)
                 };
 
-                //$(".table tbody tr").each(function () {
-                //    var BookPrice = $(this).find("td").eq(4).text('hhhh') ;
+                var parentElem = $(that).parents("tr");
+                var price = parseInt(parentElem.find("td").eq(2).text());
+                var totalPrice = price * valInPut;
+                if (totalPrice < 0 || totalPrice == 0) {
+                    totalPrice = price;
+                   
+                }
+                parentElem.find("td").eq(4).html(totalPrice);
+                //var totalPrice2 + = totalPrice ;
+                //parentElem.find("td").eq(2).html(totalPrice2);
+                //$(".table-order tbody tr").each(function () {
+                //    var valInPut = $(that).val();
+                //    var BookPrice = $(this).find("td").eq(4).html();
                 //    console.log(BookPrice);
-                //    BookPrice += valInPut * BookPrice;
-                //})
-            }
+                //}) 
+            }  
+            // lay gia tri vao hoa don:
+            // check className neu className isVaild thi bat su kien on click cua nut next de 
+            // get val tu cac o input cuar tab khac in ra hoa don
+            // ok
+            $("#ViewOders").on('click', function() {
+                var CustomerName = $("input[name='name']").val();
+                var CustomerAdr = $("input[name='adress']").val();
+                var CustomerPhone = $("input[name='phone']").val();
+                var CustomerEmail = $("input[name='email'").val();
+                console.log(CustomerName);
+                console.log(CustomerAdr);
+                console.log(CustomerPhone);
+                console.log(CustomerEmail);
+                $("input[name='CustomerName']").val(CustomerName);
+                $("input[name='CustomerAdr']").val(CustomerAdr);
+                $("input[name='CustomerPhone']").val(CustomerPhone);
+                $("input[name='CustomerEmail']").val(CustomerEmail);
+            })
+         
         </script>
     }
