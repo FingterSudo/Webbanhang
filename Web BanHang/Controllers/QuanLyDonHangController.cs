@@ -194,8 +194,6 @@ namespace Web_BanHang.Controllers
                 TenSach = n.TenSach,
                 GiaBan = n.GiaBan,
                 SoLuongTon =n.SoLuongTon,
-
-                
             }).ToList();
             return new JsonResult { Data = allbook, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }

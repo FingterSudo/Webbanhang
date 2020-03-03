@@ -1,9 +1,6 @@
 ﻿@using Web_BanHang.Models;
 @using Web_BanHang.DTO;
 @using Newtonsoft.Json;
- 
-
-
 @*@model Web_BanHang.Models.DonHang*@
 @model  Web_BanHang.Models.Sach 
 @{
@@ -11,9 +8,6 @@
     ViewBag.Title = "ThemMoiFinal";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
-
-
-
 @*<script src="~/Content/jquerystep/jquerysteps/jquery-1.9.1.min.js"></script>*@
 `
 <script src="~/Content/jquery-3.1.1.js"></script>
@@ -36,9 +30,6 @@
 
             @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
             {
-
-
-
                 <h1>Thêm mới đơn hàng </h1>
                 <div class="progress-track"></div>
                 //Tab 1 thong tin khach hang
@@ -85,11 +76,10 @@
                                     <td> </td>
                                     <td><input type="checkbox" name="checkBox" value="False"/></td>
                                 </tr>*@
-
                         </tbody>
                     </table>                    
                     <div class="productButton">
-                        <button class="Button badge-dark" id="productAdd" type="button">Thêm sản phẩm</button>
+                        <button class="Button badge-dark" id="productAdd"  type="button">Thêm sản phẩm</button>
                     </div>
                     <div class="text-center">
                         <label><button type="button" class=" btn btn-danger">Chit tiết đơn hàng</button></label>
@@ -108,8 +98,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <td></td>
                                         <td>Tổng tiền</td>
-                                        <td onclick="ChangevalInput()"></td>
+                                        <td></td>
+                                        <td class="priceFinalTotal"> 0 </td>  <!--????-->
                                     </tr>
                                 </tfoot>
                             </table>
@@ -168,12 +160,12 @@
                                 <td></td>
                                 <td>Tổng tiền: </td>
                                 <td></td>
-                                <td>6</td>
+                                <td >6</td>
                             </tr>
                         </table>
                     </div>
                 </div>
-
+               
                     <div class="tab form-group">
                         Login Info:
                         <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
@@ -194,7 +186,7 @@
                         <span class="step"></span>
                     </div>
                 }
-
+       
                 </div>
 
     @section scripts{
@@ -471,7 +463,7 @@
                             success: function (data) {
                                 respone($.map(data, function (item) {
                                     var Data = "<tr>" +
-                                        "<td>" + item.MaSach + "</td>" +
+                                        "<td class='bookIdSearch'>" + item.MaSach + "</td>" +
                                         "<td><a href='javascript:void(0)' onclick='addProduct(" + item.MaSach + ",\"" + item.TenSach + "\"," + item.GiaBan+")'>" + item.TenSach + "</a></td>" +
                                         "<td>" +  item.GiaBan  + "</td>" +
                                         "<td>" + item.SoLuongTon + "</td>" +
@@ -489,37 +481,78 @@
             function addProduct(BookId, BookName, BookPrice) {
                
                     var BookTable =
-                        "<tr>" +
-                        "<td>" + BookId + "</td>" +
+                        "<tr class='productTable'>" +
+                        "<td class='ProductId'>" + BookId + "</td>" +
                         "<td>" + BookName + "</td>" +
-                        "<td>" + BookPrice + "</td>" +
-                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this)' />" + "</td>" +
-                        "<td class='priceTotal'>" + BookPrice + "</td>" +
-                        "</tr>";
-
+                        "<td class='bookPrice'>" + BookPrice + "</td>" +
+                        "<td>" + "<input type='number' value='1' style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this)' />" + "</td>" +
+                        "<td class='priceTotal'  >" + BookPrice + "</td>" +
+                        "<td>" + "<button class='btnXoa'  type='button'  " + " <i class='fas fa-trash-alt '>"+ "Xóa"+"</i>"+"</button>"  + "</td>"
+                "</tr>";
                     // thêm dòng tr vào table
-                    $(".addOrderDetail").append(BookTable);
-               
+                var productID = "";
+                var productIDSearch = parseInt($(".bookIdSearch").html())
+                $(".addOrderDetail").each(function () {
+                    productID = parseInt($(this).find("td").eq(0).html());        
+                    if (productID == null) {
+                        $(".addOrderDetail").append(BookTable);
+                        ChangeTotal();
+                    } 
+                    else if (productID != productIDSearch) {
+                        $(".addOrderDetail").append(BookTable);
+                        ChangeTotal();
+                    }
+                    else if (productID == productIDSearch) {
+                        var price = parseInt($(".bookPrice").html());
+                        console.log(price);
+                        var totalPrice = parseInt($(".priceTotal").html());
+                        var valInPut = parseInt($("input[name='inputVal123']").val());
+                        valInPut = valInPut + 1;
+                        totalPrice = valInPut * price;
+                        $("input[name='inputVal123']").val(valInPut)
+                        console.log(totalPrice);
+                        $(".priceTotal").html(totalPrice);
+                    }
+                });
             }
-            $("#productAdd").on('click', function () {
-                
+
+            $("#productAdd").on('click', function () {   
                 $(".table-active tbody tr ").each(function () {
                     // von
                     var BookId = $(this).find("td").eq(0).text();
                     var BookName = $(this).find("td").eq(1).text();
                     var BookPrice = $(this).find("td").eq(2).text();             
                     var BookTable  =
-                        "<tr>" +
-                        "<td>" + BookId + "</td>" +
+                        "<tr class='productTable'>" +
+                        "<td  class='ProductId'>" + BookId + "</td>" +
                         "<td>" + BookName + "</td>" +
-                        "<td>" + BookPrice + "</td>" +
-                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this)' />" + "</td>" +
-                        "<td class='priceTotal'>" + BookPrice + "</td>" +
+                        "<td class='bookPrice'>" + BookPrice + "</td>" +
+                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this) ' />" + "</td>" +
+                        "<td class='priceTotal' >" + BookPrice + "</td>" +
+                        "<td>" + "<button class='btnXoa'  type='button'  " + " <i class='fas fa-trash-alt'>" + "Xóa" +"</i>" + "</button>" + "</td>"
                         "</tr>";
-                   
-                     // thêm dòng tr vào table
-                    $(".addOrderDetail").append(BookTable);
-                })
+                    var productID = "";
+                    var productIDSearch  = parseInt($(".bookIdSearch").html())
+                    //$(".productTable").each(function () {
+                    productID = parseInt($(this).find("td").eq(0).html());
+                    if (productID == undefined) {
+                        $(".addOrderDetail").append(BookTable);
+                        ChangeTotal();
+                    }
+                    else if (productID != productIDSearch) {
+                        ChangeTotal();
+                        $(".addOrderDetail").append(BookTable);  
+                    }
+                    else if (productID == productIDSearch) {
+                        var price = parseInt($(".bookPrice").html());
+                        var totalPrice = parseInt($(".priceTotal").html());
+                        var valInPut = parseInt($("input[name='inputVal123']").val());
+                        valInPut = valInPut + 1;
+                        totalPrice = valInPut * price;
+                        $("input[name='inputVal123']").val(valInPut)
+                        $(".priceTotal").html(totalPrice);
+                    }
+                    });
             })
             //$("input[name='inputVal123']").on("change", function () {
             //    const curVal = $(this).val();
@@ -528,34 +561,70 @@
             //        $(this).val(1)
             //    };
             //});
-          
+            // ham tinh tong tien
+            //function checkProduct() {
+            //    var productIDSearch = "";
+            //    var productID = parseInt($(".bookIdSearch").html())
+            //    $(".productTable").each(function () {
+            //        productIDSearch = parseInt($(this).find("td").eq(0).html());
+            //        if (productIDSearch==0) {
+            //            $(".addOrderDetail").append(BookTable);
+            //        }
+            //        else if (productIDSearch == productID) {
+            //            alert("San pham bi trung");
+            //        }
+            //        else (productIDSearch != productID){
+            //            $(".addOrderDetail").append(BookTable);
+            //        }
+            //    });
+            //}
+            $(document).on('click', 'button.btnXoa', function () {
+                $(this).closest('tr').remove();
+                return false;
+            })
+            function FinalTotal() {
+                var valIP = parseInt($(".valInput").html())
+                var total = parseInt($(".priceFinalTotal").html());
+                var totalPrice = parseInt($(".priceTotal").html());
+                
+                $(".priceFinalTotal").html(total);
+            }
+            //?? thay doi la tong thay doi sai
             function ChangevalInput(that) {
+                var total = parseInt($(".priceFinalTotal").html());
+                var totalPrice = parseInt($(".priceTotal").html());
+                //var productId = parseInt($(".ProductId").html());
+                //var productIdSearch = parseInt($(".bookIdSearch").html());
                 var valInPut = $(that).val();
                 if (valInPut <= 0 || isNaN(valInPut)) {
                     $(that).val(1)
                 };
 
                 var parentElem = $(that).parents("tr");
-                var price = parseInt(parentElem.find("td").eq(2).text());
+               var price = parseInt(parentElem.find("td").eq(2).text());
                 var totalPrice = price * valInPut;
                 if (totalPrice < 0 || totalPrice == 0) {
                     totalPrice = price;
-                   
+                    
                 }
+             
                 parentElem.find("td").eq(4).html(totalPrice);
-                //var totalPrice2 + = totalPrice ;
-                //parentElem.find("td").eq(2).html(totalPrice2);
-                //$(".table-order tbody tr").each(function () {
-                //    var valInPut = $(that).val();
-                //    var BookPrice = $(this).find("td").eq(4).html();
-                //    console.log(BookPrice);
-                //}) 
-            }  
+                total += totalPrice
+                $(".priceFinalTotal").html(total);
+            }
+            function ChangeTotal() {
+                var total = parseInt($(".priceTotal").html());
+                var priceFinalTotal = parseInt($(".priceFinalTotal").html());
+                
+                (".priceFinalTotal").html(priceFinalTotal);
+
+            }
             // lay gia tri vao hoa don:
             // check className neu className isVaild thi bat su kien on click cua nut next de 
             // get val tu cac o input cuar tab khac in ra hoa don
             // ok
-            $("#ViewOders").on('click', function() {
+          // cai nay de sau ><
+          $("#ViewOders").on('click', function() {
                 var CustomerName = $("input[name='name']").val();
                 var CustomerAdr = $("input[name='adress']").val();
                 var CustomerPhone = $("input[name='phone']").val();
@@ -569,6 +638,5 @@
                 $("input[name='CustomerPhone']").val(CustomerPhone);
                 $("input[name='CustomerEmail']").val(CustomerEmail);
             })
-         
         </script>
-    }
+}
