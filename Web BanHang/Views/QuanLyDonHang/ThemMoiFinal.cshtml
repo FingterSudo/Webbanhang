@@ -421,36 +421,7 @@
                 })
             }
             })
-            // autocomplete search book
-            //$(document).ready(function () {
-            //    $("searchBtn").click(function () {
-            //        var searchValue = $("Search").val();
-            //        var setData = $("#DataSearching");
-            //        setData.html("");
-            //        $.ajax({
-            //            type: "post",
-            //            url: "/TimKiemAdmin/GetSearching?searchBookValue=" + searchValue,
-            //            contentType: "html",
-            //            success: function (result) {
-            //                if (result.length == 0) {
-            //                    setData.append('<tr style="color:red"><td colspan="3">No Match Data</td></tr>');
-            //                }
-            //                else {
-            //                    $.each(result, function (index, value) {
-            //                        var Data = "<tr>" +
-            //                            "<td>" + value.MaSach+ "</td>" +
-            //                            "<td>" + value.TenSach + "</td>" +
-            //                            "<td>" + value.SoLuongTon + "</td>" +
-            //                            "<td>" + value.GiaBan + "</td>" +
-            //                            "<td> <td><input type='checkbox' name='checkBox'/></td>" +
-            //                            "</tr>";
-            //                        setData.append(Data);
-            //                    })
-            //                }
-            //            }
-            //        })
-            //    })
-            //})
+             
             $("#searchBook").autocomplete({
                 source:
                     function (request, respone) {
@@ -478,6 +449,7 @@
                         })
                 }
             })
+            // click on links
             function addProduct(BookId, BookName, BookPrice) {
                
                     var BookTable =
@@ -485,37 +457,48 @@
                         "<td class='ProductId'>" + BookId + "</td>" +
                         "<td>" + BookName + "</td>" +
                         "<td class='bookPrice'>" + BookPrice + "</td>" +
-                        "<td>" + "<input type='number' value='1' style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this)' />" + "</td>" +
+                        "<td>" + "<input type='number' value='1' style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this) '  />" + "</td>" +
                         "<td class='priceTotal'  >" + BookPrice + "</td>" +
                         "<td>" + "<button class='btnXoa'  type='button'  " + " <i class='fas fa-trash-alt '>"+ "Xóa"+"</i>"+"</button>"  + "</td>"
                 "</tr>";
-                    // thêm dòng tr vào table
-                var productID = "";
+                // thêm dòng tr vào table
+                 
+                var productID = [];
                 var productIDSearch = parseInt($(".bookIdSearch").html())
                 $(".addOrderDetail").each(function () {
                     productID = parseInt($(this).find("td").eq(0).html());        
                     if (productID == null) {
                         $(".addOrderDetail").append(BookTable);
-                        ChangeTotal();
+                        update_prices();
+                        $('.valIput').change(function () {
+                            update_prices();
+                        })
+                    //    ChangeTotal();
                     } 
                     else if (productID != productIDSearch) {
                         $(".addOrderDetail").append(BookTable);
-                        ChangeTotal();
+                        update_prices();
+                        $('.valIput').change(function () {
+                            update_prices();
+                        })
+                       // ChangeTotal();
                     }
                     else if (productID == productIDSearch) {
                         var price = parseInt($(".bookPrice").html());
-                        console.log(price);
                         var totalPrice = parseInt($(".priceTotal").html());
                         var valInPut = parseInt($("input[name='inputVal123']").val());
                         valInPut = valInPut + 1;
-                        totalPrice = valInPut * price;
+                       totalPrice = valInPut * price;
                         $("input[name='inputVal123']").val(valInPut)
-                        console.log(totalPrice);
                         $(".priceTotal").html(totalPrice);
+                        //update_prices();
+                        //$('.valIput').change(function () {
+                        //    update_prices();
+                        //})
                     }
                 });
             }
-
+            // click on button
             $("#productAdd").on('click', function () {   
                 $(".table-active tbody tr ").each(function () {
                     // von
@@ -527,98 +510,90 @@
                         "<td  class='ProductId'>" + BookId + "</td>" +
                         "<td>" + BookName + "</td>" +
                         "<td class='bookPrice'>" + BookPrice + "</td>" +
-                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123' onchange='ChangevalInput(this) ' />" + "</td>" +
+                        "<td>" + "<input type='number' value=1 style='width: 90px; height:40px 'class='valInput form-control' name='inputVal123'  onchange='ChangevalInput(this) ' />" + "</td>" +
                         "<td class='priceTotal' >" + BookPrice + "</td>" +
                         "<td>" + "<button class='btnXoa'  type='button'  " + " <i class='fas fa-trash-alt'>" + "Xóa" +"</i>" + "</button>" + "</td>"
-                        "</tr>";
+                    "</tr>"; 
                     var productID = "";
                     var productIDSearch  = parseInt($(".bookIdSearch").html())
                     //$(".productTable").each(function () {
                     productID = parseInt($(this).find("td").eq(0).html());
                     if (productID == undefined) {
                         $(".addOrderDetail").append(BookTable);
-                        ChangeTotal();
+                        update_prices();
+                        $('.valIput').change(function () {
+                            update_prices();
+                        })
+                       //ChangeTotal();
                     }
                     else if (productID != productIDSearch) {
-                        ChangeTotal();
                         $(".addOrderDetail").append(BookTable);  
+                        update_prices();
+                        $('.valIput').change(function () {
+                            update_prices();
+                        })
+                        //ChangeTotal();
+                     
                     }
                     else if (productID == productIDSearch) {
                         var price = parseInt($(".bookPrice").html());
                         var totalPrice = parseInt($(".priceTotal").html());
                         var valInPut = parseInt($("input[name='inputVal123']").val());
                         valInPut = valInPut + 1;
-                        totalPrice = valInPut * price;
+                      totalPrice = valInPut * price;
                         $("input[name='inputVal123']").val(valInPut)
-                        $(".priceTotal").html(totalPrice);
+                         $(".priceTotal").html(totalPrice);
+                        //update_prices();
+                        //$('.valIput').change(function () {
+                        //    update_prices();
+                        //})
                     }
                     });
             })
-            //$("input[name='inputVal123']").on("change", function () {
-            //    const curVal = $(this).val();
-            //    console.log(curVal);
-            //    if (curVal <= 0 || isNaN(curVal)) {
-            //        $(this).val(1)
-            //    };
-            //});
-            // ham tinh tong tien
-            //function checkProduct() {
-            //    var productIDSearch = "";
-            //    var productID = parseInt($(".bookIdSearch").html())
-            //    $(".productTable").each(function () {
-            //        productIDSearch = parseInt($(this).find("td").eq(0).html());
-            //        if (productIDSearch==0) {
-            //            $(".addOrderDetail").append(BookTable);
-            //        }
-            //        else if (productIDSearch == productID) {
-            //            alert("San pham bi trung");
-            //        }
-            //        else (productIDSearch != productID){
-            //            $(".addOrderDetail").append(BookTable);
-            //        }
-            //    });
-            //}
+         // hang tinh tong
             $(document).on('click', 'button.btnXoa', function () {
                 $(this).closest('tr').remove();
+                update_prices();
+                $('.valIput').change(function () {
+                    update_prices();
+                })
                 return false;
             })
-            function FinalTotal() {
-                var valIP = parseInt($(".valInput").html())
-                var total = parseInt($(".priceFinalTotal").html());
-                var totalPrice = parseInt($(".priceTotal").html());
-                
-                $(".priceFinalTotal").html(total);
-            }
+            
             //?? thay doi la tong thay doi sai
             function ChangevalInput(that) {
-                var total = parseInt($(".priceFinalTotal").html());
-                var totalPrice = parseInt($(".priceTotal").html());
-                //var productId = parseInt($(".ProductId").html());
-                //var productIdSearch = parseInt($(".bookIdSearch").html());
+                
                 var valInPut = $(that).val();
                 if (valInPut <= 0 || isNaN(valInPut)) {
                     $(that).val(1)
                 };
-
-                var parentElem = $(that).parents("tr");
-               var price = parseInt(parentElem.find("td").eq(2).text());
-                var totalPrice = price * valInPut;
-                if (totalPrice < 0 || totalPrice == 0) {
-                    totalPrice = price;
-                    
-                }
-             
-                parentElem.find("td").eq(4).html(totalPrice);
-                total += totalPrice
-                $(".priceFinalTotal").html(total);
+                update_prices();
+                $('.valIput').change(function () {
+                    update_prices();
+                })
             }
-            function ChangeTotal() {
-                var total = parseInt($(".priceTotal").html());
-                var priceFinalTotal = parseInt($(".priceFinalTotal").html());
-                
-                (".priceFinalTotal").html(priceFinalTotal);
+            // tinh tong san pham
+            //$(document).ready(function () {
+            //    update_prices();
+            //    $('.valIput').change(function () {
+            //        update_prices();
+            //    })
+            //})
+            function update_prices() {
+                var sum = 0.0;
+                $('.table-order>tbody>tr').each(function () {
+                    var input = $(this).find('.valInput ').val();
+                    var price = parseFloat($(this).find('.bookPrice').html());
+                    var totalPrice = (input * price);
+                    sum += totalPrice;
+                    $(this).find('.priceTotal').text('' + totalPrice);
+                });
+                //just update the total to sum  
+                $('.priceFinalTotal').text(sum);
+            }  // co the dung amounts thay cho price
 
-            }
+
+
             // lay gia tri vao hoa don:
             // check className neu className isVaild thi bat su kien on click cua nut next de 
             // get val tu cac o input cuar tab khac in ra hoa don
