@@ -119,5 +119,7 @@ input {
             .multi-steps > li.is-active ~ li:before {
                 background-color: #ededed;
                 border-color: #ededed;
-            }
- 
+            } 
+
+
+

@@ -329,6 +329,7 @@
     <Content Include="Content\AdmimTemplate\css\checkbox-button-toggle.css" />
     <Content Include="Content\AdmimTemplate\css\StyleSheet1.css" />
     <Content Include="Content\AdmimTemplate\css\StyleSheet2.css" />
+    <Content Include="Content\cartDisplay.css" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
