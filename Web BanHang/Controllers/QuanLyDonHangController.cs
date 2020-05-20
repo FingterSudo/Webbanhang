@@ -8,8 +8,7 @@ using PagedList;
 using PagedList.Mvc;
 using Web_BanHang.DTO;
 using System.Web.Script.Serialization;
- 
-
+using Newtonsoft.Json;
 
 namespace Web_BanHang.Controllers
 {
@@ -260,78 +259,96 @@ namespace Web_BanHang.Controllers
 
         // ajax save data
         //[HttpPost]
-        //public JsonResult SaveData(string strOrder, string strOrderDetail, string strOrderCustomer )
-        //{
-        //    JavaScriptSerializer serializer = new JavaScriptSerializer();
+        // public JsonResult SaveData(string strOrder, object strOrderDetail, string strOrderCustomer)
+        // {
+        //     JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-        //    List<GioHang>  lstGioHang = serializer.Deserialize <List<GioHang>>(strOrderDetail);
-        //    DonHang donhang = serializer.Deserialize<DonHang>(strOrder);
-        //    KhachHang kh = serializer.Deserialize<KhachHang>(strOrderCustomer);
+        //     object orderDetail = serializer.DeserializeObject(strOrderDetail);
+        //     DonHang donhang = serializer.Deserialize<DonHang>(strOrder);
+        //     KhachHang kh = serializer.Deserialize<KhachHang>(strOrderCustomer);
 
-        //    //bool status = false;
-        //    //string message = string.Empty;
-        //    //add new order
-          
-          
-        //    try {
-        //        db.KhachHangs.Add(kh);
-        //        db.SaveChanges();
-        //        donhang.NgayDat = DateTime.Now;
-        //        db.DonHangs.Add(donhang);
-        //        db.SaveChanges();
-        //        foreach (var item in lstGioHang)
-        //        {
-        //            ChiTietDonHang ctdh = new ChiTietDonHang();
-        //            ctdh.MaDonHang = donhang.MaDonHang;
-        //            ctdh.MaKH = kh.MaKH;
-        //            ctdh.MaSach = item.iMaSach;
-        //            ctdh.MaNXB = item.iMaNXB;
-        //            ctdh.DonGia = Convert.ToDecimal(item.dDonGia);
-        //            ctdh.SoLuong = item.iSoLuong;
-        //            db.ChiTietDonHangs.Add(ctdh);
-        //            db.SaveChanges();
-        //        }
-        //    }
-        //    catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-        //    {
+        //     //bool status = false;
+        //     //string message = string.Empty;
+        //     //add new order
 
-        //        foreach(var eve in ex.EntityValidationErrors)
-        //        {
-        //            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-        //           eve.Entry.Entity.GetType().Name, eve.Entry.State);
-        //            foreach (var ve in eve.ValidationErrors)
-        //            {
-        //                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-        //        ve.PropertyName, ve.ErrorMessage);
-        //            }
-        //        }
-        //        throw;
-        //    }
-        //    return Json("true", JsonRequestBehavior.AllowGet);
-        //}
+        //     dynamic jsonObj = JsonConvert.DeserializeObject(orderDetail);
+        //     try
+        //     {
+        //         db.KhachHangs.Add(kh);
+        //         db.SaveChanges();
+        //         donhang.NgayDat = DateTime.Now;
+        //         db.DonHangs.Add(donhang);
+        //         db.SaveChanges();
+        //         foreach (var item in lstGioHang)
+        //         {
+        //             ChiTietDonHang ctdh = new ChiTietDonHang();
+        //             ctdh.MaDonHang = donhang.MaDonHang;
+        //             ctdh.MaKH = kh.MaKH;
+        //             ctdh.MaSach = item.iMaSach;
+        //             ctdh.MaNXB = item.iMaNXB;
+        //             ctdh.DonGia = Convert.ToDecimal(item.dDonGia);
+        //             ctdh.SoLuong = item.iSoLuong;
+        //             db.ChiTietDonHangs.Add(ctdh);
+        //             db.SaveChanges();
+        //         }
+        //     }
+        //     catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+        //     {
+
+        //         foreach (var eve in ex.EntityValidationErrors)
+        //         {
+        //             Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+        //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+        //             foreach (var ve in eve.ValidationErrors)
+        //             {
+        //                 Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+        //         ve.PropertyName, ve.ErrorMessage);
+        //             }
+        //         }
+        //         throw;
+        //     }
+        //     return Json("true", JsonRequestBehavior.AllowGet);
+        // }
 
         [HttpPost]
         public JsonResult SaveData(DonHang donhang, KhachHang khachhang, List<ChiTietDonHang> ctdh)
-        { 
-            db.KhachHangs.Add(khachhang);
-            db.SaveChanges();
-            donhang.NgayDat = DateTime.Now;
-            donhang.MaKH = khachhang.MaKH;
-            db.DonHangs.Add(donhang);
-            db.SaveChanges();
-            foreach(var item in ctdh)
+        {
+            try
             {
-                ChiTietDonHang chitietdh = new ChiTietDonHang();
-                chitietdh.DonGia = item.DonGia;
-                chitietdh.MaKH = khachhang.MaKH;
-                chitietdh.MaNXB = item.MaNXB;
-                chitietdh.MaSach = item.MaSach;
-                chitietdh.SoLuong = item.SoLuong;
-                db.ChiTietDonHangs.Add(chitietdh);
+                db.KhachHangs.Add(khachhang);
                 db.SaveChanges();
-             }
+                donhang.NgayDat = DateTime.Now;
+                donhang.MaKH = khachhang.MaKH;
+                db.DonHangs.Add(donhang);
+                db.SaveChanges();
+                foreach (var item in ctdh)
+                {
+                    ChiTietDonHang chitietdh = new ChiTietDonHang();
+                    chitietdh.DonGia = item.DonGia;
+                    chitietdh.MaKH = khachhang.MaKH;
+                    chitietdh.MaNXB = item.MaNXB;
+                    chitietdh.MaSach = item.MaSach;
+                    chitietdh.SoLuong = item.SoLuong;
+                    db.ChiTietDonHangs.Add(chitietdh);
+                    db.SaveChanges();
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                foreach (var eve in ex.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                   eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("-Property: \"{0}\", Error: \"{1}\"",
+                ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
             return Json("true", JsonRequestBehavior.AllowGet);
-         }
-        
+        }
+
     }
 }
