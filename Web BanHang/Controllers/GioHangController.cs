@@ -299,7 +299,7 @@ namespace Web_BanHang.Controllers
                 // lưu vào db
                 db.SaveChanges();
                 // truyền tham số vào phương thức Sendmail
-                MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
+                MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com","1996@Bach","Đơn Hàng", content);
                 // kiểm tra giỏ hàng có khác null không
                 if (Session["GioHang"] != null)
                 {
@@ -345,9 +345,10 @@ namespace Web_BanHang.Controllers
                     ddh.EmailKH = email;
                     ddh.DienThoaiKH = mobile;
                     ddh.NgayDat = DateTime.Now;
+                    ddh.NgayGiao = DateTime.Now;
                     ddh.TongTien = Convert.ToDecimal(tongtien);
                     db.DonHangs.Add(ddh);
-                    //db.SaveChanges();
+                    db.SaveChanges();
                     string content = MailHelper.MailOrder(ddh, kh, giohang);
                     string mail = email;
                     try
@@ -356,6 +357,7 @@ namespace Web_BanHang.Controllers
                         {
                             ChiTietDonHang dhct = new ChiTietDonHang();
                             dhct.MaSach = item.iMaSach;
+                            dhct.MaKH = ddh.MaKH;
                             dhct.MaDonHang = ddh.MaDonHang;
                             dhct.DonGia = (decimal)item.dDonGia;
                             dhct.SoLuong = item.iSoLuong;
@@ -366,7 +368,7 @@ namespace Web_BanHang.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    MailHelper.SendEmail1(mail, "dangnhatchi@gmail.com", "1996@Bach", "Đơn Hàng", content);
+                    MailHelper.SendEmail1(mail,"dangnhatchi@gmail.com","1996@Bach","Đơn Hàng", content);
                     db.SaveChanges();
 
                 }

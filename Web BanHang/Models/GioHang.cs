@@ -8,8 +8,9 @@ namespace Web_BanHang.Models
     public class GioHang
     {
         QuanLyBanSachEntities db = new QuanLyBanSachEntities();
-        
+
         public int iMaSach { get; set; }
+        public int iMaNXB { get; set; }
         public string sTenSach { get; set; }
         public string sAnhBia { get; set; }
         public double dDonGia { get; set; }

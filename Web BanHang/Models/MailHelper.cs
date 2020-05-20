@@ -36,6 +36,7 @@ namespace Web_BanHang.Models
         }
         public static void SendEmail1(string toEmail, string fromEmail, string passEmail, string titleEmail, string contentEmail)
         {
+            
             MailMessage mail = new MailMessage();
             mail.To.Add(toEmail);
             mail.From = new MailAddress(fromEmail);
@@ -50,6 +51,12 @@ namespace Web_BanHang.Models
             smtp.EnableSsl = true;       
             smtp.Send(mail);
         }
+
+        private static ICredentialsByHost NetworkCredential(string fromEmail, string passEmail)
+        {
+            throw new NotImplementedException();
+        }
+
         public static string MailRegister(string emailCustomer, string customerName,string moblie, string codeConfirm)
         {
             StringBuilder body = new StringBuilder();
@@ -66,9 +73,7 @@ namespace Web_BanHang.Models
         }
         public static string MailOrder(DonHang ct,KhachHang kh,List<GioHang> giohang  )
         {
-            StringBuilder body = new StringBuilder();
-            
-           
+            StringBuilder body = new StringBuilder();           
             body.Append("<p>Thông tin chi tiết đơn hàng số: <b style='color:red;'>" + ct.MaDonHang + "</p>");
             body.Append("<table>");
             body.Append("<tr><td colspan='2'><h3>Thông tin người mua:</h3></td></tr>");

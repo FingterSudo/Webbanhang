@@ -41,7 +41,7 @@ namespace Web_BanHang.Models
 
             [DataType(DataType.Date)]
             [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-            [Required(ErrorMessage = "Vui lòng nhập ngày giao!")]
+            [Required(ErrorMessage = "Vui lòng nhập ngày đặt!")]
             [DisplayName("Ngày Đặt(*)")]
             public Nullable<System.DateTime> NgayDat { get; set; }
 

@@ -2894,6 +2894,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\jquerystep\Css\" />
+    <Folder Include="System\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

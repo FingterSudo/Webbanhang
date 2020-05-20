@@ -26,8 +26,23 @@
     width: 20%;
     font-size: 1.2em;
     color: #333;
+    padding-left:50px;
 }
-
+.shop-id{
+    font-size: 1.2em;
+    color: #333;
+}
+.shop-id-publishers {
+    width: 20%;
+    font-size: 1.2em;
+    color: #333;
+    padding-left:70px;
+}
+.shop-price-span {
+    width: 20%;
+    font-size: 1.2em;
+    color: #333;
+}
 .shop-quantity {
     width: 35%;
 }
@@ -123,6 +138,12 @@
 }
 
 .cart-price {
+    width: 20%;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.cart-id-publishers {
     width: 20%;
     font-size: 1.2em;
     color: #333;

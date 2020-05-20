@@ -7,6 +7,9 @@ using Web_BanHang.Models;
 using PagedList;
 using PagedList.Mvc;
 using Web_BanHang.DTO;
+using System.Web.Script.Serialization;
+ 
+
 
 namespace Web_BanHang.Controllers
 {
@@ -156,45 +159,46 @@ namespace Web_BanHang.Controllers
         //    db.SaveChanges();
         //    return View();
         //}
-        [HttpPost]
-        public ActionResult ThemMoiFinal(FormCollection form)
-        {
-            DonHang donHang = new DonHang();
-            // var statusDonHang = form["TinhTrang"].ToString();
-            donHang.TenKH = form["name"].ToString();
-            donHang.DiaChi = form["adress"].ToString();
-           // donHang.DiaChiNhanHang = form["txtDiaChiNh"].ToString();
-            donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
-            donHang.EmailKH = form["email"].ToString();
-            donHang.DienThoaiKH = form["phone"].ToString();
-            //donHang.TinhTrangGiaoHang = Convert.ToInt32(form["txtGiaohang"]);
+        //[HttpPost]
+        //public ActionResult ThemMoiFinal(FormCollection form)
+        //{
+        //    DonHang donHang = new DonHang();
+            
+        //    donHang.TenKH = form["txtTenKH"].ToString();
+        //    donHang.DiaChi = form["txtDiaChiGiao"].ToString();
+        //    donHang.DiaChiNhanHang = form["txtDiaChiNH"].ToString();
+        //    donHang.NgayGiao = DateTime.Parse(form["txtNgayGiao"].ToString());
+        //    donHang.EmailKH = form["txtEmailKH"].ToString();
+        //    donHang.DienThoaiKH = form["txtPhoneKH"].ToString();
+        //    donHang.TinhTrangGiaoHang = null;
 
-            donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
-            ChiTietDonHang ctdh = new ChiTietDonHang();
-            ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
-            ctdh.DonGia = Convert.ToDecimal(form["txtDonGia"]);
-            ctdh.Sach.TenSach = form["txtSach"].ToString();
-            ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
-            ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
-            ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
+        //    donHang.TongTien = Convert.ToDecimal(form["txtTongTien"]);
+        //    ChiTietDonHang ctdh = new ChiTietDonHang();
+        //    ctdh.SoLuong = Convert.ToInt32(form["txtSoLuong"].ToString());
+        //    ctdh.DonGia = Convert.ToDecimal(form["txtDonGia"]);
+        //    ctdh.Sach.TenSach = form["txtSach"].ToString();
+        //    ctdh.MaSach = Convert.ToInt32(form["txtMaSach"].ToString());
+        //    ctdh.MaNXB = Convert.ToInt32(form["txtMaMXB"].ToString());
+        //    ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB");
 
-            db.DonHangs.Add(donHang);
-            db.ChiTietDonHangs.Add(ctdh);
-            db.SaveChanges();
-            return View();
+        //    db.DonHangs.Add(donHang);
+        //    db.ChiTietDonHangs.Add(ctdh);
+        //    db.SaveChanges();
+        //    return View();
 
-        }
+        //}
         
         public JsonResult GetBookValue(string search)
         {
             QuanLyBanSachEntities db = new QuanLyBanSachEntities();
             List<SachDTO> allbook = db.Saches.Where(n => n.TenSach.Contains(search)).Select(n => new SachDTO
             {
-                MaSach =n.MaSach,
+                MaSach = n.MaSach,
                 TenSach = n.TenSach,
                 GiaBan = n.GiaBan,
-                SoLuongTon =n.SoLuongTon,
-            }).ToList();
+                SoLuongTon = n.SoLuongTon,
+                MaNXB = n.MaNXB,
+             }).ToList();
             return new JsonResult { Data = allbook, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
@@ -254,6 +258,80 @@ namespace Web_BanHang.Controllers
             return null;
         }
 
-       
+        // ajax save data
+        //[HttpPost]
+        //public JsonResult SaveData(string strOrder, string strOrderDetail, string strOrderCustomer )
+        //{
+        //    JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        //    List<GioHang>  lstGioHang = serializer.Deserialize <List<GioHang>>(strOrderDetail);
+        //    DonHang donhang = serializer.Deserialize<DonHang>(strOrder);
+        //    KhachHang kh = serializer.Deserialize<KhachHang>(strOrderCustomer);
+
+        //    //bool status = false;
+        //    //string message = string.Empty;
+        //    //add new order
+          
+          
+        //    try {
+        //        db.KhachHangs.Add(kh);
+        //        db.SaveChanges();
+        //        donhang.NgayDat = DateTime.Now;
+        //        db.DonHangs.Add(donhang);
+        //        db.SaveChanges();
+        //        foreach (var item in lstGioHang)
+        //        {
+        //            ChiTietDonHang ctdh = new ChiTietDonHang();
+        //            ctdh.MaDonHang = donhang.MaDonHang;
+        //            ctdh.MaKH = kh.MaKH;
+        //            ctdh.MaSach = item.iMaSach;
+        //            ctdh.MaNXB = item.iMaNXB;
+        //            ctdh.DonGia = Convert.ToDecimal(item.dDonGia);
+        //            ctdh.SoLuong = item.iSoLuong;
+        //            db.ChiTietDonHangs.Add(ctdh);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //    catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+        //    {
+
+        //        foreach(var eve in ex.EntityValidationErrors)
+        //        {
+        //            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+        //           eve.Entry.Entity.GetType().Name, eve.Entry.State);
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+        //        ve.PropertyName, ve.ErrorMessage);
+        //            }
+        //        }
+        //        throw;
+        //    }
+        //    return Json("true", JsonRequestBehavior.AllowGet);
+        //}
+
+        [HttpPost]
+        public JsonResult SaveData(DonHang donhang, KhachHang khachhang, List<ChiTietDonHang> ctdh)
+        { 
+            db.KhachHangs.Add(khachhang);
+            db.SaveChanges();
+            donhang.NgayDat = DateTime.Now;
+            donhang.MaKH = khachhang.MaKH;
+            db.DonHangs.Add(donhang);
+            db.SaveChanges();
+            foreach(var item in ctdh)
+            {
+                ChiTietDonHang chitietdh = new ChiTietDonHang();
+                chitietdh.DonGia = item.DonGia;
+                chitietdh.MaKH = khachhang.MaKH;
+                chitietdh.MaNXB = item.MaNXB;
+                chitietdh.MaSach = item.MaSach;
+                chitietdh.SoLuong = item.SoLuong;
+                db.ChiTietDonHangs.Add(chitietdh);
+                db.SaveChanges();
+             }
+            return Json("true", JsonRequestBehavior.AllowGet);
+         }
+        
     }
 }

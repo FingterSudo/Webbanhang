@@ -27,32 +27,33 @@
             <li class="step1 ">Hoàn Thành</li>
         </ul>
     </div>
-    @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { name = "regForm" }))
+    @using (Html.BeginForm("ThemMoiFinal", "QuanLyDonHang", FormMethod.Post, new { id = "regForm" }))
     {
         <h1>Thêm mới đơn hàng </h1>
         <div class="progress-track"></div>
         //Tab 1 thong tin khach hang
         //ToDo: dien thong tin khach hang
         <div class="tab form-group ">
+            <span>Dành cho người gửi:</span>
             <div class="namealert">
                 <label>Họ tên *</label>
-                <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="name" id="name" autocomplete="off"></p>
+                <p><input placeholder="Họ tên..." oninput="this.className = 'form-control form-control'" name="txtTenKH" id="txtTenKH" autocomplete="off"></p>
             </div>
             <div class="phonealert">
                 <label>Điện thoại *</label>
-                <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="phone" id="phone" autocomplete="off" /></p>
+                <p><input placeholder="Điện thoại " oninput="this.className = 'form-control form-control'" name="txtPhoneKH" id="txtPhoneKH" autocomplete="off" /></p>
             </div>
             <div class="adressalert">
                 <label>Địa chỉ *</label>
-                <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="adress" name="adress" autocomplete="off" /></p>
+                <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="txtDiaChiGiao" name="txtDiaChiGiao" autocomplete="off" /></p>
             </div>
             <div class="emailalert">
                 <label>Email *</label>
-                <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="email" name="email" autocomplete="off" /></p>
+                <p><input placeholder="Email" oninput="this.className = 'form-control form-control'" id="txtEmailKH" name="txtEmailKH" autocomplete="off" /></p>
             </div>
         </div>
         // Tab 2:  them san pham
-        
+
         <div class="tab form-group ">
             <input type="text" id="searchBook" />
 
@@ -60,32 +61,34 @@
                 <div class="shop-row">
                     <span class="shop-id shop-header shop-column">ID</span>
                     <span class="shop-item shop-header shop-column">ITEM</span>
-                    <span class="shop-price shop-header shop-column">PRICE</span>
+                    <span class="shop-header shop-column"></span>
+                    <span class=".shop-price-span shop-header shop-column">PRICE</span>
+                    <span class="shop-publishers shop-header shop-column">PUBLISHERS </span>
                     <span class="shop-quantity shop-header shop-column">QUANTITY</span>
                 </div>
                 <div class="shop-items" id="dataSeaching"></div>
             </div>
-            @* 
-            <table class="table-active  table table-striped">
-                <thead>
-                    <tr class="Search">
-                        <th>Mã sản phẩm</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Đơn giá</th>
-                        <th>Số lượng tồn</th>
-                        <th></th>
+            @*
+                <table class="table-active  table table-striped">
+                    <thead>
+                        <tr class="Search">
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng tồn</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="DataSearching">
+                        @*<tr class="Search">
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td><input type="checkbox" name="checkBox" value="False"/></td>
                     </tr>
-                </thead>
-                <tbody id="DataSearching">
-                    @*<tr class="Search">
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td><input type="checkbox" name="checkBox" value="False"/></td>
-                </tr>  
-                </tbody>
-            </table>  *@
+                    </tbody>
+                </table>  *@
             <div class="productButton">
                 <button class="Button badge-dark" id="productAdd" type="button">Thêm sản phẩm</button>
             </div>
@@ -95,105 +98,62 @@
                     <div class="cart-row">
                         <span class="cart-id cart-header cart-column">ID</span>
                         <span class="cart-item cart-header cart-column">ITEM</span>
-                        <span class="cart-price cart-header cart-column">PRICE</span>
+                         <span class="cart-price cart-header cart-column">PRICE</span>
+                        <span class="cart-id-publishers  cart-header cart-column">PUBLISHERS </span>
                         <span class="cart-quantity cart-header cart-column">QUANTITY</span>
                     </div>
 
                     <!--Div -->
                     <div class="cart-items">
-                        
+
                     </div>
 
                     <div class="cart-total">
                         <strong class="cart-total-title">Total</strong>
-                        <span class="cart-total-price">$0</span>
+                        <span class="cart-total-price" name="txtTongTien" id="txtTongTien">0</span>
                     </div>
                 </div>
             </div>
         </div>
 
-            // tab  Chi tiet hoa don
-            <div class="tab form-group">
-                Thông tin hóa đơn
-                <label><button class="btn btn-dark" id="ViewOders" type="button">Click Button</button></label>
-                <div class="viewOder">
-                    <input name="CustomerName" />
-                    <input name="CustomerAdr" />
-                    <input name="CustomerEmail" />
-                    <input name="CustomerPhone" />
-                </div>
-                <div class=" BillDetail">
-                    <table class="table table-striped">
-                        <tr>
-                            <td>Mã Hóa Đơn:</td>
-                            <td> </td>
-                            <td>Tên Khách Hàng:</td>
-                            <td></td>
-                            <td>Ngày sinh:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Địa chỉ:</td>
-                            <td></td>
-                            <td>Giới tính</td>
-                            <td></td>
-                            <td>Sđt:</td>
-                            <td></td>
-                            <td>Email:</td>
-                            <td></td>
-                        </tr>
-                    </table>
-                    <label><button type="button" class=" btn btn-danger">Chit tiết đơn hàng</button></label>
-                    <table class="table">
-                        <tr>
-                            <td>Mã sách</td>
-                            <td>Tên sách</td>
-                            <td>Số lượng</td>
-                            <td>Đơn giá</td>
-                            <td>Tổng giá</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Tổng tiền: </td>
-                            <td></td>
-                            <td>6</td>
-                        </tr>
-                    </table>
-                </div>
+        // tab  Chi tiet hoa don
+        <div class="tab form-group ">
+            <span>Giao tới địa chỉ: </span>
+             
+            <div class="adressalert">
+                <label>Địa chỉ*:</label>
+                <p><input placeholder="Địa chỉ" oninput="this.className='form-control form-control'" id="txtDiaChiNH" name="txtDiaChiNH" autocomplete="off" /></p>
             </div>
-
-            <div class="tab form-group">
-                Login Info:
-                <p><input placeholder="Username..." oninput="this.className = 'form-control form-control'"></p>
-                <p><input placeholder="Password..." oninput="this.className = 'form-control form-control'"></p>
+            
+            
+            <div class="ui-datepicker-title">
+                <label>Ngày nhận*:</label>
+                <p><input class="form-control txtNgayGiao" name="txtNgayGiao" id="txtNgayGiao"/></p>
             </div>
+        </div>
+        // tab hoana thanh
+        <div class="tab form-group">
+             <p>Kiểm tra lại địa chỉ và bấm submit để hoàn thành đơn hàng</p>
+        </div>
 
-            <div style="overflow:auto;">
-                <div style="float:right;">
-                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
-                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger">Next</button>
-                </div>
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-danger btn-submit">Next</button>
             </div>
+        </div>
 
-            <div style="text-align:center;margin-top:40px;">
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-            </div>
-            }
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+    }
+</div>
 
-
-            @section scripts{
-                <script>
+    @section scripts{
+        <script>
         var currentTab = 0; // Tab hiện tại được đặt là tab đầu tiên [0]
         showTab(currentTab); // Hiển thị tab hiện tại
 
@@ -239,8 +199,10 @@
             if (currentTab >= x.length) {
                 //...the form gets submitted:
                 // mẫu được submit
-                document.getElementById("regForm").submit();
+                //document.getElementById("regForm").Submit();
+                $('.btn-submit').on('click', Submit());
                 return false;
+                
             }
             // Otherwise, display the correct tab:
             // nếu không hiển thị tab chính xác
@@ -259,10 +221,10 @@
             // Một vòng lặp kiểm tra tất các input trong tab hiện tại
             var numbers = /^[0-9]+$/;
             var mailcheck = /^\w+([\.-]?\w+)*@("@")\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            var nameval = document.getElementById('name').value;
-            var phoneval = document.getElementById('phone').value;
-            var adressval = document.getElementById('adress').value;
-            var emailval = document.getElementById('email').value;
+            var nameval = document.getElementById('txtTenKH').value;
+            var phoneval = document.getElementById('txtPhoneKH').value;
+            var adressval = document.getElementById('txtDiaChiGiao').value;
+            var emailval = document.getElementById('txtEmailKH').value;
 
             var namecheckbutton = "<div class= 'alert alert-warning alert-dismissible fade show'+ role='alert'>" + " <button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
                 + "<span aria-hidden='true' >&times; </span ></button><strong>vui lòng điều họ tên</strong> </div > ";
@@ -293,7 +255,7 @@
                       //add an "invalid" class to the field:
                     // thêm một lớp không hợp lệ vào trường
 
-                    y[i].className += "invalid";
+                    y[i].className += "invalid  ";
 
                      //and set the current valid status to false:
                      //và set trạng thái hợp lệ thành false
@@ -436,14 +398,14 @@
                             dataType: 'json',
                             success: function (data) {
                                 respone($.map(data, function (item) {
-                                    var Data1 = "<div class='shop-row'> <div class='shop-column'>"
-                                                  
-                                        + "<span class='shop-id'>" + item.MaSach + "</span></div>" + "<div class='shop-item shop-column'>"
-                                        + "  <span class='shop-item-title'>" + item.TenSach + " </span> </div>"
-                                                + " <span class='shop-price shop-column'>" + item.GiaBan + "</span>"
-                                                + "<div class='shop-quantity shop-column'><span class='shop-quantity-input'> " + item.SoLuongTon + " </span>"
+                                    var Data1 = "<div class='shop-row'><div class='shop-column'>"
+                                        + "<span class='shop-id 'name='txtMaSach' id='txtMaSach'>" + item.MaSach + "</span></div>" + "<div class='shop-item shop-column'>"
+                                        + "  <span class='shop-item-title' name='txtSach' id='txtSach'>" + item.TenSach + " </span> </div>"
+                                        + " <span class='shop-price shop-column'name='txtDonGia' id='txtDonGia'>" + item.GiaBan + "</span>" 
+                                        + "<span class='shop-id-publishers shop-column' name='txtMaMXB' id='txtMaMXB'>" + item.MaNXB + "</span>"
+                                        + "<div class='shop-quantity shop-column'><span class='shop-quantity-input' > " + item.SoLuongTon + " </span>"
                                         + "<button class='btn btn-primary shop-item-button' type='button'onclick='addToCartClicked(event)'>Thêm</button></div></div>"
-                                       
+
                                      return setData.append(Data1);
                                 }))
                             },
@@ -499,41 +461,44 @@
                 var shopItem = button.parentElement.parentElement;
                 var id = parseInt(shopItem.getElementsByClassName('shop-id')[0].innerHTML);
                 var title = shopItem.getElementsByClassName('shop-item-title')[0].innerHTML;
-                var price = shopItem.getElementsByClassName('shop-price')[0].innerHTML;              
-                addItemToCart(id, title, price);
+                var idPublishers = parseInt( shopItem.getElementsByClassName('shop-id-publishers')[0].innerHTML);
+                var price = shopItem.getElementsByClassName('shop-price')[0].innerHTML;
+
+                addItemToCart(id, title, idPublishers,price);
                 updateCartTotal();
 
             }
 
-            function addItemToCart(id, title, price) {
+            function addItemToCart(id, title, idPublishers, price) {
                 var cartRow = document.createElement('div');
                 cartRow.classList.add('cart-row');
                 var cartItems = document.getElementsByClassName('cart-items')[0];
-                var cartItemNames = cartItems.getElementsByClassName('cart-item-title');       
+                var cartItemNames = cartItems.getElementsByClassName('cart-item-title');
                 for (var i = 0; i < cartItemNames.length; i++) {
-                     
+
                     if (cartItemNames[i].innerHTML == title) {
                         alert('Sản phẩm đã được cộng vào giỏ hàng');
                         return;
                     }
-                    
+
                 }
-                
-                var cartRowContents = 
+
+                var cartRowContents =
                      "<span class='cart-id cart-column'>" + id + "</span>"
                     + "<div class='cart-item cart-column'>"
                     + "<spa class='cart-item-title'>" + title + "</span>"
-                    +"</div >"            
-                    + "<span class='cart-price cart-column'>" + price  + "</span>"
+                    + "</div >"                  
+                    + "<span class='cart-price cart-column'>" + price + "</span>"
+                    + "<span class='cart-id-publishers cart-column'>" + idPublishers + "</span>"
                     + "<div class='cart-quantity cart-column'>"
-                    + "<input class='cart-quantity-input' type='number' value='1'>"
+                    + "<input class='cart-quantity-input txtSoLuong' type='number' value='1' name='txtSoLuong' id='txtSoLuong'>"
                     + "<button class='btn btn-danger  btn-remove' type='button'>REMOVE</button></div>";
                 cartRow.innerHTML = cartRowContents;
                 cartItems.append(cartRow);
                 cartRow.getElementsByClassName('btn-remove')[0].addEventListener('click', removeCartItem);
-                cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)        
+                cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
                     }
- 
+
             function updateCartTotal() {
                 var cartItemContainer = document.getElementsByClassName('cart-items')[0];
                 var cartRows = cartItemContainer.getElementsByClassName('cart-row');
@@ -543,15 +508,118 @@
                     var priceElement = cartRow.getElementsByClassName('cart-price')[0];
                     var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
                     var price = parseFloat(priceElement.innerHTML.replace('$', ''));
-                    var quantity = quantityElement.value;
-                    console.log(price * quantity);
+                    var quantity = quantityElement.value;               
                     total = total + (price * quantity);
                 }
                 total = Math.round(total * 100) / 100;
-                document.getElementsByClassName('cart-total-price')[0].innerHTML = '$' + total;
-                
-            }
+                document.getElementsByClassName('cart-total-price')[0].innerHTML =   total;
 
+            }
+            $(function () {
+                $('.txtNgayGiao').datepicker();
+            })
+
+            // save Data
+             function Submit() {
+                var tenkh = $('#txtTenKH').val();
+                 var dienthoai = $('#txtPhoneKH').val();
+                 var diachigiao = $('#txtDiaChiGiao').val();
+                 var email = $('#txtEmailKH').val();
+                 var masach = parseInt($('#txtMaSach').html());
+                 var giasach = parseInt($('#txtDonGia').html());
+                 var manxb = parseInt($('#txtMaMXB').html());
+                 var soluong = parseInt($('#txtSoLuong').val());
+                 console.log('day la so luong' + soluong);
+                 var tongtien = parseFloat($('#txtTongTien').html());
+                 console.log('Day la tong tien'+tongtien);
+                 var ngaygiao = $('#txtNgayGiao').val()
+                 var donhang = {
+                    TenKH: tenkh,
+                    DiaChi: diachigiao,
+                    DiaChiNhanHang: diachigiao, 
+                    EmailKH: email,
+                    NgayGiao: ngaygiao,
+                    DienThoaiKH: dienthoai,     
+                    TongTien: tongtien
+                }
+                 var ctdh = {
+                    iMaSach: masach,
+                    iMaNXB: manxb,
+                    iSoLuong: soluong,
+                    dDonGia: giasach
+                }
+                 var khachhang = {
+                     Email: email,
+                     DiaChi: diachigiao,
+                     HoTen: tenkh,
+                     DienThoai: dienthoai,
+                 }
+                $.ajax({
+                    url: 'SaveData',
+                    type: 'POST',
+                    contentType: " application / json; charset=utf-8",
+                    data: {
+                        khachhang:JSON.stringify(khachhang),
+                        donhang:JSON.stringify(donhang),
+                        ctdh:JSON.stringify(ctdh)
+                    },
+                    
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status == true) {
+                            alert('Da luu Database')
+                        }
+                        else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                 })
+                // $.ajax({
+                //     Url: 'SaveDataDetail',
+                //     data: {
+                //         strOrderDetail: JSON.stringify(orderDetail)
+                //     },
+                //     type: 'POST',
+                //     dataType: 'json',
+                //     success: function (response) {
+                //         if (response.status == true) {
+                //             console.log('Da lu database')
+                //         }
+                //         else {
+                //             alert(response.message);
+                //         }
+                //     },
+                //     error: function (err) {
+                //         console.log(err);
+                //     }
+                // })
+                 //var urls = ['SaveData'  ];
+                 //$.each(urls, function (i, u) {
+                 //    $.ajax(u,
+                 //        {
+                 //            type: 'POST',
+                 //            data: {
+                 //                strOrder: JSON.stringify(orderDetail),
+                                 
+                 //            },
+                 //            success: function (response) {
+                 //                if (response.status == true) {
+                 //                    console.log('Da lu database')
+                 //                }
+                 //                else {
+                 //                    alert(response.message);
+                 //                }
+                 //            },
+                 //            error: function (err) {
+                 //                console.log(err);
+                 //            }
+                 //    }
+                 //    )
+                 //})
+            } 
             //var BookTable1 =
             //    "<tr class='productTable'>" +
             //    "<td class='ProductId' >" + BookId + "</td>" +
@@ -823,20 +891,20 @@
             // get val tu cac o input cuar tab khac in ra hoa don
             // ok
           // cai nay de sau ><
-          $("#ViewOders").on('click', function() {
-                var CustomerName = $("input[name='name']").val();
-                var CustomerAdr = $("input[name='adress']").val();
-                var CustomerPhone = $("input[name='phone']").val();
-                var CustomerEmail = $("input[name='email'").val();
-                console.log(CustomerName);
-                console.log(CustomerAdr);
-                console.log(CustomerPhone);
-                console.log(CustomerEmail);
-                $("input[name='CustomerName']").val(CustomerName);
-                $("input[name='CustomerAdr']").val(CustomerAdr);
-                $("input[name='CustomerPhone']").val(CustomerPhone);
-                $("input[name='CustomerEmail']").val(CustomerEmail);
-            })
+          //$("#ViewOders").on('click', function() {
+          //      var CustomerName = $("input[name='name']").val();
+          //      var CustomerAdr = $("input[name='adress']").val();
+          //      var CustomerPhone = $("input[name='phone']").val();
+          //      var CustomerEmail = $("input[name='email'").val();
+          //      console.log(CustomerName);
+          //      console.log(CustomerAdr);
+          //      console.log(CustomerPhone);
+          //      console.log(CustomerEmail);
+          //      $("input[name='CustomerName']").val(CustomerName);
+          //      $("input[name='CustomerAdr']").val(CustomerAdr);
+          //      $("input[name='CustomerPhone']").val(CustomerPhone);
+          //      $("input[name='CustomerEmail']").val(CustomerEmail);
+          //  })
             //$('.table-active>tbody>tr').each(function () {
             //    var iBook = parseInt($(this).find('td.bookIdSearch').html());
             //    $('.table-order>tbody>tr').each(function () {
@@ -852,5 +920,5 @@
             //        }
             //    })
             //})
-                </script>
-            }
+        </script>
+    }
