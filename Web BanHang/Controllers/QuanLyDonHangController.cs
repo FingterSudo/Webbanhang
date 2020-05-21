@@ -311,7 +311,7 @@ namespace Web_BanHang.Controllers
         // }
 
         [HttpPost]
-        public JsonResult SaveData(DonHang donhang, KhachHang khachhang, List<ChiTietDonHang> ctdh)
+        public JsonResult SaveData(DonHang donhang, KhachHang khachhang,  ChiTietDonHang[] ctdh)
         {
             try
             {
@@ -324,10 +324,11 @@ namespace Web_BanHang.Controllers
                 foreach (var item in ctdh)
                 {
                     ChiTietDonHang chitietdh = new ChiTietDonHang();
-                    chitietdh.DonGia = item.DonGia;
-                    chitietdh.MaKH = khachhang.MaKH;
-                    chitietdh.MaNXB = item.MaNXB;
+                    chitietdh.MaDonHang = donhang.MaDonHang;
                     chitietdh.MaSach = item.MaSach;
+                    chitietdh.MaNXB = item.MaNXB;  
+                    chitietdh.MaKH = khachhang.MaKH;
+                    chitietdh.DonGia = item.DonGia;
                     chitietdh.SoLuong = item.SoLuong;
                     db.ChiTietDonHangs.Add(chitietdh);
                     db.SaveChanges();
@@ -347,8 +348,7 @@ namespace Web_BanHang.Controllers
                 }
                 throw;
             }
-            return Json("true", JsonRequestBehavior.AllowGet);
+            return Json("true");
         }
-
     }
 }
