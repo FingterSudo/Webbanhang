@@ -17,7 +17,7 @@ namespace Web_BanHang.Controllers
         private readonly QuanLyBanSachEntities db = new QuanLyBanSachEntities();
         // GET: QuanLyDonHang
         public ActionResult Index(int? Page)
-        {
+        {       
             int pageSize = 10;
             int pageNumber = Page ?? 1;
 
@@ -257,61 +257,10 @@ namespace Web_BanHang.Controllers
             return null;
         }
 
-        // ajax save data
-        //[HttpPost]
-        // public JsonResult SaveData(string strOrder, object strOrderDetail, string strOrderCustomer)
-        // {
-        //     JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-        //     object orderDetail = serializer.DeserializeObject(strOrderDetail);
-        //     DonHang donhang = serializer.Deserialize<DonHang>(strOrder);
-        //     KhachHang kh = serializer.Deserialize<KhachHang>(strOrderCustomer);
-
-        //     //bool status = false;
-        //     //string message = string.Empty;
-        //     //add new order
-
-        //     dynamic jsonObj = JsonConvert.DeserializeObject(orderDetail);
-        //     try
-        //     {
-        //         db.KhachHangs.Add(kh);
-        //         db.SaveChanges();
-        //         donhang.NgayDat = DateTime.Now;
-        //         db.DonHangs.Add(donhang);
-        //         db.SaveChanges();
-        //         foreach (var item in lstGioHang)
-        //         {
-        //             ChiTietDonHang ctdh = new ChiTietDonHang();
-        //             ctdh.MaDonHang = donhang.MaDonHang;
-        //             ctdh.MaKH = kh.MaKH;
-        //             ctdh.MaSach = item.iMaSach;
-        //             ctdh.MaNXB = item.iMaNXB;
-        //             ctdh.DonGia = Convert.ToDecimal(item.dDonGia);
-        //             ctdh.SoLuong = item.iSoLuong;
-        //             db.ChiTietDonHangs.Add(ctdh);
-        //             db.SaveChanges();
-        //         }
-        //     }
-        //     catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-        //     {
-
-        //         foreach (var eve in ex.EntityValidationErrors)
-        //         {
-        //             Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-        //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-        //             foreach (var ve in eve.ValidationErrors)
-        //             {
-        //                 Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-        //         ve.PropertyName, ve.ErrorMessage);
-        //             }
-        //         }
-        //         throw;
-        //     }
-        //     return Json("true", JsonRequestBehavior.AllowGet);
-        // }
+       
 
         [HttpPost]
-        public JsonResult SaveData(DonHang donhang, KhachHang khachhang,  ChiTietDonHang[] ctdh)
+        public JsonResult SaveData(DonHang donhang, KhachHang khachhang,  List<ChiTietDonHang> ctdh)
         {
             try
             {

@@ -1,0 +1,94 @@
+﻿@model  PagedList.IPagedList<Web_BanHang.Models.TaiKhoan>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tài Khoản
+        </th>
+        <th>
+            Mật khẩu
+        </th>
+        <th>
+            Họ tên
+        </th>
+        <th>
+             Ngày sinh
+        </th>
+        <th>
+             Địa chỉ
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Số diện thoại
+        </th>
+        <th>
+              Ảnh đại diện
+        </th>
+        <th>
+           Giới tính
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaiKhoan1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatKhau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sdt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaTK }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaTK }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaTK })
+            </td>
+        </tr>
+    }
+
+</table>
+<center>
+    @Html.PagedListPager(Model, Page =>
+       Url.Action("Index", new { Page=Page, @class="page-link" }),
+       new PagedListRenderOptions
+       {
+           ContainerDivClasses =  new string[] { "navigation" },
+           LiElementClasses = new string[] {"page-item"}
+       }
+       )
+</center>
+@section scripts{}

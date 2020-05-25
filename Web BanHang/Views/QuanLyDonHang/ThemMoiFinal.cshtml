@@ -104,7 +104,7 @@
                     </div>
 
                     <!--Div -->
-                    <div class="cart-items">
+                    <div class="cart-items cart-value">
 
                     </div>
 
@@ -128,7 +128,7 @@
             
             <div class="ui-datepicker-title">
                 <label>Ngày nhận*:</label>
-                <p><input class="form-control txtNgayGiao" name="txtNgayGiao" id="txtNgayGiao"/></p>
+                <p><input class="form-control txtNgayGiao" name="txtNgayGiao" id="txtNgayGiao" autocomplete="off"/></p>
             </div>
         </div>
         // tab hoana thanh
@@ -455,7 +455,7 @@
                 }
                 updateCartTotal();
             }
-
+            var ChiTietDonHang = [];
             function addToCartClicked(event) {
                 var button = event.target;
                 var shopItem = button.parentElement.parentElement;
@@ -463,7 +463,7 @@
                 var title = shopItem.getElementsByClassName('shop-item-title')[0].innerHTML;
                 var idPublishers = parseInt( shopItem.getElementsByClassName('shop-id-publishers')[0].innerHTML);
                 var price = shopItem.getElementsByClassName('shop-price')[0].innerHTML;
-
+                 
                 addItemToCart(id, title, idPublishers,price);
                 updateCartTotal();
 
@@ -484,13 +484,13 @@
                 }
 
                 var cartRowContents =
-                     "<span class='cart-id cart-column' name='txtMaSach' id='txtMaSach'>" + id + "</span>"
+                     "<span class='cart-id cart-column txtMaSach' name='txtMaSach' id='txtMaSach'>" + id + "</span>"
                     + "<div class='cart-item cart-column'>"
-                    + "<spa class='cart-item-title' name='txtSach' id='txtSach'>" + title + "</span>"
+                    + "<spa class='cart-item-title txtSach' name='txtSach' id='txtSach'>" + title + "</span>"
                     + "</div >"                  
-                    + "<span class='cart-price cart-column'name='txtDonGia' id='txtDonGia'>" + price + "</span>"
-                    + "<span class='cart-id-publishers cart-column' name='txtMaMXB' id='txtMaMXB'>" + idPublishers + "</span>"
-                    + "<div class='cart-quantity cart-column'>"
+                    + "<span class='cart-price cart-column txtDonGia'name='txtDonGia' id='txtDonGia'>" + price + "</span>"
+                    + "<span class='cart-id-publishers cart-column txtMaMXB' name='txtMaMXB' id='txtMaMXB'>" + idPublishers + "</span>"
+                    + "<div class='cart-quantity cart-column '>"
                     + "<input class='cart-quantity-input txtSoLuong' type='number' value='1' name='txtSoLuong' id='txtSoLuong'>"
                     + "<button class='btn btn-danger  btn-remove' type='button'>REMOVE</button></div>";
                 cartRow.innerHTML = cartRowContents;
@@ -507,7 +507,7 @@
                     var cartRow = cartRows[i];
                     var priceElement = cartRow.getElementsByClassName('cart-price')[0];
                     var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
-                    var price = parseFloat(priceElement.innerHTML.replace(''));
+                    var price = parseFloat(priceElement.innerHTML.replace('$', ' '));
                     var quantity = quantityElement.value;               
                     total = total + (price * quantity);
                 }
@@ -518,22 +518,31 @@
             $(function () {
                 $('.txtNgayGiao').datepicker();
             })
-
+            var chitietdonhang = [];
+          
+          
+           
+          
             // save Data
              function Submit() {
                 var tenkh = $('#txtTenKH').val();
                  var dienthoai = $('#txtPhoneKH').val();
                  var diachigiao = $('#txtDiaChiGiao').val();
-                 $('.cart-rows').each(function () {
-                     var masach = parseInt($('#txtMaSach').html());
-                     var giasach = parseInt($('#txtDonGia').html());
-                     var manxb = parseInt($('#txtMaMXB').html());
-                     var soluong = parseInt($('#txtSoLuong').val());
-                     var tongtien = parseFloat($('#txtTongTien').html());   
-                 })
                  var email = $('#txtEmailKH').val();
+                 var ngaygiao = $('#txtNgayGiao').val();
+                 var $tongTien = 0
+                 
+                 $('.cart-value .cart-row').each(function (index, item) {
+                     var MaSach = parseInt($(item).find('.txtMaSach').html());
+                     var DonGia = parseInt($(item).find('.txtDonGia').html());
+                     var MaNXB = parseInt($(item).find('.txtMaMXB').html());
+                     var SoLuong = parseInt($(item).find('.txtSoLuong').val());
+                     var tongtien = parseFloat($(item).find('.txtTongTien').html());
                 
-                 var ngaygiao = $('#txtNgayGiao').val()
+                     chitietdonhang.push({ MaSach, DonGia, MaNXB, SoLuong})
+                     
+                 })
+                 console.log(chitietdonhang);
                  var donhang = {
                      TenKH: tenkh,
                      DiaChi: diachigiao,
@@ -541,7 +550,7 @@
                      EmailKH: email,
                      NgayGiao: ngaygiao,
                      DienThoaiKH: dienthoai,
-                     TongTien: tongtien
+                     TongTien: $tongTien
                  };
                  var khachhang = {
                      Email: email,
@@ -549,29 +558,25 @@
                      HoTen: tenkh,
                      DienThoai: dienthoai,
                  };
-                 var ctdh = [{
-                     MaSach: masach,
-                     MaNXB: manxb,
-                     SoLuong: soluong,
-                     DonGia: giasach
-                 }];
-                $.ajax({
-                    url: 'SaveData',
-                    type: 'POST',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        'khachhang': khachhang,
-                        'donhang': donhang,
-                        'ctdh': ctdh,   
-                    })
-                   ,
-                    
-                    dataType: 'json',
+               
+                 //for (var i = 0; i < chitietdonhang.length; i++) {
+                 //    console.log(chitietdonhang[i]);
+                 //}
+                 $.ajax({
+                     url: '/QuanLyDonHang/SaveData',
+                     type: 'POST',
+                     data: {
+                         'khachhang': khachhang,
+                         'donhang': donhang,
+                         'ctdh': chitietdonhang
+                     } ,    
                     success: function (response) {
                         if (response.status == true) {
                             alert('Da luu Database')
                         }
-                        
+                        else {
+                            
+                        }             
                     },
                     error: function (err) {
                         alert(err);

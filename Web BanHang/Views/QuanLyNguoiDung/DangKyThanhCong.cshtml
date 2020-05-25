@@ -1,0 +1,24 @@
+﻿@using Web_BanHang.Models;
+@{
+    ViewBag.Title = "Đăng ký thành công";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng ký</title>
+</head>
+<body>
+    <h2 class="text-center" style="margin:15px"> Đăng ký thành công </h2>
+    <div class="text-center " style="margin:15px">
+        <img src="~/HinhAnh/register.jpg" style="max-width:8%" />
+        <a href="@Url.Action("Index","NguoiDung")">
+            <button class="btn btn-danger">
+                Về trang chủ
+            </button>
+        </a>
+    </div>
+    <div>
+    </div>
+</body>

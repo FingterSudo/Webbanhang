@@ -162,6 +162,7 @@
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhaXuatBanController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
+    <Compile Include="Controllers\QuanLyNguoiDungController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\SachController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\MetaData\ChiTietDonHangMetaData.cs" />
     <Compile Include="Models\MetaData\DonHangMetaData.cs" />
+    <Compile Include="Models\MetaData\KhachHangMetadata.cs" />
     <Compile Include="Models\MetaData\SachMetadata.cs" />
     <Compile Include="Models\NhaXuatBan.cs">
       <DependentUpon>QuanLyBanSach.tt</DependentUpon>
@@ -593,6 +595,7 @@
     <Content Include="HinhAnh\bach-khoa-tri-thuc-ve-khoa-hoc.jpg" />
     <Content Include="HinhAnh\ban-ve-khoa-hoc.jpg" />
     <Content Include="HinhAnh\buoc-duong-cung.jpg" />
+    <Content Include="HinhAnh\register.jpg" />
     <Content Include="HinhAnh\chien-tranh-va-hoa-binh-du-bo.jpg" />
     <Content Include="HinhAnh\chien-tranh-va-hoa-binh-tap-1.jpg" />
     <Content Include="HinhAnh\chien-tranh-va-hoa-binh-tap-2.jpg" />
@@ -626,6 +629,7 @@
     <Content Include="HinhAnh\nha-lanh-dao-360.jpg" />
     <Content Include="HinhAnh\phat-trien-ky-nang-lanh-dao.jpg" />
     <Content Include="HinhAnh\quang-lo-ganh-di-va-vui-song.jpg" />
+    <Content Include="HinhAnh\Register.png" />
     <Content Include="HinhAnh\So-do-vu-trong-phung.jpg" />
     <Content Include="HinhAnh\tao-dung-su-khac-biet.jpg" />
     <Content Include="HinhAnh\tat-den.jpg" />
@@ -1057,7 +1061,6 @@
     <Content Include="Views\Layout\DangKyLayout.cshtml" />
     <Content Include="Views\Layout\NguoiDungLayout.cshtml" />
     <Content Include="Views\Layout\XemChiTietLayout.cshtml" />
-    <Content Include="Views\NguoiDung\DangKy.cshtml" />
     <Content Include="Views\NguoiDung\DangNhap.cshtml" />
     <Content Include="Views\NhaXuatBan\NhaXuatBanPartial.cshtml" />
     <Content Include="Views\NhaXuatBan\SachTheoNXB.cshtml" />
@@ -2890,6 +2893,11 @@
     <Content Include="Views\QuanLyDonHang\ThemMoi.cshtml" />
     <Content Include="Views\TimKiemAdmin\_searchBook.cshtml" />
     <Content Include="Views\TimKiemAdmin\searchValueBook.cshtml" />
+    <Content Include="Views\QuanLyNguoiDung\Index.cshtml" />
+    <Content Include="Views\NguoiDung\DangKyThanhCong.cshtml" />
+    <Content Include="Views\QuanLyNguoiDung\DangKyThanhCong.cshtml" />
+    <Content Include="Views\QuanLyNguoiDung\DangKy.cshtml" />
+    <Content Include="Views\NguoiDung\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

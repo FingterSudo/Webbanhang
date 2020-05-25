@@ -30,10 +30,14 @@ namespace Web_BanHang.Controllers
                 // luu dữ liệu khách hàng
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("DangKyThanhCong", "NguoiDung");
         }
         [HttpGet]
         public ActionResult DangNhap()
+        {
+            return View();
+        }
+        public ActionResult DangKyThanhCong()
         {
             return View();
         }
